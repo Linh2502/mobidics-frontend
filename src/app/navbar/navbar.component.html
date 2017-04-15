@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" [routerLink]="'/'">
         MobiDics
       </a>
     </div>
@@ -15,10 +15,10 @@
          [collapse]="isMenuCollapsed">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a style="cursor: pointer">Mein Account</a>
+          <a [routerLink]="'/account'" style="cursor: pointer">Mein Account</a>
         </li>
         <li>
-          <a style="cursor: pointer">Admin Center</a>
+          <a [routerLink]="'/admin-center'" style="cursor: pointer">Admin Center</a>
         </li>
         <li>
           <a style="cursor: pointer">Logout</a>

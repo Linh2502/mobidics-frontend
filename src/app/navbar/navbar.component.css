@@ -6,15 +6,24 @@
   color: white;
 }
 
-li a {
+li > a {
   color: white;
 }
 
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+.navbar-default .navbar-nav > li > a:hover {
   background-color: #083f0b;
+  color: white;
+}
+
+.navbar-default .navbar-nav > li > a:focus {
   color: white;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
   background-color: white;
 }
+
+button.navbar-toggle:hover, button.navbar-toggle:focus {
+  background-color: #083f0b;
+}
+
