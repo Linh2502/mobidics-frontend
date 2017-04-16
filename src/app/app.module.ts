@@ -20,6 +20,9 @@ import { MethodAddComponent } from './home/main/method/method-add/method-add.com
 import { routing } from "./app.routing";
 import { MainComponent } from './home/main/main.component';
 import { AccountComponent } from './home/account/account.component';
+import { MethodEditComponent } from './home/main/method/method-edit/method-edit.component';
+import { MethodStartComponent } from './home/main/method/method-detail/method-start.component';
+import { MethodItemComponent } from './home/main/method/method-list/method-item.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { AccountComponent } from './home/account/account.component';
     MethodDetailComponent,
     MethodAddComponent,
     MainComponent,
-    AccountComponent
+    AccountComponent,
+    MethodEditComponent,
+    MethodStartComponent,
+    MethodItemComponent
   ],
   imports: [
     BrowserModule,

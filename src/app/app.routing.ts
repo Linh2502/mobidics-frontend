@@ -3,11 +3,12 @@ import { HomeComponent } from "./home/home.component";
 import { AccountComponent } from "./home/account/account.component";
 import { AuthGuardService } from "./services/auth/auth-guard.service";
 import { MainComponent } from "./home/main/main.component";
+import { METHOD_ROUTES } from "./home/main/method/method.routing";
 
 const APP_ROUTES: Routes = [
   { path: '', redirectTo: '/methods', pathMatch: 'full' },
   { path: 'account', component: AccountComponent },
-  { path: 'methods', component: MainComponent },
+  { path: 'methods', component: MainComponent, children: METHOD_ROUTES },
   { path: '**', redirectTo: '/methods' }
 ];
 
