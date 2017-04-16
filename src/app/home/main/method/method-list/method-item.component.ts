@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Method } from "../method.model";
 
 @Component({
   selector: 'app-method-item',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./method-item.component.css']
 })
 export class MethodItemComponent implements OnInit {
+
+  @Input("method") method: Method;
 
   constructor() { }
 
