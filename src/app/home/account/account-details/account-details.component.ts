@@ -10,12 +10,17 @@ import { User } from "../../../services/auth/user.model";
 export class AccountDetailsComponent implements OnInit {
 
   private user: User;
+  private editModeOn: boolean = false;
 
   constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
     this.user = this.authService.getLoggedinUser();
+  }
+
+  onEditButtonClicked(): void {
+    this.editModeOn = !this.editModeOn;
   }
 
 }
