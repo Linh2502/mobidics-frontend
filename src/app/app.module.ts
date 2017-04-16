@@ -23,6 +23,9 @@ import { AccountComponent } from './home/account/account.component';
 import { MethodEditComponent } from './home/main/method/method-edit/method-edit.component';
 import { MethodStartComponent } from './home/main/method/method-detail/method-start.component';
 import { MethodItemComponent } from './home/main/method/method-list/method-item.component';
+import { AdminCenterComponent } from './home/admin-center/admin-center.component';
+import { AccountEditComponent } from './home/account/account-edit/account-edit.component';
+import { AccountDetailsComponent } from './home/account/account-details/account-details.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { MethodItemComponent } from './home/main/method/method-list/method-item.
     AccountComponent,
     MethodEditComponent,
     MethodStartComponent,
-    MethodItemComponent
+    MethodItemComponent,
+    AdminCenterComponent,
+    AccountEditComponent,
+    AccountDetailsComponent
   ],
   imports: [
     BrowserModule,

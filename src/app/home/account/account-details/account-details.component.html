@@ -1,0 +1,35 @@
+<div class="container col-xs-12 col-sm-8 col-sm-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Mein Konto</h3>
+    </div>
+    <div class="panel-body">
+      <div class="form-horizontal">
+        <div class="row">
+          <div class="container col-xs-8">
+            <div class="form-group">
+              <label for="firstname" class="control-label col-xs-4">Vorname</label>
+              <div class="col-xs-8">
+                <input id="firstname" type="text" class="form-control" value="{{user.firstname}}" readonly>
+              </div>
+            </div>
+          </div>
+          <img class="img-responsive col-xs-4" alt="Profile Image" src="{{ user.profileImage }}">
+        </div>
+        <div class="row"></div>
+        <div class="row"></div>
+        <div class="row">
+          <div class="container">
+            <button [routerLink]="['edit']" type="button" class="btn btn-primary pull-left">
+              Konto bearbeiten
+            </button>
+            <button [routerLink]="['..', 'methods']" type="button" class="btn btn-link pull-left">
+              Zurück zur Startseite
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

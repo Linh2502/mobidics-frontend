@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "../services/auth/auth.service";
 import { Observable } from "rxjs";
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,9 @@ export class LoginComponent implements OnInit {
   private userLogin: any = { userId: '', password: '' };
   private errorMessage: string = '';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  constructor(private authService: AuthService,
+              private router: Router) {
+  }
 
   ngOnInit() {
   }
@@ -24,18 +24,18 @@ export class LoginComponent implements OnInit {
     //TODO: get live url of login
     this.authService.login(this.userLogin.user, this.userLogin.password).subscribe(() => {
       if (this.authService.isLoggedIn) {
-        this.router.navigate([ '/methods' ]);
+        this.router.navigate(['/methods']);
       }
     }, (err) => {
-      this.router.navigate([ '/methods' ]);
+      this.router.navigate(['/methods']);
       //this.handleError(err);
     });
   }
-  
+
   protected logout() {
     this.authService.logout();
   }
-  
+
   private handleError(err) {
     this.errorMessage = 'Wrong username or password!';
     return Observable.throw(err);
