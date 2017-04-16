@@ -1,31 +1,92 @@
-<div class="container col-xs-12 col-sm-8 col-sm-offset-2">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Mein Konto</h3>
-    </div>
-    <div class="panel-body">
-      <div class="form-horizontal">
-        <div class="row">
-          <div class="container col-xs-8">
-            <div class="form-group">
-              <label for="firstname" class="control-label col-xs-4">Vorname</label>
-              <div class="col-xs-8">
-                <input id="firstname" type="text" class="form-control" value="{{user.firstname}}" readonly>
+<div class="container">
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Mein Konto</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-horizontal">
+          <div class="row">
+            <div class="col-xs-8">
+              <div class="form-group">
+                <label for="firstname" class="control-label col-xs-12 col-sm-4">Vorname</label>
+                <div class="col-xs-12 col-sm-8">
+                  <input id="firstname" type="text" class="form-control" value="{{ user.firstname }}" readonly>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="lastname" class="control-label col-xs-12 col-sm-4">Nachname</label>
+                <div class="col-xs-12 col-sm-8">
+                  <input id="lastname" type="text" class="form-control" value="{{ user.lastname }}" readonly>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="username" class="control-label col-xs-12 col-sm-4">Nutzername</label>
+                <div class="col-xs-12 col-sm-8">
+                  <input id="username" type="text" class="form-control" value="{{ user.username }}" readonly>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email" class="control-label col-xs-12 col-sm-4">E-Mail Adresse</label>
+                <div class="col-xs-12 col-sm-8">
+                  <input id="email" type="text" class="form-control" value="{{ user.eMail }}" readonly>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="languages" class="control-label col-xs-12 col-sm-4">Sprachen</label>
+                <div class="col-xs-12 col-sm-8">
+                  <input type="text" class="form-control" readonly id="languages" value="{{ user.languages }}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="gender" class="control-label col-xs-12 col-sm-4">Geschlecht</label>
+                <div class="col-xs-12 col-sm-8">
+                  <input type="text" class="form-control" readonly id="gender" value="{{ user.gender }}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="userStatus" class="control-label col-xs-12 col-sm-4">Nutzerstatus</label>
+                <div class="col-xs-12 col-sm-8">
+                  <input type="text" class="form-control" readonly id="userStatus"
+                         value="{{ user.userStatus }}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="userType" class="control-label col-xs-12 col-sm-4">Nutzertyp</label>
+                <div class="col-xs-12 col-sm-8">
+                  <input type="text" class="form-control" readonly id="userType"
+                         value="{{ user.userType }}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="university" class="control-label col-xs-12 col-sm-4">Universität</label>
+                <div class="col-xs-12 col-sm-8">
+                  <input type="text" class="form-control" readonly id="university" value="{{ user.university }}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="faculty" class="control-label col-xs-12 col-sm-4">Fakultät</label>
+                <div class="col-xs-12 col-sm-8">
+                  <input type="text" class="form-control" readonly id="faculty" value="{{ user.faculty }}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="experience" class="control-label col-xs-12 col-sm-4">Lehrerfahrung</label>
+                <div class="col-xs-12 col-sm-8">
+                  <input type="text" class="form-control" readonly id="experience"
+                         value="{{ user.experience }}">
+                </div>
+              </div>
+              <div class="form-group">
+                  <button [routerLink]="['edit']" type="button" class="btn btn-primary col-xs-offset-1">
+                    Konto bearbeiten
+                  </button>
+                  <button [routerLink]="['..', 'methods']" type="button" class="btn btn-link">
+                    Zurück zur Startseite
+                  </button>
               </div>
             </div>
-          </div>
-          <img class="img-responsive col-xs-4" alt="Profile Image" src="{{ user.profileImage }}">
-        </div>
-        <div class="row"></div>
-        <div class="row"></div>
-        <div class="row">
-          <div class="container">
-            <button [routerLink]="['edit']" type="button" class="btn btn-primary pull-left">
-              Konto bearbeiten
-            </button>
-            <button [routerLink]="['..', 'methods']" type="button" class="btn btn-link pull-left">
-              Zurück zur Startseite
-            </button>
+            <img class="img-responsive col-xs-4" alt="Profile Image" src="{{ user.profileImage }}">
           </div>
         </div>
       </div>
