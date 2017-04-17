@@ -1,14 +1,42 @@
 <div class="container">
   <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Mein Konto</h3>
+    <div class="panel panel-default container-fluid">
+      <div class="panel-heading row">
+        <div class="col-xs-4">
+          <h3 class="panel-title">
+            Mein Konto</h3>
+        </div>
+        <div class="col-xs-8" *ngIf="!editModeOn">
+          <a [routerLink]="['..', 'methods']"
+             class="btn btn-primary pull-right">
+            <span class="glyphicon glyphicon-home"></span>
+            Zurück zur Startseite
+          </a>
+          <a (click)="onEditButtonClicked()"
+             class="btn btn-primary pull-right">
+            <span class="glyphicon glyphicon-edit"></span>
+            Konto bearbeiten
+          </a>
+        </div>
       </div>
       <div class="panel-body">
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
           <div class="form-horizontal">
             <div class="row">
-              <div class="col-xs-8">
+              <div class="col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-0">
+                <div class="row">
+                  <img class="img-responsive col-xs-12" alt="Profile Image" src="{{ user.profileImage }}">
+                </div>
+                <div class="row">
+                  <button type="button"
+                          class="btn btn-primary col-xs-8 col-xs-offset-2"
+                          (click)="onUploadButtonClicked()"
+                          *ngIf="editModeOn">
+                    Profilbild hochladen...
+                  </button>
+                </div>
+              </div>
+              <div class="col-xs-10 col-sm-8 col-xs-offset-1 col-sm-offset-0">
                 <div class="form-group">
                   <label for="firstname" class="control-label col-xs-12 col-sm-4">Vorname</label>
                   <div class="col-xs-12 col-sm-8">
@@ -119,37 +147,15 @@
                            formControlName="experience">
                   </div>
                 </div>
-                <div class="form-group" *ngIf="!editModeOn">
-                  <a (click)="onEditButtonClicked()"
-                     class="btn btn-primary col-xs-offset-1">
-                    Konto bearbeiten
-                  </a>
-                  <a [routerLink]="['..', 'methods']" class="btn btn-link">
-                    Zurück zur Startseite
-                  </a>
-                </div>
                 <div class="form-group" *ngIf="editModeOn">
                   <button type="submit"
                           class="btn btn-success col-xs-offset-1"
                           [disabled]="!userForm.valid">
                     Speichern
                   </button>
-                  <a (click)="onAbortEdit()" class="btn btn-warning">
+                  <a (click)="onAbortEdit()" class="btn btn-danger">
                     Abbrechen
                   </a>
-                </div>
-              </div>
-              <div class="col-xs-4">
-                <div class="row">
-                  <img class="img-responsive col-xs-12" alt="Profile Image" src="{{ user.profileImage }}">
-                </div>
-                <div class="row">
-                  <button type="button"
-                          class="btn btn-primary col-xs-8 col-xs-offset-2"
-                          (click)="onUploadButtonClicked()"
-                          *ngIf="editModeOn">
-                    Profilbild hochladen...
-                  </button>
                 </div>
               </div>
             </div>

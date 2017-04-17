@@ -1,0 +1,10 @@
+.panel-default > .panel-heading {
+  background-color: #007534;
+  color: white;
+}
+
+.panel-heading h3 {
+  white-space: nowrap;
+  line-height: normal;
+  padding-top: 8px;
+}

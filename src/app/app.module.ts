@@ -20,12 +20,12 @@ import { MethodDetailComponent } from './home/main/method/method-detail/method-d
 import { MethodAddComponent } from './home/main/method/method-add/method-add.component';
 import { routing } from './app.routing';
 import { MainComponent } from './home/main/main.component';
-import { AccountComponent } from './home/account/account.component';
 import { MethodEditComponent } from './home/main/method/method-edit/method-edit.component';
 import { MethodStartComponent } from './home/main/method/method-detail/method-start.component';
 import { MethodItemComponent } from './home/main/method/method-list/method-item.component';
 import { AdminCenterComponent } from './home/admin-center/admin-center.component';
-import { AccountDetailsComponent } from './home/account/account-details/account-details.component';
+import { AccountDetailsComponent } from './home/account/account.component';
+import { RatingModule } from "ngx-bootstrap";
 
 @NgModule({
   declarations: [
@@ -39,7 +39,6 @@ import { AccountDetailsComponent } from './home/account/account-details/account-
     MethodDetailComponent,
     MethodAddComponent,
     MainComponent,
-    AccountComponent,
     MethodEditComponent,
     MethodStartComponent,
     MethodItemComponent,
@@ -53,6 +52,7 @@ import { AccountDetailsComponent } from './home/account/account-details/account-
     CollapseModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    RatingModule,
     routing
   ],
   providers: [
