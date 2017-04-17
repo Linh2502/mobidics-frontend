@@ -1,10 +1,12 @@
-<a [routerLink]="[method.id]" class="list-group-item clearfix" routerLinkActive="active">
+<a [routerLink]="[method.id]" class="list-group-item" routerLinkActive="active">
   <div class="pull-left">
     <img [src]="method.image" alt="" class="img-responsive" style="height: 40px;">
   </div>
   <div class="text-center">
     <h4 class="list-group-item-heading">{{ method.name }}</h4>
-    <p class="list-group-item-text">{{ method.description }}</p>
+    <p class="list-group-item-text">
+      <rating [(ngModel)]="method.rating" [max]="max" [readonly]="true"
+              [titles]="['eins','zwei','drei']"></rating>
+    </p>
   </div>
-
 </a>

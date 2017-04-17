@@ -1,11 +1,11 @@
 #custom-search-input button {
-  border-color: #007534;
+  border-color: #43A047;
   background: none;
   /** belows styles are working good */
   /* IE7-8 doesn't have border-radius, so don't indent the padding */
   margin-bottom: 0;
   border-radius: 3px;
-  color: #007534;
+  color: #43A047;
 }
 
 .search-query:focus + button {

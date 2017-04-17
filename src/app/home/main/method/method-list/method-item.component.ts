@@ -9,6 +9,7 @@ import { Method } from "../method.model";
 export class MethodItemComponent implements OnInit {
 
   @Input("method") method: Method;
+  max = 5;
 
   constructor() { }
 

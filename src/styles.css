@@ -10,14 +10,24 @@
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-  background: #2E7D32;
+  background: #007534;
 }
 
 .btn-primary:active, .btn-primary.active {
-  background: #1B5E20;
+  background: #007534;
   box-shadow: none;
 }
 
 .btn:focus {
   outline: none;
+}
+
+rating {
+  color: #43A047;
+}
+
+.list-group a.list-group-item.active {
+  border: 3px solid #007534;
+  color: #007534;
+  background-color: #FFFFFF;
 }
