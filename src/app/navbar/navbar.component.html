@@ -15,10 +15,10 @@
          [collapse]="isMenuCollapsed">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a [routerLink]="['account']" style="cursor: pointer">Mein Account</a>
+          <a routerLinkActive="active" [routerLink]="['account']" style="cursor: pointer">Mein Account</a>
         </li>
         <li>
-          <a [routerLink]="['admin-center']" style="cursor: pointer">Admin Center</a>
+          <a routerLinkActive="active" [routerLink]="['admin-center']" style="cursor: pointer">Admin Center</a>
         </li>
         <li>
           <a style="cursor: pointer" (click)="logout()">Logout</a>
