@@ -3,43 +3,27 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from "@angular/http";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
+import { HttpService } from "../http/http.service";
 
 @Injectable()
 export class AuthService {
 
-  private loggedInUser = new User(
-    'Max',
-    'Mustermann',
-    'admin',
-    'root@mobidics.org',
-    [
-      'Deutsch',
-      'Englisch'
-    ],
-    'männlich',
-    'Prof.',
-    'Fest angestellt',
-    'Technische Universität München',
-    'Informatik',
-    20,
-    'http://www.castlehearing.co.uk/wp-content/uploads/2016/03/profile-placeholder.jpg');
+  private loggedInUser: User;
 
   public isLoggedIn: boolean = false;
 
-  constructor(private http: Http,
+  constructor(private httpService: HttpService,
               private router: Router) {
   }
 
-  public login(userId: string, password: string) {
-    //TODO: get live url of login
-    let headers: Headers = new Headers();
-    headers.append('Authorization', 'Basic ' + btoa(userId + ':' + password));
-    return this.http.get('http://localhost:4200', { headers })
-      .map(res => res.json())
-      .catch(this.handleError)
-      .do(data => {
+  public login(username: string, password: string) {
+    return this.httpService.getUserByUsername(username).map(
+      (user: User) => {
+        this.loggedInUser = user;
         this.isLoggedIn = true;
-      });
+        console.log(this.loggedInUser);
+      }
+    );
   }
 
   public logout(): void {

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../services/auth/user.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpService } from "../../services/http/http.service";
 
 @Component({
-  selector: 'app-account-details',
+  selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
@@ -24,10 +25,10 @@ export class AccountDetailsComponent implements OnInit {
       'firstname': new FormControl(this.user.firstname, Validators.required),
       'lastname': new FormControl(this.user.lastname, Validators.required),
       'username': new FormControl(this.user.username, Validators.required),
-      'email': new FormControl(this.user.eMail,
+      'email': new FormControl(this.user.email,
         [Validators.required,
           Validators.email]),
-      'languages': new FormControl(this.user.languages, Validators.required),
+      'languages': new FormControl(this.user.language, Validators.required),
       'gender': new FormControl(this.user.gender, Validators.required),
       'userStatus': new FormControl(this.user.userStatus, Validators.required),
       'userType': new FormControl(this.user.userType, Validators.required),

@@ -10,7 +10,7 @@ import { Subscription } from "rxjs/Subscription";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private userLogin: any = { userId: '', password: '' };
+  private userLogin: any = { username: 'admin', password: 'admin' };
   private errorMessage: string = '';
 
   constructor(private authService: AuthService,
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   protected login() {
     //TODO: get live url of login
-    this.authService.login(this.userLogin.user, this.userLogin.password).subscribe(() => {
+    this.authService.login(this.userLogin.username, this.userLogin.password).subscribe(() => {
       if (this.authService.isLoggedIn) {
         this.router.navigate(['/methods']);
       }
