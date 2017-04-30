@@ -26,6 +26,7 @@ import { AccountDetailsComponent } from './home/account/account.component';
 import { RatingModule, CarouselModule, CollapseModule } from "ngx-bootstrap";
 import { AuthGuard } from "./services/auth/auth.guard";
 import { routing } from './app.routing';
+import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { routing } from './app.routing';
     CollapseModule.forRoot(),
     CarouselModule.forRoot(),
     RatingModule.forRoot(),
+    PerfectScrollbarModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
     routing

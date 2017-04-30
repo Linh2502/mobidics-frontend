@@ -13,14 +13,72 @@
       </button>
     </div>
   </div>
-  <div class="form-group">
-    <label for="socialform" class="control-label col-xs-6">Sozialform</label>
-    <div class="col-xs-6">
-      <input id="socialform"
-             type="text"
-             class="form-control"
-             [readonly]="!editModeOn">
-    </div>
+  <div class="row">
+    <carousel class="col-xs-8 col-xs-offset-2">
+      <slide *ngFor="let image of method?.images">
+        <img [src]="image" class="img-responsive" width="100%">
+      </slide>
+    </carousel>
   </div>
+  <table class="table">
+    <tbody>
+    <tr>
+      <th>Sozialform</th>
+      <td>{{method?.socialForm}}</td>
+    </tr>
+    <tr>
+      <th>Phase</th>
+      <td>{{method?.phase}}</td>
+    </tr>
+    <tr>
+      <th>Unterphase</th>
+      <td>{{method?.subPhase}}</td>
+    </tr>
+    <tr>
+      <th>Art der Veranstaltung</th>
+      <td>{{method?.courseType}}</td>
+    </tr>
+    <tr>
+      <th>Gruppengröße (min)</th>
+      <td>{{method?.groupSizeMin}}</td>
+    </tr>
+    <tr>
+      <th>Gruppengröße (max)</th>
+      <td>{{method?.groupSizeMax}}</td>
+    </tr>
+    <tr>
+      <th>Ablauf</th>
+      <td>{{method?.proceeding}}</td>
+    </tr>
+    <tr>
+      <th>Material</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>Zeitaufwand (min)</th>
+      <td>{{method?.timeMin}}</td>
+    </tr>
+    <tr>
+      <th>Zeitaufwand (max)</th>
+      <td>{{method?.timeMax}}</td>
+    </tr>
+    <tr>
+      <th>Erfahrungen der Profis</th>
+      <td>{{method?.experiences}}</td>
+    </tr>
+    <tr>
+      <th>Spielart</th>
+      <td>{{method?.variations}}</td>
+    </tr>
+    <tr>
+      <th>Tipps</th>
+      <td>{{method?.tips}}</td>
+    </tr>
+    <tr>
+      <th>Visualisierung</th>
+      <td>{{method?.visualization}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 

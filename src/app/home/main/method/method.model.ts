@@ -2,6 +2,7 @@ export class Method {
 
   constructor(public id: string,
               public title: string,
+              public images: string[],
               public alternativeTitles: string,
               public socialForm: string,
               public phase: string,
@@ -21,6 +22,7 @@ export class Method {
               public lastModifiedDate: Date,
               public rating: string,
               public citations: string,
-              public userRating: number) {
+              public userRating: number,
+              public visualization: string) {
   }
 }

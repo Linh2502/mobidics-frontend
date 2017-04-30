@@ -2,9 +2,7 @@
   border-color: #43A047;
 }
 
-.uneditable {
-  border: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
+carousel {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
