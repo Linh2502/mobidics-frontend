@@ -26,6 +26,10 @@ rating {
   color: #43A047;
 }
 
+.glyphicon {
+  color: #43A047;
+}
+
 .list-group a.list-group-item.active {
   border: 3px solid #007534;
   color: #007534;

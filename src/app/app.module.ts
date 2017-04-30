@@ -12,20 +12,20 @@ import { ExportService } from './services/export/export.service';
 import { HttpService } from './services/http/http.service';
 import { SearchService } from './services/search/search.service';
 import { HeaderComponent } from './navbar/navbar.component';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { SidemenuComponent } from './home/main/sidemenu/sidemenu.component';
 import { MethodComponent } from './home/main/method/method.component';
 import { MethodListComponent } from './home/main/method/method-list/method-list.component';
 import { MethodDetailComponent } from './home/main/method/method-detail/method-detail.component';
 import { MethodAddComponent } from './home/main/method/method-add/method-add.component';
-import { routing } from './app.routing';
 import { MainComponent } from './home/main/main.component';
 import { MethodEditComponent } from './home/main/method/method-edit/method-edit.component';
 import { MethodStartComponent } from './home/main/method/method-detail/method-start.component';
 import { MethodItemComponent } from './home/main/method/method-list/method-item.component';
 import { AdminCenterComponent } from './home/admin-center/admin-center.component';
 import { AccountDetailsComponent } from './home/account/account.component';
-import { RatingModule } from "ngx-bootstrap";
+import { RatingModule, CarouselModule, CollapseModule } from "ngx-bootstrap";
+import { AuthGuard } from "./services/auth/auth.guard";
+import { routing } from './app.routing';
 
 @NgModule({
   declarations: [
@@ -50,16 +50,18 @@ import { RatingModule } from "ngx-bootstrap";
     FormsModule,
     HttpModule,
     CollapseModule.forRoot(),
+    CarouselModule.forRoot(),
+    RatingModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    RatingModule,
     routing
   ],
   providers: [
     AuthService,
     ExportService,
     HttpService,
-    SearchService
+    SearchService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

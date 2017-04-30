@@ -21,15 +21,17 @@ export class LoginComponent implements OnInit {
   }
 
   protected login() {
-    //TODO: get live url of login
-    this.authService.login(this.userLogin.username, this.userLogin.password).subscribe(() => {
-      if (this.authService.isLoggedIn) {
-        this.router.navigate(['/methods']);
-      }
-    }, (err) => {
-      this.router.navigate(['/methods']);
-      //this.handleError(err);
-    });
+    this.authService.login(this.userLogin.username, this.userLogin.password).subscribe(
+      () => {
+        if (this.authService.isLoggedIn) {
+          this.router.navigate(['/methods']);
+        } else {
+          this.handleError(null);
+        }
+      }, (err) => {
+        this.router.navigate(['/login']);
+        this.handleError(err);
+      });
   }
 
   protected logout() {

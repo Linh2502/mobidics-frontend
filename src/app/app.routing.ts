@@ -4,13 +4,13 @@ import { METHOD_ROUTES } from './home/main/method/method.routing';
 import { LoginComponent } from './login/login.component';
 import { AdminCenterComponent } from './home/admin-center/admin-center.component';
 import { AccountDetailsComponent } from "./home/account/account.component";
+import { AuthGuard } from "./services/auth/auth.guard";
 
 const APP_ROUTES: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'account', component: AccountDetailsComponent },
-  { path: 'methods', component: MainComponent, children: METHOD_ROUTES },
-  { path: 'admin-center', component: AdminCenterComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'account', component: AccountDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'methods', component: MainComponent, canActivate: [AuthGuard], children: METHOD_ROUTES },
+  { path: 'admin-center', component: AdminCenterComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/login' }
 ];
 

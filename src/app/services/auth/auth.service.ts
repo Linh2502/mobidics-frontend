@@ -16,12 +16,11 @@ export class AuthService {
               private router: Router) {
   }
 
-  public login(username: string, password: string) {
+  public login(username: string, password: string): Observable<any> {
     return this.httpService.getUserByUsername(username).map(
       (user: User) => {
         this.loggedInUser = user;
         this.isLoggedIn = true;
-        console.log(this.loggedInUser);
       }
     );
   }

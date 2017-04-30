@@ -12,15 +12,11 @@
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-xs-12">
-    <ul class="list-group">
-      <app-method-item
-        *ngFor="let method of methods"
-        [method]="method">
-      </app-method-item>
-    </ul>
-  </div>
+<div class="list-group">
+  <app-method-item
+    *ngFor="let method of methods"
+    [method]="method">
+  </app-method-item>
 </div>
 <div class="row">
   <div class="col-xs-12">
