@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Method } from "../method.model";
 import { Subscription } from "rxjs";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MethodService } from "../method.service";
 
 @Component({
@@ -15,7 +15,13 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private methodService: MethodService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
+  }
+
+  onNavigateBack() {
+    this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+    this.methodService.onRouterParamsChanged(false);
   }
 
   ngOnInit() {
@@ -30,6 +36,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
               'http://hh-solution.com/wp-content/uploads/2016/06/testimage-4.jpg'
             ];
             this.detailsContainer.nativeElement.scrollTop = 0;
+            this.methodService.onRouterParamsChanged(true);
           })
         ;
       }
@@ -39,5 +46,4 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }

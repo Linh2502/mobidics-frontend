@@ -26,6 +26,10 @@ rating {
   color: #43A047;
 }
 
+rating > span:focus {
+  outline: 0 none;
+}
+
 .glyphicon {
   color: #43A047;
 }

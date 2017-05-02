@@ -1,6 +1,6 @@
-<div class="col-sm-12 col-md-5">
+<div class="col-xs-12 col-sm-12 col-md-5" [ngClass]="{ 'hidden-sm': detailPageSelected, 'hidden-xs': detailPageSelected }">
   <app-method-list></app-method-list>
 </div>
-<div class="col-sm-12 col-md-7">
+<div class="col-xs-12 col-sm-12 col-md-7" [ngClass]="{ 'hidden-sm': !detailPageSelected, 'hidden-xs': !detailPageSelected}">
   <router-outlet></router-outlet>
 </div>

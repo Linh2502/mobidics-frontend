@@ -1,14 +1,24 @@
 <a [routerLink]="[method.id]" class="list-group-item" routerLinkActive="active">
-  <div class="pull-left">
-    <img
-      [src]="image"
-      alt="" class="img-responsive" style="height: 40px;">
-  </div>
-  <div class="text-center">
-    <h4 class="list-group-item-heading">{{ method.title }}</h4>
-    <p class="list-group-item-text">
+  <div class="media">
+    <div class="media-left media-middle">
+      <img
+        [src]="image"
+        alt="" class="media-object" style="height: 50px">
+    </div>
+    <div class="media-body media-middle">
+      <h4 class="media-heading">
+        {{ method.title }}
+      </h4>
       <rating [(ngModel)]="method.userRating" [max]="max" [readonly]="true"
               [titles]="['eins','zwei','drei']"></rating>
-    </p>
+    </div>
+    <div class="media-right media-middle" *ngIf="methodIsFavorite()">
+      <span class="glyphicon glyphicon-heart" style="font-size: 1.5em">
+      </span>
+    </div>
+    <div class="media-right media-middle">
+      <span class="glyphicon glyphicon-chevron-right" style="font-size: 1.5em">
+      </span>
+    </div>
   </div>
 </a>

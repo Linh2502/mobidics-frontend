@@ -9,11 +9,11 @@ export class User {
               public userType: string,
               public university: string,
               public faculty: string,
+              public favorites: string[],
               public experience: number,
               public profileImage: string,
               public department: string,
               public isApproved: boolean,
               public userLevel: number) {
-
   }
 }
