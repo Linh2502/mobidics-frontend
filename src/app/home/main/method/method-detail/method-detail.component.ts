@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Method } from "../method.model";
 import { Subscription } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
@@ -10,7 +10,7 @@ import { MethodService } from "../method.service";
   styleUrls: ['./method-detail.component.css']
 })
 export class MethodDetailComponent implements OnInit, OnDestroy {
-
+  @ViewChild('detailContainer') detailsContainer: ElementRef;
   method: Method;
   subscription: Subscription;
 
@@ -29,6 +29,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
               'https://app.crownmakers.com/media/2013/12/19/47d5b24fb5fce429a64804ca1b782581-test.jpg',
               'http://hh-solution.com/wp-content/uploads/2016/06/testimage-4.jpg'
             ];
+            this.detailsContainer.nativeElement.scrollTop = 0;
           })
         ;
       }

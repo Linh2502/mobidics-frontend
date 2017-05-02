@@ -1,11 +1,13 @@
-<div class="col-xs-12">
+<div class="col-xs-12 scrollable-content" #detailContainer>
   <div class="row">
     <img class="col-xs-3 img-responsive"
          src="https://app.crownmakers.com/media/2013/12/19/47d5b24fb5fce429a64804ca1b782581-test.jpg">
     <div class="row col-xs-7">
-      <p>{{method?.title}}</p>
-      <rating *ngIf="method" [(ngModel)]="method.userRating" [max]="max" [readonly]="true"
-              [titles]="['eins','zwei','drei']"></rating>
+      <h4>{{method?.title}}</h4>
+      <h4>
+        <rating *ngIf="method" [(ngModel)]="method.userRating" [max]="max" [readonly]="true"
+                [titles]="['eins','zwei','drei']"></rating>
+      </h4>
     </div>
     <div class="col-xs-2">
       <button class="btn btn-default vertical-align">
@@ -24,31 +26,31 @@
     <tbody>
     <tr>
       <th>Sozialform</th>
-      <td>{{method?.socialForm}}</td>
+      <td>{{ method?.socialForm | socialform }}</td>
     </tr>
     <tr>
       <th>Phase</th>
-      <td>{{method?.phase}}</td>
+      <td>{{ method?.phase | phase }}</td>
     </tr>
     <tr>
       <th>Unterphase</th>
-      <td>{{method?.subPhase}}</td>
+      <td>{{ method?.subPhase | subphase }}</td>
     </tr>
     <tr>
       <th>Art der Veranstaltung</th>
-      <td>{{method?.courseType}}</td>
+      <td>{{ method?.courseType | courseType }}</td>
     </tr>
     <tr>
       <th>Gruppengröße (min)</th>
-      <td>{{method?.groupSizeMin}}</td>
+      <td>{{ method?.groupSizeMin }}</td>
     </tr>
     <tr>
       <th>Gruppengröße (max)</th>
-      <td>{{method?.groupSizeMax}}</td>
+      <td>{{ method?.groupSizeMax }}</td>
     </tr>
     <tr>
       <th>Ablauf</th>
-      <td>{{method?.proceeding}}</td>
+      <td>{{ method?.proceeding }}</td>
     </tr>
     <tr>
       <th>Material</th>
@@ -56,27 +58,27 @@
     </tr>
     <tr>
       <th>Zeitaufwand (min)</th>
-      <td>{{method?.timeMin}}</td>
+      <td>{{ method?.timeMin }}</td>
     </tr>
     <tr>
       <th>Zeitaufwand (max)</th>
-      <td>{{method?.timeMax}}</td>
+      <td>{{ method?.timeMax }}</td>
     </tr>
     <tr>
       <th>Erfahrungen der Profis</th>
-      <td>{{method?.experiences}}</td>
+      <td>{{ method?.experiences }}</td>
     </tr>
     <tr>
       <th>Spielart</th>
-      <td>{{method?.variations}}</td>
+      <td>{{ method?.variations }}</td>
     </tr>
     <tr>
       <th>Tipps</th>
-      <td>{{method?.tips}}</td>
+      <td>{{ method?.tips }}</td>
     </tr>
     <tr>
       <th>Visualisierung</th>
-      <td>{{method?.visualization}}</td>
+      <td>{{ method?.visualization }}</td>
     </tr>
     </tbody>
   </table>

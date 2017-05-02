@@ -43,5 +43,6 @@ body {
 
 .scrollable-content {
   height: 85vh;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }

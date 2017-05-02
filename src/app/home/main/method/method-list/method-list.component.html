@@ -11,34 +11,22 @@
       </div>
     </div>
   </div>
-  <div class="col-xs-12">
+  <div class="col-xs-12 scrollable-content">
     <div class="list-group">
       <app-method-item
         *ngFor="let method of methods"
         [method]="method">
       </app-method-item>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <a class="btn btn-primary" role="button" [routerLink]="['new']">
-        Neue Methode
-      </a>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <a class="btn btn-primary" role="button" [routerLink]="['1','edit']">
-        Methode bearbeiten
-      </a>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <a class="btn btn-primary" role="button" [routerLink]="['1']">
-        Methode betrachten
-      </a>
-    </div>
+    <a class="btn btn-primary" role="button" [routerLink]="['new']">
+      Neue Methode
+    </a>
+    <a class="btn btn-primary" role="button" [routerLink]="['1','edit']">
+      Methode bearbeiten
+    </a>
+    <a class="btn btn-primary" role="button" [routerLink]="['1']">
+      Methode betrachten
+    </a>
   </div>
 </div>
 

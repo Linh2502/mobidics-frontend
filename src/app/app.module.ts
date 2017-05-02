@@ -26,7 +26,10 @@ import { AccountDetailsComponent } from './home/account/account.component';
 import { RatingModule, CarouselModule, CollapseModule } from "ngx-bootstrap";
 import { AuthGuard } from "./services/auth/auth.guard";
 import { routing } from './app.routing';
-import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
+import { MethodDetailSocialformPipe } from './home/main/method/method-detail/method-detail-pipes/method-detail-socialform.pipe';
+import { MethodDetailPhasePipe } from './home/main/method/method-detail/method-detail-pipes/method-detail-phase.pipe';
+import { MethodDetailSubphasePipe } from './home/main/method/method-detail/method-detail-pipes/method-detail-subphase.pipe';
+import { MethodDetailCourseTypePipe } from './home/main/method/method-detail/method-detail-pipes/method-detail-coursetype.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,11 @@ import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
     MethodStartComponent,
     MethodItemComponent,
     AdminCenterComponent,
-    AccountDetailsComponent
+    AccountDetailsComponent,
+    MethodDetailSocialformPipe,
+    MethodDetailPhasePipe,
+    MethodDetailSubphasePipe,
+    MethodDetailCourseTypePipe
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,6 @@ import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
     CollapseModule.forRoot(),
     CarouselModule.forRoot(),
     RatingModule.forRoot(),
-    PerfectScrollbarModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
     routing
