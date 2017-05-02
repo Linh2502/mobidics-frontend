@@ -35,3 +35,13 @@ rating {
   color: #007534;
   background-color: #FFFFFF;
 }
+
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.scrollable-content {
+  height: 85vh;
+  overflow: scroll;
+}
