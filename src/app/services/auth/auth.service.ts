@@ -1,4 +1,4 @@
-import { User } from "./user.model";
+import { User } from "./user/user.model";
 import { Injectable } from '@angular/core';
 import { Http, Headers } from "@angular/http";
 import { Router } from "@angular/router";

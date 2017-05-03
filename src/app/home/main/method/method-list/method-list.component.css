@@ -14,3 +14,11 @@
 .input-group input.form-control:focus {
   border-color: #43A047;
 }
+
+.scrollable-content {
+  height: 77vh;
+}
+
+.add-item {
+  z-index: 3;
+}

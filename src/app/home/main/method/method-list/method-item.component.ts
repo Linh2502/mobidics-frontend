@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Method } from "../method.model";
 import { AuthService } from "../../../../services/auth/auth.service";
-import { User } from "../../../../services/auth/user.model";
+import { User } from "../../../../services/auth/user/user.model";
 
 @Component({
   selector: 'app-method-item',

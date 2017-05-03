@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-import { User } from '../../services/auth/user.model';
+import { User } from '../../services/auth/user/user.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from "../../services/http/http.service";
 
@@ -32,8 +32,8 @@ export class AccountDetailsComponent implements OnInit {
       'gender': new FormControl(this.user.gender, Validators.required),
       'userStatus': new FormControl(this.user.userStatus, Validators.required),
       'userType': new FormControl(this.user.userType, Validators.required),
-      'university': new FormControl(this.user.university, Validators.required),
-      'faculty': new FormControl(this.user.faculty, Validators.required),
+      'university': new FormControl(this.user.university.name, Validators.required),
+      'faculty': new FormControl(this.user.faculty.name, Validators.required),
       'experience': new FormControl(this.user.experience,
         [Validators.required,
           Validators.pattern('\\d+'),

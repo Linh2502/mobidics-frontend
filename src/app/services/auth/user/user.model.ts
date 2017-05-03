@@ -1,3 +1,5 @@
+import { University } from "./university.model";
+import { Faculty } from "./faculty.model";
 export class User {
   constructor(public firstname: string,
               public lastname: string,
@@ -7,8 +9,8 @@ export class User {
               public gender: string,
               public userStatus: string,
               public userType: string,
-              public university: string,
-              public faculty: string,
+              public university: University,
+              public faculty: Faculty,
               public favorites: string[],
               public experience: number,
               public profileImage: string,

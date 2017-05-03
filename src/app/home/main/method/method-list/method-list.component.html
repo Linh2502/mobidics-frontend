@@ -1,32 +1,42 @@
-<div class="row">
-  <div class="col-xs-12">
-    <div id="custom-search-input">
-      <div class="input-group">
-        <input type="text" class="search-query form-control" placeholder="Methode finden..."/>
-        <span class="input-group-btn">
+<div class="col-xs-12">
+  <div id="custom-search-input">
+    <div class="input-group">
+      <input type="text" class="search-query form-control" placeholder="Methode finden..."/>
+      <span class="input-group-btn">
           <button class="btn btn-danger" type="button">
             <span class="glyphicon glyphicon-search"></span>
           </button>
         </span>
-      </div>
     </div>
   </div>
-  <div class="col-xs-12 scrollable-content">
-    <div class="list-group">
+</div>
+<div class="col-xs-12">
+  <div class="list-group">
+    <a [routerLink]="['new']" class="list-group-item add-item" routerLinkActive="active">
+      <div class="media">
+        <div class="media-left media-middle">
+          <span class="glyphicon glyphicon-plus-sign"></span>
+        </div>
+        <div class="media-body media-middle">
+          Methode hinzufügen
+        </div>
+      </div>
+    </a>
+    <div class="scrollable-content">
       <app-method-item
         *ngFor="let method of methods"
         [method]="method">
       </app-method-item>
     </div>
-    <a class="btn btn-primary" role="button" [routerLink]="['new']">
-      Neue Methode
-    </a>
-    <a class="btn btn-primary" role="button" [routerLink]="['1','edit']">
-      Methode bearbeiten
-    </a>
-    <a class="btn btn-primary" role="button" [routerLink]="['1']">
-      Methode betrachten
-    </a>
   </div>
+  <a class="btn btn-primary" role="button" [routerLink]="['new']">
+    Neue Methode
+  </a>
+  <a class="btn btn-primary" role="button" [routerLink]="['1','edit']">
+    Methode bearbeiten
+  </a>
+  <a class="btn btn-primary" role="button" [routerLink]="['1']">
+    Methode betrachten
+  </a>
 </div>
 
