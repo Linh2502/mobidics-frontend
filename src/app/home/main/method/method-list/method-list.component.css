@@ -11,7 +11,7 @@
   z-index: 3;
 }
 
-.input-group input.form-control:focus {
+.input-group input.form-control:focus, .input-group input.form-control:hover {
   border-color: #43A047;
 }
 

@@ -14,8 +14,10 @@
               [titles]="['eins','zwei','drei']" style="font-size: 1.7em"></rating>
     </div>
     <div class="media-right media-middle">
-      <button class="btn btn-default">
-        <span class="glyphicon glyphicon-heart" style="font-size: 1.5em"></span>
+      <button class="btn btn-default" (click)="toggleFavorite()">
+        <span class="glyphicon"
+              [ngClass]="{ 'glyphicon-heart': isFavorite, 'glyphicon-heart-empty': !isFavorite }"
+              style="font-size: 1.5em"></span>
       </button>
     </div>
   </div>

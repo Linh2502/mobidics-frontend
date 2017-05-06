@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MethodService } from "./method.service";
-import { NavigationEnd, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 
 @Component({
@@ -11,7 +10,7 @@ import { Subscription } from "rxjs";
 })
 export class MethodComponent implements OnInit, OnDestroy {
   subscription: Subscription;
-  detailPageSelected: boolean = true;
+  detailPageSelected: boolean = false;
 
   constructor(private methodService: MethodService) {
   }

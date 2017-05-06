@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   private handleError(err) {
-    this.errorMessage = 'Wrong username or password!';
+    this.errorMessage = 'Nutzername oder Passwort ist falsch!';
     return Observable.throw(err);
   }
 }

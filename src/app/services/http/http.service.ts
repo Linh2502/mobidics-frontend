@@ -23,8 +23,8 @@ export class HttpService {
       .map(response => response.json());
   }
 
-  getAllMethods(): Observable<Method[]> {
-    return this.http.get(this.baseUri + "methods")
+  getAllMethodsByName(searchedName: string): Observable<Method[]> {
+    return this.http.get(this.baseUri + "methods" + "?name=" + searchedName)
       .map(response => response.json());
   }
 

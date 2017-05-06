@@ -1,10 +1,11 @@
-.panel-default > .panel-heading {
-  background-color: #007534;
+.glyphicon.glyphicon-home {
   color: white;
 }
 
-.panel-heading h3 {
-  white-space: nowrap;
-  line-height: normal;
-  padding-top: 8px;
+.glyphicon.glyphicon-edit {
+  color: white;
+}
+
+.glyphicon.glyphicon-user {
+  color: white;
 }
