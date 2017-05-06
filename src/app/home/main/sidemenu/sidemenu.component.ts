@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MethodService } from "../method/method.service";
 
 @Component({
   selector: 'app-sidemenu',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidemenuComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private methodService: MethodService) { }
 
   ngOnInit() {
+    this.methodService.detailPagedChanged.subscribe(
+      () => console.log("HAPPENS")
+    )
   }
-
 }

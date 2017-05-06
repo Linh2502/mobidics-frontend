@@ -5,8 +5,7 @@ import { Subscription } from "rxjs";
 @Component({
   selector: 'app-method',
   templateUrl: './method.component.html',
-  styleUrls: ['./method.component.css'],
-  providers: [MethodService]
+  styleUrls: ['./method.component.css']
 })
 export class MethodComponent implements OnInit, OnDestroy {
   subscription: Subscription;

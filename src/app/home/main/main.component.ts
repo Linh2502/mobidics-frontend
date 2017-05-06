@@ -5,6 +5,7 @@ import { MethodService } from "./method/method.service";
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
+  providers: [MethodService]
 })
 export class MainComponent implements OnInit {
 
