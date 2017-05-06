@@ -22,7 +22,12 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
 
   onNavigateBack() {
     this.router.navigate(['../'], { relativeTo: this.activatedRoute });
-    this.methodService.onRouterParamsChanged(false);
+    this.methodService.notifyDetailPagedChanged(false);
+  }
+
+  onEditButtonClicked() {
+    this.router.navigate(['edit'], { relativeTo: this.activatedRoute });
+
   }
 
   ngOnInit() {
@@ -38,7 +43,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
             ];
             this.isFavorite = this.methodService.methodIsFavorite(this.method.id);
             this.detailsContainer.nativeElement.scrollTop = 0;
-            this.methodService.onRouterParamsChanged(true);
+            this.methodService.notifyDetailPagedChanged(true);
           })
         ;
       }

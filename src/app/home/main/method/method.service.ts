@@ -7,27 +7,27 @@ import { User } from "../../../services/auth/user/user.model";
 
 @Injectable()
 export class MethodService {
-  public $detailPagedCalled: EventEmitter<boolean>;
+  public detailPagedChanged: EventEmitter<boolean>;
 
   constructor(private httpService: HttpService,
               private authService: AuthService) {
-    this.$detailPagedCalled = new EventEmitter();
+    this.detailPagedChanged = new EventEmitter();
   }
 
-  getAllMethodsByName(searchedName: string): Observable<Method[]> {
-    return this.httpService.getAllMethodsByName(searchedName);
+  getAllMethodsByQuery(searchQuery: string): Observable<Method[]> {
+    return this.httpService.getAllMethodsByName(searchQuery);
   }
 
   getMethodById(id): Observable<Method> {
     return this.httpService.getMethodById(id);
   }
 
-  methodIsFavorite(methodId) {
+  methodIsFavorite(methodId): boolean {
     let user: User = this.authService.getLoggedinUser();
     return user.favorites.includes(methodId);
   }
 
-  onRouterParamsChanged(detailIsSelected: boolean) {
-    this.$detailPagedCalled.emit(detailIsSelected);
+  notifyDetailPagedChanged(detailIsSelected: boolean) {
+    this.detailPagedChanged.emit(detailIsSelected);
   }
 }

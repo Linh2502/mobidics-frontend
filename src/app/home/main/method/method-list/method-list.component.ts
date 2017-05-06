@@ -21,7 +21,7 @@ export class MethodListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.methodService.getAllMethodsByName(this.searchQuery).subscribe(
+    this.methodService.getAllMethodsByQuery(this.searchQuery).subscribe(
       (methods: Method[]) => this.methods = methods
     );
     Observable.fromEvent(
@@ -29,11 +29,11 @@ export class MethodListComponent implements OnInit {
       .debounceTime(200)
       .distinctUntilChanged()
       .subscribe(
-        () => this.methodService.getAllMethodsByName(this.searchQuery).subscribe(
+        () => this.methodService.getAllMethodsByQuery(this.searchQuery).subscribe(
           (methods: Method[]) => {
             this.methods = methods;
             this.router.navigate(['/methods']);
-            this.methodService.onRouterParamsChanged(false);
+            this.methodService.notifyDetailPagedChanged(false);
           }
         ));
   }

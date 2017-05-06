@@ -11,7 +11,7 @@ const APP_ROUTES: Routes = [
   { path: 'account', component: AccountDetailsComponent, canActivate: [AuthGuard] },
   { path: 'methods', component: MainComponent, canActivate: [AuthGuard], children: METHOD_ROUTES },
   { path: 'admin-center', component: AdminCenterComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '/login' }
+  { path: '**', redirectTo: '/methods' }
 ];
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

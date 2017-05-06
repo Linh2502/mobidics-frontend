@@ -1,5 +1,5 @@
 import { User } from "./user/user.model";
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Http, Headers } from "@angular/http";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
@@ -7,13 +7,13 @@ import { HttpService } from "../http/http.service";
 
 @Injectable()
 export class AuthService {
-
   private loggedInUser: User;
-
   public isLoggedIn: boolean = false;
+  public loggedInStatusChanged: EventEmitter<boolean>;
 
   constructor(private httpService: HttpService,
               private router: Router) {
+    this.loggedInStatusChanged = new EventEmitter();
   }
 
   public login(username: string, password: string): Observable<any> {
@@ -21,12 +21,14 @@ export class AuthService {
       (user: User) => {
         this.loggedInUser = user;
         this.isLoggedIn = true;
+        this.loggedInStatusChanged.emit(true);
       }
     );
   }
 
   public logout(): void {
     this.isLoggedIn = false;
+    this.loggedInStatusChanged.emit(false);
     this.router.navigate(['/login']);
   }
 

@@ -1,22 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from "../services/auth/auth.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+  isMenuCollapsed: boolean = true;
+  userIsLoggedIn: boolean = false;
+  loginStatusSubscription: Subscription;
 
-  public isMenuCollapsed: boolean = true;
-
-  constructor(
-    private authService: AuthService
-  ) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
+    this.loginStatusSubscription = this.authService.loggedInStatusChanged.subscribe(
+      (changedLoginStatus: boolean) => this.userIsLoggedIn = changedLoginStatus
+    )
   }
-  
+
+  ngOnDestroy() {
+    this.loginStatusSubscription.unsubscribe();
+  }
+
   logout(): void {
     this.authService.logout();
   }

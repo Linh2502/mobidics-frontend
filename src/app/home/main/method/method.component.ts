@@ -16,7 +16,7 @@ export class MethodComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.methodService.$detailPagedCalled.subscribe(
+    this.subscription = this.methodService.detailPagedChanged.subscribe(
       (methodDetailSelected: boolean) =>
         this.detailPageSelected = methodDetailSelected
     );

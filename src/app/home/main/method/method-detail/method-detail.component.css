@@ -2,6 +2,10 @@
   border-color: #43A047;
 }
 
+.glyphicon.glyphicon-edit {
+  color: white;
+}
+
 carousel {
   margin-top: 20px;
   margin-bottom: 20px;
