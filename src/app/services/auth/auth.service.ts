@@ -8,7 +8,6 @@ import { HttpService } from "../http/http.service";
 @Injectable()
 export class AuthService {
   private loggedInUser: User;
-  public isLoggedIn: boolean = false;
   public loggedInStatusChanged: EventEmitter<boolean>;
 
   constructor(private httpService: HttpService,
@@ -16,24 +15,21 @@ export class AuthService {
     this.loggedInStatusChanged = new EventEmitter();
   }
 
-  public login(username: string, password: string): Observable<any> {
+  public login(username: string, password: string, persist: boolean): Observable<any> {
     return this.httpService.getUserByUsername(username).map(
       (user: User) => {
         this.loggedInUser = user;
-        this.isLoggedIn = true;
         this.loggedInStatusChanged.emit(true);
       }
-    );
+    ).catch(error => {
+      return Observable.throw(error);
+    });
   }
 
   public logout(): void {
-    this.isLoggedIn = false;
+    this.loggedInUser = null;
     this.loggedInStatusChanged.emit(false);
     this.router.navigate(['/login']);
-  }
-
-  private handleError(err) {
-    return Observable.throw(err);
   }
 
   public getLoggedinUser(): User {

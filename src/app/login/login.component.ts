@@ -10,8 +10,13 @@ import { Subscription } from "rxjs/Subscription";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private userLogin: any = { username: 'admin', password: 'admin' };
-  private errorMessage: string = '';
+  loginModel: any = {
+    "username": "",
+    "password": "",
+    "shouldPersist": false
+  };
+  loading: boolean = false;
+  errorMessage: string = '';
 
   constructor(private authService: AuthService,
               private router: Router) {
@@ -20,26 +25,24 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  protected login() {
-    this.authService.login(this.userLogin.username, this.userLogin.password).subscribe(
-      () => {
-        if (this.authService.isLoggedIn) {
-          this.router.navigate(['/methods']);
-        } else {
-          this.handleError(null);
-        }
-      }, (err) => {
-        this.router.navigate(['/login']);
-        this.handleError(err);
-      });
+  login() {
+    this.authService.login(
+      this.loginModel.username,
+      this.loginModel.password,
+      this.loginModel.shouldPersist)
+      .subscribe(
+        () => {
+          if (this.authService.getLoggedinUser()) {
+            this.router.navigate(['/methods']);
+          }
+        },
+        (error) => {
+          this.router.navigate(['/login']);
+          this.handleError();
+        });
   }
 
-  protected logout() {
-    this.authService.logout();
-  }
-
-  private handleError(err) {
+  private handleError() {
     this.errorMessage = 'Nutzername oder Passwort ist falsch!';
-    return Observable.throw(err);
   }
 }
