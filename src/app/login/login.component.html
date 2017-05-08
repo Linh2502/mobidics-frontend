@@ -8,7 +8,7 @@
         <form (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
           <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="username">Nutzername</label>
-            <input [(ngModel)]="loginModel.username"
+            <input [(ngModel)]="loginForm.username"
                    id="username"
                    name="username"
                    type="text"
@@ -19,7 +19,7 @@
           </div>
           <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
             <label for="password">Passwort</label>
-            <input [(ngModel)]="loginModel.password"
+            <input [(ngModel)]="loginForm.password"
                    id="password"
                    name="password"
                    type="password"
@@ -30,7 +30,7 @@
           </div>
           <div class="checkbox">
             <label><input
-              [(ngModel)]="loginModel.shouldPersist"
+              [(ngModel)]="loginForm.shouldPersist"
               type="checkbox"
               name="persistCheckbox">
               Angemeldet bleiben

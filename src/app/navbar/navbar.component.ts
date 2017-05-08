@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loginStatusSubscription: Subscription;
 
   constructor(private authService: AuthService) {
+    this.userIsLoggedIn = !!localStorage.getItem('authCache');
   }
 
   ngOnInit() {

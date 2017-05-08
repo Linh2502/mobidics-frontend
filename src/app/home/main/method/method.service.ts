@@ -8,10 +8,12 @@ import { User } from "../../../services/auth/user/user.model";
 @Injectable()
 export class MethodService {
   public detailPagedChanged: EventEmitter<boolean>;
+  public methodListChanged: EventEmitter<Method[]>;
 
   constructor(private httpService: HttpService,
               private authService: AuthService) {
     this.detailPagedChanged = new EventEmitter();
+    this.methodListChanged = new EventEmitter();
   }
 
   getAllMethodsByQuery(searchQuery: string): Observable<Method[]> {
@@ -30,4 +32,6 @@ export class MethodService {
   notifyDetailPagedChanged(detailIsSelected: boolean) {
     this.detailPagedChanged.emit(detailIsSelected);
   }
+
+
 }

@@ -30,6 +30,7 @@ import { MethodDetailSocialformPipe } from './home/main/method/method-detail/met
 import { MethodDetailPhasePipe } from './home/main/method/method-detail/method-detail-pipes/method-detail-phase.pipe';
 import { MethodDetailSubphasePipe } from './home/main/method/method-detail/method-detail-pipes/method-detail-subphase.pipe';
 import { MethodDetailCourseTypePipe } from './home/main/method/method-detail/method-detail-pipes/method-detail-coursetype.pipe';
+import { TokenStorageService } from "./services/auth/token-storage.service";
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { MethodDetailCourseTypePipe } from './home/main/method/method-detail/met
     ExportService,
     HttpService,
     SearchService,
-    AuthGuard
+    AuthGuard,
+    TokenStorageService
   ],
   bootstrap: [AppComponent]
 })

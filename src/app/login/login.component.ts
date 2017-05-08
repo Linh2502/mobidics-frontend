@@ -10,7 +10,7 @@ import { Subscription } from "rxjs/Subscription";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginModel: any = {
+  loginForm: any = {
     "username": "",
     "password": "",
     "shouldPersist": false
@@ -23,13 +23,15 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.logout();
   }
 
   login() {
+    this.loading = true;
     this.authService.login(
-      this.loginModel.username,
-      this.loginModel.password,
-      this.loginModel.shouldPersist)
+      this.loginForm.username,
+      this.loginForm.password,
+      this.loginForm.shouldPersist)
       .subscribe(
         () => {
           if (this.authService.getLoggedinUser()) {
@@ -43,6 +45,7 @@ export class LoginComponent implements OnInit {
   }
 
   private handleError() {
+    this.loading = false;
     this.errorMessage = 'Nutzername oder Passwort ist falsch!';
   }
 }
