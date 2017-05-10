@@ -12,6 +12,7 @@ import { MethodService } from "../method.service";
 export class MethodItemComponent implements OnInit {
 
   @Input("method") method: Method;
+  isFavorite: boolean = false;
   max = 5;
   image = "https://app.crownmakers.com/media/2013/12/19/47d5b24fb5fce429a64804ca1b782581-test.jpg";
 
@@ -19,9 +20,8 @@ export class MethodItemComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  methodIsFavorite() {
-    return this.methodService.methodIsFavorite(this.method.id);
+    this.methodService.getFavoritesIds().subscribe(
+      (favorites: string[]) => this.isFavorite = favorites.includes(this.method.id)
+    )
   }
 }

@@ -13,7 +13,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   @ViewChild('detailContainer') detailsContainer: ElementRef;
   method: Method;
   subscription: Subscription;
-  isFavorite: boolean = true;
+  isFavorite: boolean = false;
 
   constructor(private methodService: MethodService,
               private activatedRoute: ActivatedRoute,
@@ -41,7 +41,9 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
               'https://app.crownmakers.com/media/2013/12/19/47d5b24fb5fce429a64804ca1b782581-test.jpg',
               'http://hh-solution.com/wp-content/uploads/2016/06/testimage-4.jpg'
             ];
-            this.isFavorite = this.methodService.methodIsFavorite(this.method.id);
+            this.methodService.getFavoritesIds().subscribe(
+              (favorites: string[]) => this.isFavorite = favorites.includes(this.method.id)
+            );
             this.detailsContainer.nativeElement.scrollTop = 0;
             this.methodService.notifyDetailPagedChanged(true);
           })

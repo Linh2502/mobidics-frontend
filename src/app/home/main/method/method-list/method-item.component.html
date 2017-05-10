@@ -12,7 +12,7 @@
       <rating [(ngModel)]="method.userRating" [max]="max" [readonly]="true"
               [titles]="['eins','zwei','drei']"></rating>
     </div>
-    <div class="media-right media-middle" *ngIf="methodIsFavorite()">
+    <div class="media-right media-middle" *ngIf="isFavorite">
       <span class="glyphicon glyphicon-heart" style="font-size: 1.5em">
       </span>
     </div>

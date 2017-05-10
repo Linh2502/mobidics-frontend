@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { Method } from "./method.model";
 import { HttpService } from "../../../services/http/http.service";
-import { Observable } from "rxjs";
+import { Observable, ConnectableObservable } from "rxjs";
 import { AuthService } from "../../../services/auth/auth.service";
 import { User } from "../../../services/auth/user/user.model";
 
@@ -9,29 +9,44 @@ import { User } from "../../../services/auth/user/user.model";
 export class MethodService {
   public detailPagedChanged: EventEmitter<boolean>;
   public methodListChanged: EventEmitter<Method[]>;
+  public favoritesObservable: ConnectableObservable<string[]>;
 
-  constructor(private httpService: HttpService,
-              private authService: AuthService) {
+  constructor(private httpService: HttpService) {
     this.detailPagedChanged = new EventEmitter();
     this.methodListChanged = new EventEmitter();
   }
 
-  getAllMethodsByQuery(searchQuery: string): Observable<Method[]> {
-    return this.httpService.getAllMethodsByName(searchQuery);
+  getAllMethodsByQuery(searchQuery: string): void {
+    this.httpService.getAllMethodsByName(searchQuery).subscribe(
+      (methods: Method[]) => {
+        this.methodListChanged.emit(methods);
+      }
+    );
   }
 
   getMethodById(id): Observable<Method> {
     return this.httpService.getMethodById(id);
   }
 
-  methodIsFavorite(methodId): boolean {
-    let user: User = this.authService.getLoggedinUser();
-    return user.favorites.includes(methodId);
+  getFavorites(): void {
+    this.httpService.getFavorites().subscribe(
+      (methods: Method[]) => {
+        this.methodListChanged.emit(methods)
+      }
+    );
+  }
+
+  getFavoritesIds(): Observable<string[]> {
+    if (!this.favoritesObservable) {
+      this.favoritesObservable = this.httpService.getFavoritesIds()
+        .share()
+        .publishReplay();
+      this.favoritesObservable.connect();
+    }
+    return this.favoritesObservable;
   }
 
   notifyDetailPagedChanged(detailIsSelected: boolean) {
     this.detailPagedChanged.emit(detailIsSelected);
   }
-
-
 }

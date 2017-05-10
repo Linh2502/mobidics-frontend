@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../services/auth/user/user.model';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from "../../services/http/http.service";
+import { University } from "../../services/auth/user/university.model";
+import { Faculty } from "../../services/auth/user/faculty.model";
 
 @Component({
   selector: 'app-account',
@@ -12,33 +14,60 @@ import { HttpService } from "../../services/http/http.service";
 export class AccountDetailsComponent implements OnInit {
 
   private userForm: FormGroup;
-  private user: User;
   private editModeOn = false;
+  private profileImage: string = "https://art.placefull.com/Content/Properties/shared/images/no-profile-image.png";
 
-  constructor(private authService: AuthService) {
+  private firstnameCtrl: FormControl = new FormControl("", Validators.required);
+  private lastnameCtrl: FormControl = new FormControl("", Validators.required);
+  private usernameCtrl: FormControl = new FormControl("", Validators.required);
+  private emailCtrl: FormControl = new FormControl("",
+    [Validators.required,
+      Validators.email]);
+  private languagesCtrl: FormControl = new FormControl("", Validators.required);
+  private genderCtrl: FormControl = new FormControl("", Validators.required);
+  private userStatusCtrl: FormControl = new FormControl("", Validators.required);
+  private userTypeCtrl: FormControl = new FormControl("", Validators.required);
+  private universityCtrl: FormControl = new FormControl("", Validators.required);
+  private facultyCtrl: FormControl = new FormControl("", Validators.required);
+  private experienceCtrl: FormControl = new FormControl("",
+    [Validators.required,
+      Validators.pattern('\\d+'),
+      Validators.maxLength(2)]);
+
+
+  constructor(private httpService: HttpService) {
   }
 
   ngOnInit() {
-    this.user = this.authService.getLoggedinUser();
-
     this.userForm = new FormGroup({
-      'firstname': new FormControl(this.user.firstname, Validators.required),
-      'lastname': new FormControl(this.user.lastname, Validators.required),
-      'username': new FormControl(this.user.username, Validators.required),
-      'email': new FormControl(this.user.email,
-        [Validators.required,
-          Validators.email]),
-      'languages': new FormControl(this.user.language, Validators.required),
-      'gender': new FormControl(this.user.gender, Validators.required),
-      'userStatus': new FormControl(this.user.userStatus, Validators.required),
-      'userType': new FormControl(this.user.userType, Validators.required),
-      'university': new FormControl(this.user.university.name, Validators.required),
-      'faculty': new FormControl(this.user.faculty.name, Validators.required),
-      'experience': new FormControl(this.user.experience,
-        [Validators.required,
-          Validators.pattern('\\d+'),
-          Validators.maxLength(2)])
+      'firstname': this.firstnameCtrl,
+      'lastname': this.lastnameCtrl,
+      'username': this.usernameCtrl,
+      'email': this.emailCtrl,
+      'languages': this.languagesCtrl,
+      'gender': this.genderCtrl,
+      'userStatus': this.userStatusCtrl,
+      'userType': this.userTypeCtrl,
+      'university': this.universityCtrl,
+      'faculty': this.facultyCtrl,
+      'experience': this.experienceCtrl
     });
+    this.httpService.getUserMe().subscribe(
+      (user: User) => {
+        this.profileImage = user.profileImage ? user.profileImage : this.profileImage;
+        this.firstnameCtrl.setValue(user.firstname);
+        this.lastnameCtrl.setValue(user.lastname);
+        this.usernameCtrl.setValue(user.username);
+        this.emailCtrl.setValue(user.email);
+        this.languagesCtrl.setValue(user.language);
+        this.genderCtrl.setValue(user.gender);
+        this.userStatusCtrl.setValue(user.userStatus);
+        this.userTypeCtrl.setValue(user.userType);
+        this.universityCtrl.setValue(user.university.name);
+        this.facultyCtrl.setValue(user.faculty.name);
+        this.experienceCtrl.setValue(user.experience);
+      }
+    );
   }
 
   onEditButtonClicked(): void {

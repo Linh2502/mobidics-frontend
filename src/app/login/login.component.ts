@@ -34,9 +34,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.shouldPersist)
       .subscribe(
         () => {
-          if (this.authService.getLoggedinUser()) {
-            this.router.navigate(['/methods']);
-          }
+          this.router.navigate(['/methods']);
         },
         (error) => {
           this.router.navigate(['/login']);
