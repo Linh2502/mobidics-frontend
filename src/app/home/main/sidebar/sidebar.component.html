@@ -14,8 +14,5 @@
     <li>
       <a routerLinkActive="active" [routerLink]="['admin-center']" style="cursor: pointer">Admin Center</a>
     </li>
-    <li *ngIf="userIsLoggedIn">
-      <a style="cursor: pointer" (click)="logout()">Logout</a>
-    </li>
   </ul>
 </div>

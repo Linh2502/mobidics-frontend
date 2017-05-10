@@ -13,9 +13,9 @@ import { Faculty } from "../../services/auth/user/faculty.model";
 })
 export class AccountDetailsComponent implements OnInit {
 
-  private userForm: FormGroup;
-  private editModeOn = false;
-  private profileImage: string = "https://art.placefull.com/Content/Properties/shared/images/no-profile-image.png";
+  userForm: FormGroup;
+  editModeOn = false;
+  profileImage: string = "https://art.placefull.com/Content/Properties/shared/images/no-profile-image.png";
 
   private firstnameCtrl: FormControl = new FormControl("", Validators.required);
   private lastnameCtrl: FormControl = new FormControl("", Validators.required);

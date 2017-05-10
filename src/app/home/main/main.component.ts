@@ -5,11 +5,11 @@ import { Subscription } from "rxjs";
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css'],
+  styleUrls: ['./main.component.scss'],
   providers: [MethodService]
 })
 export class MainComponent implements OnInit, OnDestroy {
-  sideBarCollapsed: boolean = false;
+  sideBarCollapsed: boolean = true;
   detailPageSelected: boolean = false;
 
   private detailPageSubscription: Subscription;
@@ -19,9 +19,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.detailPageSubscription = this.methodService.detailPageSelected.subscribe(
-      (methodDetailSelected: boolean) =>
-        this.detailPageSelected = methodDetailSelected
-    );
+      (methodDetailSelected: boolean) => {
+        this.detailPageSelected = methodDetailSelected;
+        this.sideBarCollapsed = true;
+      });
   }
 
   ngOnDestroy() {
