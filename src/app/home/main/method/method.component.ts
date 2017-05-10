@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MethodService } from "./method.service";
 import { Subscription } from "rxjs";
 
@@ -7,21 +7,13 @@ import { Subscription } from "rxjs";
   templateUrl: './method.component.html',
   styleUrls: ['./method.component.css']
 })
-export class MethodComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
-  detailPageSelected: boolean = false;
+export class MethodComponent implements OnInit {
+  @Input() detailPageSelected: boolean = false;
 
-  constructor(private methodService: MethodService) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.subscription = this.methodService.detailPagedChanged.subscribe(
-      (methodDetailSelected: boolean) =>
-        this.detailPageSelected = methodDetailSelected
-    );
-  }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }

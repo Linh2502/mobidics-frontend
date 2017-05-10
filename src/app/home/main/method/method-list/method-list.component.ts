@@ -15,6 +15,7 @@ export class MethodListComponent implements OnInit, OnDestroy {
   searchQuery: string = "";
   userFavorites: string[] = [];
   methodListSubscription: Subscription;
+  initialLoad: boolean = true;
 
   @ViewChild('searchBar') searchBar: ElementRef;
 
@@ -26,8 +27,12 @@ export class MethodListComponent implements OnInit, OnDestroy {
     this.methodListSubscription = this.methodService.methodListChanged.subscribe(
       (methods: Method[]) => {
         this.methods = methods;
-        this.router.navigate(['/methods']);
-        this.methodService.notifyDetailPagedChanged(false);
+        if (this.initialLoad) {
+          this.initialLoad = false;
+        } else {
+          this.router.navigate(['/methods']);
+          this.methodService.notifyDetailPagedSelected(false);
+        }
       }
     );
     this.methodService.getAllMethodsByQuery("");

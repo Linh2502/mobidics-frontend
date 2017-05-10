@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit, OnDestroy {
   isMenuCollapsed: boolean = true;
   userIsLoggedIn: boolean = false;
   loginStatusSubscription: Subscription;

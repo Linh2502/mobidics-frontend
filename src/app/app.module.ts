@@ -11,8 +11,8 @@ import { AuthService } from './services/auth/auth.service';
 import { ExportService } from './services/export/export.service';
 import { HttpService } from './services/http/http.service';
 import { SearchService } from './services/search/search.service';
-import { HeaderComponent } from './navbar/navbar.component';
-import { SidemenuComponent } from './home/main/sidemenu/sidemenu.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SidebarComponent } from './home/main/sidebar/sidebar.component';
 import { MethodComponent } from './home/main/method/method.component';
 import { MethodListComponent } from './home/main/method/method-list/method-list.component';
 import { MethodDetailComponent } from './home/main/method/method-detail/method-detail.component';
@@ -35,10 +35,10 @@ import { TokenStorageService } from "./services/auth/token-storage.service";
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    NavbarComponent,
     LoginComponent,
     HomeComponent,
-    SidemenuComponent,
+    SidebarComponent,
     MethodComponent,
     MethodListComponent,
     MethodDetailComponent,

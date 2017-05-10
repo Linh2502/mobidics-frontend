@@ -22,7 +22,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
 
   onNavigateBack() {
     this.router.navigate(['../'], { relativeTo: this.activatedRoute });
-    this.methodService.notifyDetailPagedChanged(false);
+    this.methodService.notifyDetailPagedSelected(false);
   }
 
   onEditButtonClicked() {
@@ -45,7 +45,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
               (favorites: string[]) => this.isFavorite = favorites.includes(this.method.id)
             );
             this.detailsContainer.nativeElement.scrollTop = 0;
-            this.methodService.notifyDetailPagedChanged(true);
+            this.methodService.notifyDetailPagedSelected(true);
           })
         ;
       }

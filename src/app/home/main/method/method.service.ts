@@ -7,12 +7,12 @@ import { User } from "../../../services/auth/user/user.model";
 
 @Injectable()
 export class MethodService {
-  public detailPagedChanged: EventEmitter<boolean>;
+  public detailPageSelected: EventEmitter<boolean>;
   public methodListChanged: EventEmitter<Method[]>;
   public favoritesObservable: ConnectableObservable<string[]>;
 
   constructor(private httpService: HttpService) {
-    this.detailPagedChanged = new EventEmitter();
+    this.detailPageSelected = new EventEmitter();
     this.methodListChanged = new EventEmitter();
   }
 
@@ -46,7 +46,7 @@ export class MethodService {
     return this.favoritesObservable;
   }
 
-  notifyDetailPagedChanged(detailIsSelected: boolean) {
-    this.detailPagedChanged.emit(detailIsSelected);
+  notifyDetailPagedSelected(detailIsSelected: boolean) {
+    this.detailPageSelected.emit(detailIsSelected);
   }
 }

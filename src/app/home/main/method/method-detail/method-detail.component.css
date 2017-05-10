@@ -10,3 +10,7 @@ carousel {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.scrollable-content {
+  height: 77vh;
+}

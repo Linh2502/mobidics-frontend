@@ -1,23 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MethodService } from '../method/method.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-sidemenu',
-  templateUrl: './sidemenu.component.html',
-  styleUrls: ['./sidemenu.component.css']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css']
 })
-export class SidemenuComponent implements OnInit, OnDestroy {
-
+export class SidebarComponent implements OnInit, OnDestroy {
   methodServiceSubscription: Subscription;
 
   constructor(private methodService: MethodService) {
   }
 
   ngOnInit() {
-    this.methodServiceSubscription = this.methodService.detailPagedChanged.subscribe(
+    this.methodServiceSubscription = this.methodService.methodListChanged.subscribe(
       () => console.log("TODO")
-    )
+    );
   }
 
   ngOnDestroy() {

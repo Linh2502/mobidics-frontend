@@ -1,0 +1,21 @@
+<div class="scrollable-content">
+  <p>Favoriten</p>
+  <p>Am besten bewertet</p>
+  <p>Neuste</p>
+
+  <p>Filter</p>
+  <ul>
+    <li>
+      <a routerLinkActive="active" [routerLink]="['methods']" style="cursor: pointer">Startseite</a>
+    </li>
+    <li>
+      <a routerLinkActive="active" [routerLink]="['account']" style="cursor: pointer">Mein Account</a>
+    </li>
+    <li>
+      <a routerLinkActive="active" [routerLink]="['admin-center']" style="cursor: pointer">Admin Center</a>
+    </li>
+    <li *ngIf="userIsLoggedIn">
+      <a style="cursor: pointer" (click)="logout()">Logout</a>
+    </li>
+  </ul>
+</div>
