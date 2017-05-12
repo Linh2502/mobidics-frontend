@@ -15,3 +15,20 @@ div[accordion-heading] {
   font-size: 0.9em;
   color: $color-primary;
 }
+
+.side-bar {
+  padding-top: 30px;
+}
+
+.side-button {
+  margin-bottom: 10px;
+  border: 1px solid $color-primary;
+  border-radius: 0;
+  padding: 10px 0 10px 0;
+  width: 100%;
+}
+
+.scrollable-content {
+  height: 92vh;
+  padding-bottom: 30px;
+}

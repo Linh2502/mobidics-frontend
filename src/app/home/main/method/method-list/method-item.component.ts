@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Method } from "../method.model";
-import { AuthService } from "../../../../services/auth/auth.service";
-import { User } from "../../../../services/auth/user/user.model";
 import { MethodService } from "../method.service";
-import { animate, keyframes, state, style, transition, trigger } from "@angular/animations";
+import { animate, state, style, transition, trigger } from "@angular/animations";
 
 @Component({
   selector: 'app-method-item',

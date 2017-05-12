@@ -59,8 +59,8 @@ export class AccountDetailsComponent implements OnInit {
         this.lastnameCtrl.setValue(user.lastname);
         this.usernameCtrl.setValue(user.username);
         this.emailCtrl.setValue(user.email);
-        this.languagesCtrl.setValue(user.language);
-        this.genderCtrl.setValue(user.gender);
+        this.languagesCtrl.setValue(AccountDetailsComponent.convertLanguages(user.language));
+        this.genderCtrl.setValue(AccountDetailsComponent.convertGender(user.gender));
         this.userStatusCtrl.setValue(user.userStatus);
         this.userTypeCtrl.setValue(user.userType);
         this.universityCtrl.setValue(user.university.name);
@@ -83,5 +83,36 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   onUploadButtonClicked() {
+  }
+
+  static convertGender(gender) {
+    if (gender == 0) {
+      return 'Männlich';
+    } else {
+      return 'Weiblich';
+    }
+  }
+
+  static convertLanguages(languages) {
+    let result: string;
+    let languageArray: string[] = languages.split("::");
+    result = this.mapLanguage(languageArray[0]);
+    for (let i = 1; i < languageArray.length; i++) {
+      result = result.concat(', ', this.mapLanguage(languageArray[i]));
+    }
+    return result;
+  }
+
+  static mapLanguage(language) {
+    switch (language) {
+      case 'de':
+        return 'Deutsch';
+      case 'en':
+        return 'Englisch';
+      case 'fr':
+        return 'Französisch';
+      case 'es':
+        return 'Spanisch';
+    }
   }
 }

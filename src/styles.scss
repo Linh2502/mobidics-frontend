@@ -25,10 +25,6 @@
 }
 
 rating {
-  color: $color-primary-button;
-}
-
-rating {
   span {
     cursor: default;
   }
@@ -39,7 +35,7 @@ rating > span:focus {
 }
 
 .glyphicon {
-  color: $color-primary-button;
+  color: $color-primary;
 }
 
 .list-group li.list-group-item.active {
