@@ -13,7 +13,6 @@ export class MethodListComponent implements OnInit, OnDestroy {
 
   methods: Method[] = [];
   searchQuery: string = "";
-  userFavorites: string[] = [];
   methodListSubscription: Subscription;
   initialLoad: boolean = true;
 
@@ -36,9 +35,6 @@ export class MethodListComponent implements OnInit, OnDestroy {
       }
     );
     this.methodService.getAllMethodsByQuery("");
-    this.methodService.getFavoritesIds().subscribe(
-      (favorites: string[]) => this.userFavorites = favorites
-    );
     Observable.fromEvent(
       this.searchBar.nativeElement, 'keyup')
       .debounceTime(500)
@@ -50,5 +46,9 @@ export class MethodListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.methodListSubscription.unsubscribe();
+  }
+
+  onSearchButtonClicked() {
+    this.methodService.getAllMethodsByQuery(this.searchQuery);
   }
 }

@@ -1,5 +1,7 @@
+@import "../../variables";
+
 .navbar-default {
-  background-color: #007534;
+  background-color: $color-primary;
 }
 
 .navbar-brand {
@@ -11,7 +13,7 @@ li > a {
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-  background-color: #083f0b;
+  background-color: $color-primary-accent;
   color: white;
 }
 
@@ -20,10 +22,10 @@ li > a {
 }
 
 button.navbar-toggle:hover, button.navbar-toggle:focus {
-  background-color: #083f0b;
+  background-color: $color-primary-accent;
 }
 
 .navbar-default .navbar-nav > li > a.active {
-  background-color: #083f0b;
+  background-color: $color-primary-accent;
   color: white;
 }

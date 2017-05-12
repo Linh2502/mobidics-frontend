@@ -15,7 +15,8 @@
                    class="form-control"
                    #username="ngModel"
                    required>
-            <div *ngIf="f.submitted && !username.valid" class="help-block">Bitte Nutzername eingeben!</div>
+            <div *ngIf="f.submitted && !username.valid" class="help-block">Bitte Nutzername eingeben!
+            </div>
           </div>
           <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
             <label for="password">Passwort</label>
@@ -36,7 +37,7 @@
               Angemeldet bleiben
             </label>
           </div>
-          <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}</div>
+          <alert type="danger" *ngIf="errorMessage" dismissible="true">{{ errorMessage }}</alert>
           <div class="form-group">
             <button [disabled]="loading" class="btn btn-primary"
                     type="submit">

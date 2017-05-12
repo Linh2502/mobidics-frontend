@@ -1,20 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@import "variables";
+
 .btn:focus, .btn:active:focus, .btn.active:focus {
   outline: 0 none;
 }
 
 .btn-primary {
-  background: #43A047;
+  background: $color-primary-button;
   color: #ffffff;
   border-color: #1B5E20;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-  background: #007534;
+  background: $color-primary;
 }
 
 .btn-primary:active, .btn-primary.active {
-  background: #007534;
+  background: $color-primary;
   box-shadow: none;
 }
 
@@ -23,7 +25,7 @@
 }
 
 rating {
-  color: #43A047;
+  color: $color-primary-button;
 }
 
 rating > span:focus {
@@ -31,12 +33,12 @@ rating > span:focus {
 }
 
 .glyphicon {
-  color: #43A047;
+  color: $color-primary-button;
 }
 
 .list-group a.list-group-item.active {
-  border: 3px solid #007534;
-  color: #007534;
+  border: 3px solid $color-primary;
+  color: $color-primary;
   background-color: #FFFFFF;
 }
 
@@ -52,6 +54,6 @@ body {
 }
 
 .panel-default > .panel-heading {
-  background-color: #007534;
+  background-color: $color-primary;
   color: white;
 }

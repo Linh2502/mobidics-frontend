@@ -23,6 +23,7 @@ export class Method {
               public rating: string,
               public citations: string,
               public userRating: number,
-              public visualization: string) {
+              public visualization: string,
+              public thumbnail: string) {
   }
 }

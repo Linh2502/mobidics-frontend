@@ -14,7 +14,6 @@ export class MethodItemComponent implements OnInit {
   @Input("method") method: Method;
   isFavorite: boolean = false;
   max = 5;
-  image = "https://app.crownmakers.com/media/2013/12/19/47d5b24fb5fce429a64804ca1b782581-test.jpg";
 
   constructor(private methodService: MethodService) {
   }

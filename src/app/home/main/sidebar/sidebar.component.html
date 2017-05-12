@@ -1,18 +1,81 @@
 <div class="scrollable-content">
-  <p>Favoriten</p>
-  <p>Am besten bewertet</p>
-  <p>Neuste</p>
+  <button class="btn btn-default col-xs-12" type="button">
+    <span class="glyphicon glyphicon-heart"></span>
+    Meine Favoriten
+  </button>
+  <button class="btn btn-default col-xs-12" type="button">
+    <span class="glyphicon glyphicon-star"></span>
+    Am besten bewertet
+  </button>
+  <button class="btn btn-default col-xs-12" type="button">
+    <span class="glyphicon glyphicon-calendar"></span>
+    Neueste
+  </button>
 
-  <p>Filter</p>
-  <ul>
-    <li>
-      <a routerLinkActive="active" [routerLink]="['methods']" style="cursor: pointer">Startseite</a>
-    </li>
-    <li>
-      <a routerLinkActive="active" [routerLink]="['account']" style="cursor: pointer">Mein Account</a>
-    </li>
-    <li>
-      <a routerLinkActive="active" [routerLink]="['admin-center']" style="cursor: pointer">Admin Center</a>
-    </li>
-  </ul>
+  <accordion>
+    <accordion-group panelClass="customClass" #group1>
+      <div accordion-heading>
+        <strong>Veranstaltungsarten</strong>
+        <span class="pull-right float-xs-right glyphicon"
+              [ngClass]="{'glyphicon-chevron-down': group1?.isOpen, 'glyphicon-chevron-right': !group1?.isOpen}"></span>
+      </div>
+    </accordion-group>
+    <accordion-group panelClass="customClass" #group2>
+      <div accordion-heading>
+        <strong>Gruppengröße</strong>
+        <span class="pull-right float-xs-right glyphicon"
+              [ngClass]="{'glyphicon-chevron-down': group2?.isOpen, 'glyphicon-chevron-right': !group2?.isOpen}"></span>
+      </div>
+    </accordion-group>
+    <accordion-group panelClass="customClass" #group3>
+      <div accordion-heading>
+        <strong>Zeitaufwand (Minuten)</strong>
+        <span class="pull-right float-xs-right glyphicon"
+              [ngClass]="{'glyphicon-chevron-down': group3?.isOpen, 'glyphicon-chevron-right': !group3?.isOpen}"></span>
+      </div>
+    </accordion-group>
+    <accordion-group panelClass="customClass" #group4>
+      <div accordion-heading>
+        <strong>Gruppen-Zusammensetzung</strong>
+        <span class="pull-right float-xs-right glyphicon"
+              [ngClass]="{'glyphicon-chevron-down': group4?.isOpen, 'glyphicon-chevron-right': !group4?.isOpen}"></span>
+      </div>
+    </accordion-group>
+    <accordion-group panelClass="customClass" #group5>
+      <div accordion-heading>
+        <strong>Mindestbewertung</strong>
+        <span class="pull-right float-xs-right glyphicon"
+              [ngClass]="{'glyphicon-chevron-down': group5?.isOpen, 'glyphicon-chevron-right': !group5?.isOpen}"></span>
+      </div>
+    </accordion-group>
+    <accordion-group panelClass="customClass" #group6>
+      <div accordion-heading>
+        <strong>Aviva-Phase</strong>
+        <span class="pull-right float-xs-right glyphicon"
+              [ngClass]="{'glyphicon-chevron-down': group6?.isOpen, 'glyphicon-chevron-right': !group6?.isOpen}"></span>
+      </div>
+    </accordion-group>
+    <accordion-group panelClass="customClass" #group7>
+      <div accordion-heading>
+        <strong>Sozialform</strong>
+        <span class="pull-right float-xs-right glyphicon"
+              [ngClass]="{'glyphicon-chevron-down': group7?.isOpen, 'glyphicon-chevron-right': !group7?.isOpen}"></span>
+      </div>
+    </accordion-group>
+    <accordion-group panelClass="customClass" #group8>
+      <div accordion-heading>
+        <strong>Materialien</strong>
+        <span class="pull-right float-xs-right glyphicon"
+              [ngClass]="{'glyphicon-chevron-down': group8?.isOpen, 'glyphicon-chevron-right': !group8?.isOpen}"></span>
+      </div>
+    </accordion-group>
+    <accordion-group panelClass="customClass" #group9>
+      <div accordion-heading>
+        <strong>Raumanforderungen</strong>
+        <span class="pull-right float-xs-right glyphicon"
+              [ngClass]="{'glyphicon-chevron-down': group9?.isOpen, 'glyphicon-chevron-right': !group9?.isOpen}"></span>
+      </div>
+    </accordion-group>
+  </accordion>
+
 </div>

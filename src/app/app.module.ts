@@ -23,7 +23,7 @@ import { MethodStartComponent } from './home/main/method/method-detail/method-st
 import { MethodItemComponent } from './home/main/method/method-list/method-item.component';
 import { AdminCenterComponent } from './home/admin-center/admin-center.component';
 import { AccountDetailsComponent } from './home/account/account.component';
-import { RatingModule, CarouselModule, CollapseModule } from "ngx-bootstrap";
+import { RatingModule, CarouselModule, CollapseModule, AccordionModule, AlertModule } from "ngx-bootstrap";
 import { AuthGuard } from "./services/auth/auth.guard";
 import { routing } from './app.routing';
 import { MethodDetailSocialformPipe } from './home/main/method/method-detail/method-detail-pipes/method-detail-socialform.pipe';
@@ -61,6 +61,8 @@ import { TokenStorageService } from "./services/auth/token-storage.service";
     CollapseModule.forRoot(),
     CarouselModule.forRoot(),
     RatingModule.forRoot(),
+    AccordionModule.forRoot(),
+    AlertModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
     routing
