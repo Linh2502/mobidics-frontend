@@ -13,14 +13,14 @@ import { animate, keyframes, state, style, transition, trigger } from "@angular/
     trigger('flyIn', [
       state('in', style({
         opacity: 1,
-        height: '*'
+        transform: 'translateY(0)'
       })),
       transition('void => *', [
         style({
           opacity: 0,
-          height: 0
+          transform: 'translateY(-100%)'
         }),
-        animate(1000)
+        animate(500)
       ])
     ])
   ]
@@ -41,8 +41,13 @@ export class MethodItemComponent implements OnInit {
     )
   }
 
-  checkClicked($event) {
-    console.log("HLLAO");
-    $event.stopPropagation();
+  checkboxClicked() {
+    if (this.checked) {
+      let methodIndex = this.methodService.checkedMethods.indexOf(this.method.id);
+      this.methodService.checkedMethods.splice(methodIndex, 1);
+    } else {
+      this.methodService.checkedMethods.push(this.method.id);
+    }
+    this.checked = !this.checked;
   }
 }

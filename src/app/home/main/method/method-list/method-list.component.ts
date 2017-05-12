@@ -46,6 +46,7 @@ export class MethodListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.methodListSubscription.unsubscribe();
+    this.methodService.checkedMethods = [];
   }
 
   onSearchButtonClicked() {

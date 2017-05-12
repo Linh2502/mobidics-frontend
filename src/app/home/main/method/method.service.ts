@@ -10,6 +10,7 @@ export class MethodService {
   public detailPageSelected: EventEmitter<boolean>;
   public methodListChanged: EventEmitter<Method[]>;
   public favoritesObservable: ConnectableObservable<string[]>;
+  public checkedMethods: string[] = [];
 
   constructor(private httpService: HttpService) {
     this.detailPageSelected = new EventEmitter();

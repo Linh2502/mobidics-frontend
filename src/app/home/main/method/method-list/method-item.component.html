@@ -2,7 +2,7 @@
   <div class="flex-container">
     <div class="flex-element">
       <span class="glyphicon" [ngClass]="{ 'glyphicon-check': checked, 'glyphicon-unchecked': !checked }"
-            (click)="checked = !checked" style="cursor: pointer"></span>
+            (click)="checkboxClicked()" style="cursor: pointer"></span>
     </div>
     <div class="flex-element" [routerLink]="[method.id]">
       <img

@@ -28,6 +28,12 @@ rating {
   color: $color-primary-button;
 }
 
+rating {
+  span {
+    cursor: default;
+  }
+}
+
 rating > span:focus {
   outline: 0 none;
 }
