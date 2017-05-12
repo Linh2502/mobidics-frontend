@@ -1,24 +1,29 @@
-<a [routerLink]="[method.id]" class="list-group-item" routerLinkActive="active">
-  <div class="media">
-    <div class="media-left media-middle">
+<li class="list-group-item" routerLinkActive="active" [@flyIn]="'in'">
+  <div class="flex-container">
+    <div class="flex-element">
+      <span class="glyphicon" [ngClass]="{ 'glyphicon-check': checked, 'glyphicon-unchecked': !checked }"
+            (click)="checked = !checked" style="cursor: pointer"></span>
+    </div>
+    <div class="flex-element" [routerLink]="[method.id]">
       <img
         [src]="method.thumbnail"
         alt="" class="media-object" style="height: 50px">
     </div>
-    <div class="media-body media-middle">
-      <h4 class="media-heading">
+    <div class="flex-body" [routerLink]="[method.id]">
+      <h4 class="text-center" style="cursor: pointer">
         {{ method.title }}
       </h4>
-      <rating [(ngModel)]="method.userRating" [max]="max" [readonly]="true"
-              [titles]="['eins','zwei','drei']"></rating>
+      <rating [(ngModel)]="method.userRating" [max]="max" [readonly]="true"></rating>
     </div>
-    <div class="media-right media-middle" *ngIf="isFavorite">
-      <span class="glyphicon glyphicon-heart" style="font-size: 1.5em">
+    <div class="flex-right" [routerLink]="[method.id]">
+      <div class="flex-element">
+        <span class="glyphicon glyphicon-heart" *ngIf="isFavorite" style="font-size: 1.5em">
       </span>
-    </div>
-    <div class="media-right media-middle">
+      </div>
+      <div class="flex-element" style="cursor: pointer">
       <span class="glyphicon glyphicon-chevron-right" style="font-size: 1.5em">
       </span>
+      </div>
     </div>
   </div>
-</a>
+</li>

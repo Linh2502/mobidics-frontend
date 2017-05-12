@@ -1,0 +1,35 @@
+.flex-container {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.flex-body {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  flex: 8;
+}
+
+.flex-body:focus {
+  outline: 0 none;
+}
+
+.flex-right {
+  display: flex;
+  flex: 2;
+  flex-flow: row;
+  justify-content: flex-end;
+}
+
+.flex-right {
+  outline: 0 none;
+}
+
+.flex-element {
+  flex: 1;
+}
+
+.flex-element:focus {
+  outline: 0 none;
+}

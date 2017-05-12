@@ -36,10 +36,11 @@ rating > span:focus {
   color: $color-primary-button;
 }
 
-.list-group a.list-group-item.active {
+.list-group li.list-group-item.active {
   border: 3px solid $color-primary;
   color: $color-primary;
   background-color: #FFFFFF;
+  outline: 0 none;
 }
 
 body {
