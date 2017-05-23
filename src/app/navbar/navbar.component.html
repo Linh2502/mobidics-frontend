@@ -7,28 +7,32 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-left logo" [routerLink]="['methods']">
+      <a class="navbar-left logo" (click)="onNavigationPressed()" [routerLink]="['methods']">
         <img alt="Brand" src="../../assets/logo_mobidics.svg">
       </a>
     </div>
     <div class="navbar-collapse sliding-navbar"
-         [collapse]="isMenuCollapsed">
+         [collapse]="isMenuCollapsed"
+         *ngIf="authService.isLoggedIn">
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="authService.isLoggedIn">
+        <li>
           <div class="navbar-text greeting">
             Hallo, {{authService.userFirstname}}!
           </div>
         </li>
         <li>
-          <a routerLinkActive="active" [routerLink]="['methods']" style="cursor: pointer">Startseite</a>
+          <a routerLinkActive="active" (click)="onNavigationPressed()" [routerLink]="['methods']"
+             style="cursor: pointer">Startseite</a>
         </li>
         <li>
-          <a routerLinkActive="active" [routerLink]="['account']" style="cursor: pointer">Mein Konto</a>
+          <a routerLinkActive="active" (click)="onNavigationPressed()" [routerLink]="['account']"
+             style="cursor: pointer">Mein Konto</a>
         </li>
         <li>
-          <a routerLinkActive="active" [routerLink]="['admin-center']" style="cursor: pointer">Admin Center</a>
+          <a routerLinkActive="active" (click)="onNavigationPressed()" [routerLink]="['admin-center']"
+             style="cursor: pointer">Admin Center</a>
         </li>
-        <li *ngIf="userIsLoggedIn">
+        <li>
           <a style="cursor: pointer" (click)="logout()">Logout</a>
         </li>
       </ul>

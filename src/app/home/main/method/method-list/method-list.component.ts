@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 @Component({
   selector: 'app-method-list',
   templateUrl: './method-list.component.html',
-  styleUrls: ['./method-list.component.css']
+  styleUrls: ['./method-list.component.scss']
 })
 export class MethodListComponent implements OnInit, OnDestroy {
 

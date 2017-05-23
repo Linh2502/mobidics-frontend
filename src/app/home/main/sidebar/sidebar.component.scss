@@ -17,7 +17,7 @@ div[accordion-heading] {
 }
 
 .side-bar {
-  padding-top: 30px;
+  padding-top: 20px;
 }
 
 .side-button {
@@ -29,6 +29,14 @@ div[accordion-heading] {
 }
 
 .scrollable-content {
-  height: 92vh;
+  // navbar-height = 50px
+  height: calc(100vh - 50px);
   padding-bottom: 30px;
+}
+
+@media screen and (max-width: $screen-size-xs) {
+  .scrollable-content {
+    // navbar-height * 2= 100px
+    height: calc(100vh - 100px);
+  }
 }

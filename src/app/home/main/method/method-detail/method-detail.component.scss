@@ -12,7 +12,11 @@ carousel {
 }
 
 .scrollable-content {
-  height: 77vh;
+  // navbar-height = 50px
+  // default-padding = 20px
+  // button-height = 34px
+  // default-padding * 2 + hr-height = 41px
+  height: calc(100vh - 50px - 20px - 34px - 41px);
 }
 
 .detail-header {

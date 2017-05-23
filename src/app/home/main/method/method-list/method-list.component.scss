@@ -1,0 +1,40 @@
+@import '../../../../../variables';
+
+#custom-search-input button {
+  border-color: #43A047;
+  background: none;
+  /** belows styles are working good */
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+  border-radius: 3px;
+}
+
+.search-query:focus + button {
+  z-index: 3;
+}
+
+.input-group input.form-control:focus, .input-group input.form-control:hover {
+  border-color: #43A047;
+}
+
+.scrollable-content {
+  // navbar-height = 50px
+  // default-padding = 20px
+  // searchbar-height = 34px
+  // button-height = 42px
+  height: calc(100vh - 50px - 20px - 34px - 42px);
+}
+
+.add-item {
+  z-index: 3;
+}
+
+@media screen and (max-width: $screen-size-xs) {
+  .scrollable-content {
+    // navbar-height * 2 = 100px
+    // default-padding = 20px
+    // searchbar-height = 34px
+    // button-height = 42px
+    height: calc(100vh - 100px - 20px - 34px - 42px);
+  }
+}

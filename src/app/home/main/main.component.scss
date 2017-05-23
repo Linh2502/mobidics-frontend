@@ -1,7 +1,6 @@
 @import "../../../variables";
 
-// No idea how this works, understand sass for potential future bug fixing
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $screen-size-xs) {
   .sliding-sidebar {
     position: absolute;
     z-index: 4;

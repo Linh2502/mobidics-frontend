@@ -1,6 +1,6 @@
 @import "../../variables";
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $screen-size-xs) {
   .logo {
     margin-left: 15px;
   }
@@ -45,7 +45,7 @@ button.navbar-toggle:hover, button.navbar-toggle:focus {
   margin-right: 15px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $screen-size-xs) {
   .sliding-navbar {
     position: absolute;
     z-index: 4;

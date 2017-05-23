@@ -51,7 +51,9 @@ body {
 }
 
 .scrollable-content {
-  height: 85vh;
+  // navbar-height = 50px
+  // default-padding = 20px
+  height: calc(100vh - 50px - 20px);
   overflow-y: scroll;
   overflow-x: hidden;
 }
