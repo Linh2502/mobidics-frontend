@@ -15,9 +15,9 @@
       <img *ngIf="method.thumbnail" class="media-object" height="60px"
            [src]="method.thumbnail">
       <div class="header-body">
-        <h3 *ngIf="method.title" class="media-heading">{{method.title}}</h3>
-        <rating *ngIf="method.userRating" [(ngModel)]="method.userRating" [max]="max"
-                [titles]="['eins','zwei','drei']" style="font-size: 1.5em"></rating>
+        <h4 *ngIf="method.title" class="media-heading">{{method.title}}</h4>
+        <rating *ngIf="method.userRating" [(ngModel)]="method.userRating" [max]="5"
+                [titles]="['eins','zwei','drei']" style="font-size: 1.4em"></rating>
       </div>
       <button class="btn btn-default" (click)="toggleFavorite()">
         <span class="glyphicon"

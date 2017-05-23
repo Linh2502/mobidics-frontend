@@ -28,7 +28,6 @@ export class MethodItemComponent implements OnInit {
   @Input("method") method: Method;
   checked: boolean = false;
   isFavorite: boolean = false;
-  max = 5;
 
   constructor(private methodService: MethodService) {
   }

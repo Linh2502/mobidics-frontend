@@ -13,7 +13,7 @@
       <h4 class="text-center" style="cursor: pointer">
         {{ method.title }}
       </h4>
-      <rating [(ngModel)]="method.userRating" [max]="max" [readonly]="true"></rating>
+      <rating [(ngModel)]="method.userRating" [max]="5" [readonly]="true"></rating>
     </div>
     <div class="flex-right" [routerLink]="[method.id]">
       <div class="flex-element">
