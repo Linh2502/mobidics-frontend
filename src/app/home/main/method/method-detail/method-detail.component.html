@@ -10,23 +10,19 @@
 </div>
 <hr>
 <div class="scrollable-content" #detailContainer [@detailsLoaded]="'in'">
-  <div class="media">
-    <div class="media-left media-middle">
-      <img *ngIf="method && method.thumbnail" class="media-object" height="80px"
-           [src]="method.thumbnail">
-    </div>
-    <div class="media-body media-middle">
+  <div class="detail-header">
+    <img *ngIf="method && method.thumbnail" class="media-object" height="60px"
+         [src]="method.thumbnail">
+    <div class="header-body">
       <h3 *ngIf="method && method.title" class="media-heading">{{method.title}}</h3>
       <rating *ngIf="method && method.userRating" [(ngModel)]="method.userRating" [max]="max"
-              [titles]="['eins','zwei','drei']" style="font-size: 1.7em"></rating>
+              [titles]="['eins','zwei','drei']" style="font-size: 1.5em"></rating>
     </div>
-    <div class="media-right media-middle">
-      <button class="btn btn-default" (click)="toggleFavorite()">
+    <button class="btn btn-default" (click)="toggleFavorite()">
         <span class="glyphicon"
               [ngClass]="{ 'glyphicon-heart': isFavorite, 'glyphicon-heart-empty': !isFavorite }"
               style="font-size: 1.5em"></span>
-      </button>
-    </div>
+    </button>
   </div>
   <div class="row" *ngIf="method && method.images">
     <carousel class="col-xs-8 col-xs-offset-2">

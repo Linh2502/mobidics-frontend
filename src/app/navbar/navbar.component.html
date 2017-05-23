@@ -7,13 +7,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" [routerLink]="['methods']">
-        MobiDics
+      <a class="navbar-left logo" [routerLink]="['methods']">
+        <img alt="Brand" src="../../assets/logo_mobidics.svg">
       </a>
     </div>
-    <div class="navbar-collapse"
+    <div class="navbar-collapse sliding-navbar"
          [collapse]="isMenuCollapsed">
       <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="authService.isLoggedIn">
+          <div class="navbar-text greeting">
+            Hallo, {{authService.userFirstname}}!
+          </div>
+        </li>
         <li>
           <a routerLinkActive="active" [routerLink]="['methods']" style="cursor: pointer">Startseite</a>
         </li>

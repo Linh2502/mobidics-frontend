@@ -1,6 +1,4 @@
-import { User } from "./user/user.model";
 import { EventEmitter, Injectable } from '@angular/core';
-import { Http, Headers } from "@angular/http";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { HttpService } from "../http/http.service";
@@ -10,6 +8,7 @@ import { TokenStorageService } from "./token-storage.service";
 export class AuthService {
   public loggedInStatusChanged: EventEmitter<boolean>;
   public isLoggedIn = false;
+  public userFirstname;
 
   constructor(private httpService: HttpService,
               private tokenStorage: TokenStorageService,
@@ -18,6 +17,7 @@ export class AuthService {
     let authCache = JSON.parse(localStorage.getItem('authCache'));
     this.isLoggedIn = !!authCache;
     this.tokenStorage.setJwtToken(authCache && authCache.jwtToken);
+    this.userFirstname = (authCache && authCache.firstname);
   }
 
   public login(username: string, password: string, persist: boolean): Observable<any> {
@@ -26,9 +26,11 @@ export class AuthService {
         this.tokenStorage.setJwtToken(response.headers.get('X-mobidics-jwt-token'));
         this.isLoggedIn = true;
         this.loggedInStatusChanged.emit(true);
+        this.userFirstname = response.json().firstname;
         if (persist) {
           localStorage.setItem('authCache', JSON.stringify({
-            "jwtToken": this.tokenStorage.getJwtToken()
+            'jwtToken': this.tokenStorage.getJwtToken(),
+            'firstname': this.userFirstname
           }))
         }
       }

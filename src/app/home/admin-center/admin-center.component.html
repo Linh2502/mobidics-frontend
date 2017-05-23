@@ -1,3 +1,9 @@
-<p>
-  admin-center works!
-</p>
+<div class="container-fluid">
+
+
+  <button class="btn btn-primary" type="button" (click)="toggle()">toggle</button>
+
+  <div class="container test-container" [@slideInOut]="toggleState">
+
+  </div>
+</div>

@@ -14,3 +14,16 @@ carousel {
 .scrollable-content {
   height: 77vh;
 }
+
+.detail-header {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.header-body {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  flex: 8;
+}

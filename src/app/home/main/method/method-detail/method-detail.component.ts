@@ -8,7 +8,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 @Component({
   selector: 'app-method-detail',
   templateUrl: './method-detail.component.html',
-  styleUrls: ['./method-detail.component.css'],
+  styleUrls: ['./method-detail.component.scss'],
   animations: [
     trigger('detailsLoaded', [
       state('in', style({ opacity: 1 })),

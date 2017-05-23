@@ -8,7 +8,7 @@
   display: flex;
   flex-flow: column wrap;
   align-items: center;
-  flex: 8;
+  flex: 7;
 }
 
 .flex-body:focus {
@@ -20,10 +20,6 @@
   flex: 2;
   flex-flow: row;
   justify-content: flex-end;
-}
-
-.flex-right {
-  outline: 0 none;
 }
 
 .flex-element {

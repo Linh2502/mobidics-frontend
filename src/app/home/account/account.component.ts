@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../services/auth/user/user.model';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from "../../services/http/http.service";
-import { University } from "../../services/auth/user/university.model";
-import { Faculty } from "../../services/auth/user/faculty.model";
+import { AccountEditService } from "./account-edit.service";
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css']
+  styleUrls: ['./account.component.css'],
+  providers: [AccountEditService]
 })
 export class AccountDetailsComponent implements OnInit {
 
   userForm: FormGroup;
+  userFormBackup: FormGroup;
   editModeOn = false;
   profileImage: string = "https://art.placefull.com/Content/Properties/shared/images/no-profile-image.png";
 
@@ -72,14 +72,17 @@ export class AccountDetailsComponent implements OnInit {
 
   onEditButtonClicked(): void {
     this.editModeOn = !this.editModeOn;
+    this.userFormBackup = this.userForm;
   }
 
   onSubmit() {
+    console.log(this.userForm);
     this.editModeOn = !this.editModeOn;
   }
 
   onAbortEdit() {
     this.editModeOn = !this.editModeOn;
+    this.userForm = this.userFormBackup;
   }
 
   onUploadButtonClicked() {

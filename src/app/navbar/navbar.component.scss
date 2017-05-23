@@ -1,15 +1,22 @@
 @import "../../variables";
 
+@media screen and (max-width: 768px) {
+  .logo {
+    margin-left: 15px;
+  }
+}
+
 .navbar-default {
   background-color: $color-primary;
 }
 
-.navbar-brand {
+li > a {
   color: white;
 }
 
-li > a {
+.greeting {
   color: white;
+  margin-left: 16px;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
@@ -28,4 +35,33 @@ button.navbar-toggle:hover, button.navbar-toggle:focus {
 .navbar-default .navbar-nav > li > a.active {
   background-color: $color-primary-accent;
   color: white;
+}
+
+.logo {
+  display: block;
+  height: auto;
+  width: 200px;
+  padding-top: 5px;
+  margin-right: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .sliding-navbar {
+    position: absolute;
+    z-index: 4;
+    background: $color-primary;
+    width: 100vw;
+    height: 100%;
+    border-bottom: 1px solid black;
+
+    &.collapse {
+      display: block !important;
+      transform: translate3D(-100%, 0, 0);
+      transition: all 200ms;
+    }
+
+    &.collapse.in {
+      transform: translate3D(0, 0, 0);
+    }
+  }
 }
