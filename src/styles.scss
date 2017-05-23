@@ -60,3 +60,13 @@ body {
   background-color: $color-primary;
   color: white;
 }
+
+carousel {
+  .carousel-indicators li {
+    border: 1px solid $color-primary-accent;
+
+  }
+  .carousel-indicators li.active {
+    background-color: $color-primary-accent;
+  }
+}

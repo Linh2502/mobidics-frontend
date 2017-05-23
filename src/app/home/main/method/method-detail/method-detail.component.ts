@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Method } from "../method.model";
 import { Subscription } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
