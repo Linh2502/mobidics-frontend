@@ -9,90 +9,91 @@
   </button>
 </div>
 <hr>
-<div class="scrollable-content" #detailContainer [@detailsLoaded]="'in'">
-  <div class="detail-header">
-    <img *ngIf="method && method.thumbnail" class="media-object" height="60px"
-         [src]="method.thumbnail">
-    <div class="header-body">
-      <h3 *ngIf="method && method.title" class="media-heading">{{method.title}}</h3>
-      <rating *ngIf="method && method.userRating" [(ngModel)]="method.userRating" [max]="max"
-              [titles]="['eins','zwei','drei']" style="font-size: 1.5em"></rating>
-    </div>
-    <button class="btn btn-default" (click)="toggleFavorite()">
+<div class="scrollable-content" #detailContainer>
+  <div *ngIf="method" [@detailsLoaded]="'in'">
+    <div class="detail-header">
+      <img *ngIf="method.thumbnail" class="media-object" height="60px"
+           [src]="method.thumbnail">
+      <div class="header-body">
+        <h3 *ngIf="method.title" class="media-heading">{{method.title}}</h3>
+        <rating *ngIf="method.userRating" [(ngModel)]="method.userRating" [max]="max"
+                [titles]="['eins','zwei','drei']" style="font-size: 1.5em"></rating>
+      </div>
+      <button class="btn btn-default" (click)="toggleFavorite()">
         <span class="glyphicon"
               [ngClass]="{ 'glyphicon-heart': isFavorite, 'glyphicon-heart-empty': !isFavorite }"
               style="font-size: 1.5em"></span>
-    </button>
-  </div>
-  <div class="row" *ngIf="method && method.images">
-    <carousel class="col-xs-8 col-xs-offset-2">
-      <slide *ngFor="let image of method.images">
-        <img [src]="image" class="img-responsive" width="100%">
-      </slide>
-    </carousel>
-  </div>
-  <table class="table">
-    <tbody>
-    <tr *ngIf="method && method.socialForm">
-      <th>Sozialform</th>
-      <td>{{ method.socialForm | socialform }}</td>
-    </tr>
-    <tr *ngIf="method && method.phase">
-      <th>Phase</th>
-      <td>{{ method.phase | phase }}</td>
-    </tr>
-    <tr *ngIf="method && method.subPhase">
-      <th>Unterphase</th>
-      <td>{{ method.subPhase | subphase }}</td>
-    </tr>
-    <tr *ngIf="method && method.courseType">
-      <th>Art der Veranstaltung</th>
-      <td>{{ method.courseType | courseType }}</td>
-    </tr>
-    <tr *ngIf="method && method.groupSizeMin">
-      <th>Gruppengröße (min)</th>
-      <td>{{ method.groupSizeMin }}</td>
-    </tr>
-    <tr *ngIf="method && method.groupSizeMax">
-      <th>Gruppengröße (max)</th>
-      <td>{{ method.groupSizeMax }}</td>
-    </tr>
-    <tr *ngIf="method && method.proceeding">
-      <th>Ablauf</th>
-      <td>{{ method.proceeding }}</td>
-    </tr>
-    <tr *ngIf="method">
-      <th>Material</th>
-      <td></td>
-    </tr>
-    <tr *ngIf="method && method.timeMin">
-      <th>Zeitaufwand (min)</th>
-      <td>{{ method.timeMin }}</td>
-    </tr>
-    <tr *ngIf="method && method.timeMax">
-      <th>Zeitaufwand (max)</th>
-      <td>{{ method.timeMax }}</td>
-    </tr>
-    <tr *ngIf="method && method.experiences">
-      <th>Erfahrungen der Profis</th>
-      <td>{{ method.experiences }}</td>
-    </tr>
-    <tr *ngIf="method && method.variations">
-      <th>Spielart</th>
-      <td>{{ method.variations }}</td>
-    </tr>
-    <tr *ngIf="method && method.tips">
-      <th>Tipps</th>
-      <td>{{ method.tips }}</td>
-    </tr>
-    <tr *ngIf="method && method.visualization">
-      <th>Visualisierung</th>
-      <td>{{ method.visualization }}</td>
-    </tr>
-    </tbody>
-  </table>
+      </button>
+    </div>
+    <div class="row" *ngIf="method.images">
+      <carousel class="col-xs-8 col-xs-offset-2">
+        <slide *ngFor="let image of method.images">
+          <img [src]="image" class="img-responsive" width="100%">
+        </slide>
+      </carousel>
+    </div>
+    <table class="table">
+      <tbody>
+      <tr *ngIf="method.socialForm">
+        <th>Sozialform</th>
+        <td>{{ method.socialForm | socialform }}</td>
+      </tr>
+      <tr *ngIf="method.phase">
+        <th>Phase</th>
+        <td>{{ method.phase | phase }}</td>
+      </tr>
+      <tr *ngIf="method.subPhase">
+        <th>Unterphase</th>
+        <td>{{ method.subPhase | subphase }}</td>
+      </tr>
+      <tr *ngIf="method.courseType">
+        <th>Art der Veranstaltung</th>
+        <td>{{ method.courseType | courseType }}</td>
+      </tr>
+      <tr *ngIf="method.groupSizeMin">
+        <th>Gruppengröße (min)</th>
+        <td>{{ method.groupSizeMin }}</td>
+      </tr>
+      <tr *ngIf="method.groupSizeMax">
+        <th>Gruppengröße (max)</th>
+        <td>{{ method.groupSizeMax }}</td>
+      </tr>
+      <tr *ngIf="method.proceeding">
+        <th>Ablauf</th>
+        <td>{{ method.proceeding }}</td>
+      </tr>
+      <tr *ngIf="method">
+        <th>Material</th>
+        <td></td>
+      </tr>
+      <tr *ngIf="method.timeMin">
+        <th>Zeitaufwand (min)</th>
+        <td>{{ method.timeMin }}</td>
+      </tr>
+      <tr *ngIf="method.timeMax">
+        <th>Zeitaufwand (max)</th>
+        <td>{{ method.timeMax }}</td>
+      </tr>
+      <tr *ngIf="method.experiences">
+        <th>Erfahrungen der Profis</th>
+        <td>{{ method.experiences }}</td>
+      </tr>
+      <tr *ngIf="method.variations">
+        <th>Spielart</th>
+        <td>{{ method.variations }}</td>
+      </tr>
+      <tr *ngIf="method.tips">
+        <th>Tipps</th>
+        <td>{{ method.tips }}</td>
+      </tr>
+      <tr *ngIf="method.visualization">
+        <th>Visualisierung</th>
+        <td>{{ method.visualization }}</td>
+      </tr>
+      </tbody>
+    </table>
 
-  <app-method-detail-comments *ngIf="method" [methodId]="method.id">
-  </app-method-detail-comments>
+    <app-method-detail-comments [methodId]="method.id">
+    </app-method-detail-comments>
+  </div>
 </div>
-

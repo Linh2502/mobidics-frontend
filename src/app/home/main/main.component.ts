@@ -22,6 +22,7 @@ export class MainComponent implements OnInit, OnDestroy {
       (methodDetailSelected: boolean) => {
         this.detailPageSelected = methodDetailSelected;
         this.sideBarCollapsed = true;
+        console.log(methodDetailSelected);
       });
   }
 

@@ -42,6 +42,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.activatedRoute.params.subscribe(
       params => {
+        this.method = null;
         this.methodService.getMethodById(params['id']).subscribe(
           method => {
             this.method = method;
