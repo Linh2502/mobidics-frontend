@@ -22,12 +22,12 @@
                   <img class="img-responsive img-circle col-xs-12" alt="Profile Image" src="{{ profileImage }}">
                 </div>
                 <div class="row">
-                  <button type="button"
-                          class="btn btn-primary col-xs-8 col-xs-offset-2"
-                          (click)="onUploadButtonClicked()"
-                          *ngIf="editModeOn">
+                  <label class="btn btn-primary col-xs-8 col-xs-offset-2"
+                         for="profile-image-selector"
+                         *ngIf="editModeOn">
+                    <input id="profile-image-selector" type="file" style="display:none;">
                     Profilbild hochladen...
-                  </button>
+                  </label>
                 </div>
               </div>
               <div class="col-xs-10 col-sm-8 col-xs-offset-1 col-sm-offset-0">

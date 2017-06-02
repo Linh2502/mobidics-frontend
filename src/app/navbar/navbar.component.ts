@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Animations } from "../animations";
+import { User } from "../services/auth/user/user.model";
 
 @Component({
   selector: 'app-navbar',
@@ -18,6 +19,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+  }
+
+  getNameOfUser() {
+    let user: User = this.authService.loggedInUser;
+    return user.firstname + " " + user.lastname;
   }
 
   onNavigationPressed() {

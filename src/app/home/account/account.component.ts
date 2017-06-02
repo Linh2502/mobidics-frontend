@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../services/auth/user/user.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpService } from "../../services/http/http.service";
-import { AccountEditService } from "./account-edit.service";
+import { AuthService } from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css'],
-  providers: [AccountEditService]
+  styleUrls: ['./account.component.css']
 })
 export class AccountDetailsComponent implements OnInit {
 
@@ -35,7 +33,7 @@ export class AccountDetailsComponent implements OnInit {
       Validators.maxLength(2)]);
 
 
-  constructor(private httpService: HttpService) {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -52,22 +50,19 @@ export class AccountDetailsComponent implements OnInit {
       'faculty': this.facultyCtrl,
       'experience': this.experienceCtrl
     });
-    this.httpService.getUserMe().subscribe(
-      (user: User) => {
-        this.profileImage = user.profileImage ? user.profileImage : this.profileImage;
-        this.firstnameCtrl.setValue(user.firstname);
-        this.lastnameCtrl.setValue(user.lastname);
-        this.usernameCtrl.setValue(user.username);
-        this.emailCtrl.setValue(user.email);
-        this.languagesCtrl.setValue(AccountDetailsComponent.convertLanguages(user.language));
-        this.genderCtrl.setValue(AccountDetailsComponent.convertGender(user.gender));
-        this.userStatusCtrl.setValue(user.userStatus);
-        this.userTypeCtrl.setValue(user.userType);
-        this.universityCtrl.setValue(user.university.name);
-        this.facultyCtrl.setValue(user.faculty.name);
-        this.experienceCtrl.setValue(user.experience);
-      }
-    );
+    let user: User = this.authService.loggedInUser;
+    this.profileImage = user.profileImage ? user.profileImage : this.profileImage;
+    this.firstnameCtrl.setValue(user.firstname);
+    this.lastnameCtrl.setValue(user.lastname);
+    this.usernameCtrl.setValue(user.username);
+    this.emailCtrl.setValue(user.email);
+    this.languagesCtrl.setValue(AccountDetailsComponent.convertLanguages(user.language));
+    this.genderCtrl.setValue(AccountDetailsComponent.convertGender(user.gender));
+    this.userStatusCtrl.setValue(user.userStatus);
+    this.userTypeCtrl.setValue(user.userType);
+    this.universityCtrl.setValue(user.university.name);
+    this.facultyCtrl.setValue(user.faculty.name);
+    this.experienceCtrl.setValue(user.experience);
   }
 
   onEditButtonClicked(): void {
@@ -88,7 +83,8 @@ export class AccountDetailsComponent implements OnInit {
   onUploadButtonClicked() {
   }
 
-  static convertGender(gender) {
+  static
+  convertGender(gender) {
     if (gender == 0) {
       return 'Männlich';
     } else {
@@ -96,7 +92,8 @@ export class AccountDetailsComponent implements OnInit {
     }
   }
 
-  static convertLanguages(languages) {
+  static
+  convertLanguages(languages) {
     let result: string;
     let languageArray: string[] = languages.split("::");
     result = this.mapLanguage(languageArray[0]);
@@ -106,7 +103,8 @@ export class AccountDetailsComponent implements OnInit {
     return result;
   }
 
-  static mapLanguage(language) {
+  static
+  mapLanguage(language) {
     switch (language) {
       case 'de':
         return 'Deutsch';

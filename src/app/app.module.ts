@@ -12,9 +12,7 @@ import { SidebarComponent } from './home/main/sidebar/sidebar.component';
 import { MethodComponent } from './home/main/method/method.component';
 import { MethodListComponent } from './home/main/method/method-list/method-list.component';
 import { MethodDetailComponent } from './home/main/method/method-detail/method-detail.component';
-import { MethodAddComponent } from './home/main/method/method-add/method-add.component';
 import { MainComponent } from './home/main/main.component';
-import { MethodEditComponent } from './home/main/method/method-edit/method-edit.component';
 import { MethodStartComponent } from './home/main/method/method-detail/method-start.component';
 import { MethodItemComponent } from './home/main/method/method-list/method-item.component';
 import { AdminCenterComponent } from './home/admin-center/admin-center.component';
@@ -32,6 +30,7 @@ import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from "./services/auth/auth.guard";
 import { routing } from './app.routing';
 import { MethodDetailCommentsComponent } from './home/main/method/method-detail/method-detail-comments/method-detail-comments.component';
+import { MethodAddEditComponent } from './home/main/method/method-add-edit/method-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -43,9 +42,7 @@ import { MethodDetailCommentsComponent } from './home/main/method/method-detail/
     MethodComponent,
     MethodListComponent,
     MethodDetailComponent,
-    MethodAddComponent,
     MainComponent,
-    MethodEditComponent,
     MethodStartComponent,
     MethodItemComponent,
     AdminCenterComponent,
@@ -54,7 +51,8 @@ import { MethodDetailCommentsComponent } from './home/main/method/method-detail/
     MethodDetailPhasePipe,
     MethodDetailSubphasePipe,
     MethodDetailCourseTypePipe,
-    MethodDetailCommentsComponent
+    MethodDetailCommentsComponent,
+    MethodAddEditComponent
   ],
   imports: [
     BrowserModule,

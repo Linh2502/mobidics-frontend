@@ -37,6 +37,14 @@ export class MethodService {
     );
   }
 
+  addMethod(method: Method) {
+
+  }
+
+  editMethod(method: Method) {
+
+  }
+
   getFavoritesIds(): Observable<string[]> {
     if (!this.favoritesObservable) {
       this.favoritesObservable = this.httpService.getFavoritesIds()
