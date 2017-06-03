@@ -1,26 +1,27 @@
 <li class="list-group-item" routerLinkActive="active" [@flyIn]="'in'">
-  <div class="flex-container">
-    <div class="flex-element">
-      <span class="glyphicon" [ngClass]="{ 'glyphicon-check': checked, 'glyphicon-unchecked': !checked }"
+  <div class="method-item">
+    <div class="flex-container__checkbox">
+      <span class="glyphicon glyphicon-orange"
+            [ngClass]="{ 'glyphicon-check': checked, 'glyphicon-unchecked': !checked }"
             (click)="checkboxClicked()" style="cursor: pointer"></span>
     </div>
-    <div class="flex-element" [routerLink]="[method.id]">
+    <div class="flex-container__thumbnail" [routerLink]="[method.id]">
       <img
         [src]="method.thumbnail"
-        alt="" class="media-object" style="height: 50px">
+        alt="" class="media-object" style="height: 40px">
     </div>
-    <div class="flex-body" [routerLink]="[method.id]">
-      <h4 class="text-center" style="cursor: pointer">
-        {{ method.title }}
-      </h4>
+    <div class="method-item__body" [routerLink]="[method.id]">
+      <div class="method-item__body__title">
+        <strong style="cursor: pointer; font-size: 1.1em">{{ method.title }}</strong>
+      </div>
       <rating [(ngModel)]="method.userRating" [max]="5" [readonly]="true"></rating>
     </div>
-    <div class="flex-right" [routerLink]="[method.id]">
-      <div class="flex-element">
+    <div class="method-item__fav-and-chev" [routerLink]="[method.id]">
+      <div class="method-item__fav-and-chev__element">
         <span class="glyphicon glyphicon-heart" *ngIf="isFavorite" style="font-size: 1.5em">
       </span>
       </div>
-      <div class="flex-element" style="cursor: pointer">
+      <div class="method-item__fav-and-chev__element" style="cursor: pointer">
       <span class="glyphicon glyphicon-chevron-right" style="font-size: 1.5em">
       </span>
       </div>
