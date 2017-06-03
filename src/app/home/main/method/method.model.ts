@@ -1,21 +1,29 @@
 export class Method {
 
   constructor(public id: string,
-              public title: string,
               public images: string[],
+              public title: string,
               public alternativeTitles: string,
+              public creator: string,
               public socialForm: string,
               public phase: string,
               public subPhase: string,
               public result: string,
               public courseType: string,
+              public groupType: string,
               public groupSizeMin: number,
               public groupSizeMax: number,
+              public groupSizeComment: string,
               public proceeding: string,
+              public phaseProceeding: string,
+              public seating: string,
+              public material: string,
+              public methodMaterial: string,
               public timeMax: number,
               public timeMin: number,
               public timeComment: string,
               public variations: string,
+              public examples: string,
               public tips: string,
               public experiences: string,
               public creationDate: Date,
@@ -24,6 +32,10 @@ export class Method {
               public citations: string,
               public userRating: number,
               public visualization: string,
-              public thumbnail: string) {
+              public weblinks: string,
+              public references: string,
+              public scope: string,
+              public thumbnail: string,
+              public language: string) {
   }
 }

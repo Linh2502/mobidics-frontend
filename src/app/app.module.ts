@@ -65,7 +65,7 @@ import { MethodAddEditComponent } from './home/main/method/method-add-edit/metho
     AlertModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    routing
+    routing,
   ],
   providers: [
     AuthService,

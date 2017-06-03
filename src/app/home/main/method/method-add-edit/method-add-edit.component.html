@@ -14,46 +14,405 @@
         </div>
         <div class="row">
           <div class="col-xs-12">
+            <h4>
+              Bilder hochladen
+            </h4>
+            <div class="preview-container" *ngIf="uploadedImages.length != 0">
+              <div class="preview" *ngFor="let imageUrl of uploadedImages; let i = index">
+                <img class="img" [src]="imageUrl">
+                <button type="button" class="btn btn-danger btn-circle delete" (click)="removeImage(i)">
+                  <i class="glyphicon glyphicon-remove"></i>
+                </button>
+              </div>
+            </div>
+            <label class="btn btn-default"
+                   for="method-image-selector">
+              <input id="method-image-selector" (change)="readUrl($event)" type="file" style="display:none;">
+              Bild auswählen...
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="language-selector">
+              <h4>Languages</h4>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
             <div class="form-group">
-              <label for="name">Title</label>
+              <label for="title">Name der Methode</label>
               <input
                 type="text"
-                id="name"
+                id="title"
                 class="form-control"
-                formControlName="name">
+                formControlName="title"
+                #title>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="image-url">Image Url</label>
+              <label for="alternative-titles">Alternative Namen</label>
               <input
                 type="text"
-                id="image-url"
+                id="alternative-titles"
                 class="form-control"
-                formControlName="imagePath"
-                #imagePath>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="img">
-              <img [src]="imagePath.value">
+                formControlName="alternativeTitles"
+                #alternativeTitles>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="content">Content</label>
-              <textarea
+              <label for="creator">Ersteller</label>
+              <input
                 type="text"
-                id="content"
-                rows="6"
+                id="creator"
                 class="form-control"
-                formControlName="description"></textarea>
+                formControlName="creator"
+                #creator>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="socialform">Sozialform</label>
+              <input
+                type="text"
+                id="socialform"
+                class="form-control"
+                formControlName="socialForm"
+                #socialForm>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="phase">Phase</label>
+              <input
+                type="text"
+                id="phase"
+                class="form-control"
+                formControlName="phase"
+                #phase>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="subphase">Unterphase</label>
+              <input
+                type="text"
+                id="subphase"
+                class="form-control"
+                formControlName="subPhase"
+                #subPhase>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="result">Ergebnis</label>
+              <input
+                type="text"
+                id="result"
+                class="form-control"
+                formControlName="result"
+                #result>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="group-type">Teilnehmerzusammensetzung</label>
+              <input
+                type="text"
+                id="group-type"
+                class="form-control"
+                formControlName="groupType"
+                #groupType>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="course-type">Art der Veranstaltung</label>
+              <input
+                type="text"
+                id="course-type"
+                class="form-control"
+                formControlName="courseType"
+                #courseType>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="group-size-min">Gruppengröße (min)</label>
+              <input
+                type="text"
+                id="group-size-min"
+                class="form-control"
+                formControlName="groupSizeMin"
+                #groupSizeMin>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="group-size-max">Gruppengröße (max)</label>
+              <input
+                type="text"
+                id="group-size-max"
+                class="form-control"
+                formControlName="groupSizeMax"
+                #groupSizeMax>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="group-size-comment">Gruppengröße (Kommentar)</label>
+              <input
+                type="text"
+                id="group-size-comment"
+                class="form-control"
+                formControlName="groupSizeComment"
+                #groupSizeComment>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="proceeding">Ablauf</label>
+              <input
+                type="text"
+                id="proceeding"
+                class="form-control"
+                formControlName="proceeding"
+                #proceeding>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="phase-proceeding">Phasenspezifischer Ablauf</label>
+              <input
+                type="text"
+                id="phase-proceeding"
+                class="form-control"
+                formControlName="phaseProceeding"
+                #phaseProceeding>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="seating">Bestuhlung</label>
+              <input
+                type="text"
+                id="seating"
+                class="form-control"
+                formControlName="seating"
+                #seating>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="material">Material</label>
+              <input
+                type="text"
+                id="material"
+                class="form-control"
+                formControlName="material"
+                #material>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="method-material">Methodenspezifisches Material</label>
+              <input
+                type="text"
+                id="method-material"
+                class="form-control"
+                formControlName="methodMaterial"
+                #methodMaterial>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="time-min">Zeitaufwand (min)</label>
+              <input
+                type="text"
+                id="time-min"
+                class="form-control"
+                formControlName="timeMin"
+                #timeMin>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="time-max">Zeitaufwand (max)</label>
+              <input
+                type="text"
+                id="time-max"
+                class="form-control"
+                formControlName="timeMax"
+                #timeMax>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="time-comment">Zeitaufwand (Kommentar)</label>
+              <input
+                type="text"
+                id="time-comment"
+                class="form-control"
+                formControlName="timeComment"
+                #timeComment>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="rating">Bewertung</label>
+              <input
+                type="text"
+                id="rating"
+                class="form-control"
+                formControlName="rating"
+                #rating>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="experiences">Erfahrungen der Profis</label>
+              <input
+                type="text"
+                id="experiences"
+                class="form-control"
+                formControlName="experiences"
+                #experiences>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="variations">Spielart</label>
+              <input
+                type="text"
+                id="variations"
+                class="form-control"
+                formControlName="variations"
+                #variations>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="examples">Beispiele</label>
+              <input
+                type="text"
+                id="examples"
+                class="form-control"
+                formControlName="examples"
+                #examples>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="tips">Tipps</label>
+              <input
+                type="text"
+                id="tips"
+                class="form-control"
+                formControlName="tips"
+                #tips>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="visualization">Visualisierung</label>
+              <input
+                type="text"
+                id="visualization"
+                class="form-control"
+                formControlName="visualization"
+                #visualization>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="weblinks">Weblinks</label>
+              <input
+                type="text"
+                id="weblinks"
+                class="form-control"
+                formControlName="weblinks"
+                #weblinks>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="references">Referenzen</label>
+              <input
+                type="text"
+                id="references"
+                class="form-control"
+                formControlName="references"
+                #references>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="scope">Zugriff</label>
+              <input
+                type="text"
+                id="scope"
+                class="form-control"
+                formControlName="scope"
+                #scope>
             </div>
           </div>
         </div>
@@ -94,8 +453,13 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="form-group row">
-        <div class="col-md-5"><input type="text" class="form-control" #itemName></div>
-        <div class="col-md-5"><input type="text" class="form-control" #itemAmount></div>
+        <div class="col-md-5">
+          <label for="itemName">Name</label>
+          <input id="itemName" type="text" class="form-control"
+                 #itemName></div>
+        <div class="col-md-5"><label for="itemAmount">Amount</label>
+          <input id="itemAmount" type="text"
+                 class="form-control" #itemAmount></div>
         <div class="col-md-2">
           <button
             type="button"

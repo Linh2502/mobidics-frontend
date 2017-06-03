@@ -16,7 +16,7 @@
            [src]="method.thumbnail">
       <div class="header-body">
         <h4 *ngIf="method.title" class="media-heading">{{method.title}}</h4>
-        <rating *ngIf="method.userRating" [(ngModel)]="method.userRating" [max]="5"
+        <rating [(ngModel)]="method.userRating" [max]="5"
                 [titles]="['eins','zwei','drei']" style="font-size: 1.4em"></rating>
       </div>
       <button class="btn btn-default" (click)="toggleFavorite()">
@@ -26,7 +26,7 @@
       </button>
     </div>
     <div class="row" *ngIf="method.images">
-      <carousel class="col-xs-8 col-xs-offset-2">
+      <carousel class="col-xs-6 col-xs-offset-3">
         <slide *ngFor="let image of method.images">
           <img [src]="image" class="img-responsive" width="100%">
         </slide>

@@ -15,54 +15,41 @@ export class AccountDetailsComponent implements OnInit {
   editModeOn = false;
   profileImage: string = "https://art.placefull.com/Content/Properties/shared/images/no-profile-image.png";
 
-  private firstnameCtrl: FormControl = new FormControl("", Validators.required);
-  private lastnameCtrl: FormControl = new FormControl("", Validators.required);
-  private usernameCtrl: FormControl = new FormControl("", Validators.required);
-  private emailCtrl: FormControl = new FormControl("",
-    [Validators.required,
-      Validators.email]);
-  private languagesCtrl: FormControl = new FormControl("", Validators.required);
-  private genderCtrl: FormControl = new FormControl("", Validators.required);
-  private userStatusCtrl: FormControl = new FormControl("", Validators.required);
-  private userTypeCtrl: FormControl = new FormControl("", Validators.required);
-  private universityCtrl: FormControl = new FormControl("", Validators.required);
-  private facultyCtrl: FormControl = new FormControl("", Validators.required);
-  private experienceCtrl: FormControl = new FormControl("",
-    [Validators.required,
-      Validators.pattern('\\d+'),
-      Validators.maxLength(2)]);
-
-
   constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
     this.userForm = new FormGroup({
-      'firstname': this.firstnameCtrl,
-      'lastname': this.lastnameCtrl,
-      'username': this.usernameCtrl,
-      'email': this.emailCtrl,
-      'languages': this.languagesCtrl,
-      'gender': this.genderCtrl,
-      'userStatus': this.userStatusCtrl,
-      'userType': this.userTypeCtrl,
-      'university': this.universityCtrl,
-      'faculty': this.facultyCtrl,
-      'experience': this.experienceCtrl
+      'firstname': new FormControl("", Validators.required),
+      'lastname': new FormControl("", Validators.required),
+      'username': new FormControl("", Validators.required),
+      'email': new FormControl("",
+        [Validators.required,
+          Validators.email]),
+      'languages': new FormControl("", Validators.required),
+      'gender': new FormControl("", Validators.required),
+      'userStatus': new FormControl("", Validators.required),
+      'userType': new FormControl("", Validators.required),
+      'university': new FormControl("", Validators.required),
+      'faculty': new FormControl("", Validators.required),
+      'experience': new FormControl("",
+        [Validators.required,
+          Validators.pattern('\\d+'),
+          Validators.maxLength(2)])
     });
     let user: User = this.authService.loggedInUser;
     this.profileImage = user.profileImage ? user.profileImage : this.profileImage;
-    this.firstnameCtrl.setValue(user.firstname);
-    this.lastnameCtrl.setValue(user.lastname);
-    this.usernameCtrl.setValue(user.username);
-    this.emailCtrl.setValue(user.email);
-    this.languagesCtrl.setValue(AccountDetailsComponent.convertLanguages(user.language));
-    this.genderCtrl.setValue(AccountDetailsComponent.convertGender(user.gender));
-    this.userStatusCtrl.setValue(user.userStatus);
-    this.userTypeCtrl.setValue(user.userType);
-    this.universityCtrl.setValue(user.university.name);
-    this.facultyCtrl.setValue(user.faculty.name);
-    this.experienceCtrl.setValue(user.experience);
+    this.userForm.get('firstname').setValue(user.firstname);
+    this.userForm.get('lastname').setValue(user.lastname);
+    this.userForm.get('username').setValue(user.username);
+    this.userForm.get('email').setValue(user.email);
+    this.userForm.get('languages').setValue(AccountDetailsComponent.convertLanguages(user.language));
+    this.userForm.get('gender').setValue(AccountDetailsComponent.convertGender(user.gender));
+    this.userForm.get('userStatus').setValue(user.userStatus);
+    this.userForm.get('userType').setValue(user.userType);
+    this.userForm.get('university').setValue(user.university.name);
+    this.userForm.get('faculty').setValue(user.faculty.name);
+    this.userForm.get('experience').setValue(user.experience);
   }
 
   onEditButtonClicked(): void {

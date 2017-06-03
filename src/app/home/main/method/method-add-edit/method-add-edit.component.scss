@@ -1,0 +1,45 @@
+img {
+  width: 100px;
+  height: 100px;
+}
+
+.preview-container {
+  height: 110px;
+  width: 100%;
+  margin: 10px 0 10px 0;
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+div.preview {
+  position: relative;
+  display: inline-block;
+  border: none;
+  margin: 0 5px 0 5px;
+  box-shadow: 2px 2px 4px #bbb;
+  vertical-align: bottom;
+}
+
+div.preview button {
+  position: absolute;
+  display: block;
+}
+
+div.preview button.delete {
+  top: 0;
+  left: 80%;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 3px 2px 2px 1px;
+  font-size: 13px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+
+  .glyphicon {
+    color: white;
+  }
+}

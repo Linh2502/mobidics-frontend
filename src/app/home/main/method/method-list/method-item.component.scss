@@ -12,7 +12,9 @@
   min-width: 0;
 }
 
-.method-item__body:focus {
+.method-item__body:focus,
+.method-item__fav-and-chev:focus,
+.method-item__fav-and-chev__element:focus {
   outline: 0 none;
 }
 
@@ -39,10 +41,6 @@
 
 .flex-container__thumbnail {
   flex: 0 0 10%;
-}
-
-.method-item__fav-and-chev__element:focus {
-  outline: 0 none;
 }
 
 .glyphicon-orange {
