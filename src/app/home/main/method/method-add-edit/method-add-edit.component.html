@@ -55,7 +55,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="alternative-titles">Alternative Namen</label>
+              <label for="alternative-titles">Alternativnamen</label>
               <input
                 type="text"
                 id="alternative-titles"
@@ -67,14 +67,16 @@
         </div>
         <div class="row">
           <div class="col-xs-12">
-            <div class="form-group">
-              <label for="socialform">Sozialform</label>
-              <input
-                type="text"
-                id="socialform"
-                class="form-control"
-                formControlName="socialForm"
-                #socialForm>
+            <label for="socialform">Sozialform</label>
+            <div *ngFor="let option of socialFormOptions">
+              <label>
+                <input type="checkbox"
+                       value="{{ option.value }}"
+                       id="socialform"
+                       [(ngModel)]="option.checked"
+                       [ngModelOptions]="{standalone: true}">
+                {{ option.name }}
+              </label>
             </div>
           </div>
         </div>

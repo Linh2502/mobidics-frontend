@@ -57,7 +57,7 @@
       </tr>
       <tr *ngIf="method.result">
         <th>Ergebnis</th>
-        <td>{{ method.socialForm }}</td>
+        <td>{{ method.result }}</td>
       </tr>
       <tr *ngIf="method.courseType">
         <th>Art der Veranstaltung</th>
@@ -89,11 +89,11 @@
       </tr>
       <tr *ngIf="method.seating">
         <th>Bestuhlung</th>
-        <td>{{ method.socialForm }}</td>
+        <td>{{ method.seating }}</td>
       </tr>
       <tr *ngIf="method.material">
         <th>Material</th>
-        <td></td>
+        <td>{{ method.material }}</td>
       </tr>
       <tr *ngIf="method.methodMaterial">
         <th>Methodenspezifisches Material</th>

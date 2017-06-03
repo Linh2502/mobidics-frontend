@@ -3,15 +3,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'subphase'
 })
-export class MethodDetailSubphasePipe implements PipeTransform {
+export class MethodSubphasePipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     let result: string = null;
     if (value) {
       let splitString: string[] = value.split(':');
-      result = MethodDetailSubphasePipe.mapSubphases(splitString[0]);
+      result = MethodSubphasePipe.mapSubphases(splitString[0]);
       for (let i = 1; i < splitString.length; i++) {
-        result += ', ' + MethodDetailSubphasePipe.mapSubphases(splitString[i]);
+        result += ', ' + MethodSubphasePipe.mapSubphases(splitString[i]);
       }
     }
     return result;

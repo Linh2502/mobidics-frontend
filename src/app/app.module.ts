@@ -17,10 +17,10 @@ import { MethodStartComponent } from './home/main/method/method-detail/method-st
 import { MethodItemComponent } from './home/main/method/method-list/method-item.component';
 import { AdminCenterComponent } from './home/admin-center/admin-center.component';
 import { AccountDetailsComponent } from './home/account/account.component';
-import { MethodDetailSocialformPipe } from './home/main/method/method-detail/method-detail-pipes/method-detail-socialform.pipe';
-import { MethodDetailPhasePipe } from './home/main/method/method-detail/method-detail-pipes/method-detail-phase.pipe';
-import { MethodDetailSubphasePipe } from './home/main/method/method-detail/method-detail-pipes/method-detail-subphase.pipe';
-import { MethodDetailCourseTypePipe } from './home/main/method/method-detail/method-detail-pipes/method-detail-coursetype.pipe';
+import { MethodSocialformPipe } from './home/main/method/method-pipes/method-socialform.pipe';
+import { MethodPhasePipe } from './home/main/method/method-pipes/method-phase.pipe';
+import { MethodSubphasePipe } from './home/main/method/method-pipes/method-subphase.pipe';
+import { MethodCourseTypePipe } from './home/main/method/method-pipes/method-coursetype.pipe';
 import { RatingModule, CarouselModule, CollapseModule, AccordionModule, AlertModule } from "ngx-bootstrap";
 import { TokenStorageService } from "./services/auth/token-storage.service";
 import { SearchService } from './services/search/search.service';
@@ -32,6 +32,8 @@ import { routing } from './app.routing';
 import { MethodDetailCommentsComponent } from './home/main/method/method-detail/method-detail-comments/method-detail-comments.component';
 import { MethodAddEditComponent } from './home/main/method/method-add-edit/method-add-edit.component';
 import { SplitArrayPipe } from './pipes/split-array.pipe';
+import { ArrayAsStringPipe } from './pipes/array-as-string.pipe';
+import { StringAsArrayPipe } from './pipes/string-as-array.pipe';
 
 @NgModule({
   declarations: [
@@ -48,13 +50,15 @@ import { SplitArrayPipe } from './pipes/split-array.pipe';
     MethodItemComponent,
     AdminCenterComponent,
     AccountDetailsComponent,
-    MethodDetailSocialformPipe,
-    MethodDetailPhasePipe,
-    MethodDetailSubphasePipe,
-    MethodDetailCourseTypePipe,
+    MethodSocialformPipe,
+    MethodPhasePipe,
+    MethodSubphasePipe,
+    MethodCourseTypePipe,
     SplitArrayPipe,
     MethodDetailCommentsComponent,
-    MethodAddEditComponent
+    MethodAddEditComponent,
+    ArrayAsStringPipe,
+    StringAsArrayPipe
   ],
   imports: [
     BrowserModule,

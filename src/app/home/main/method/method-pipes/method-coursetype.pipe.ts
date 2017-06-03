@@ -3,15 +3,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'courseType'
 })
-export class MethodDetailCourseTypePipe implements PipeTransform {
+export class MethodCourseTypePipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     let result: string = null;
     if (value) {
       let splitString: string[] = value.split(':');
-      result = MethodDetailCourseTypePipe.mapCourseType(splitString[0]);
+      result = MethodCourseTypePipe.mapCourseType(splitString[0]);
       for (let i = 1; i < splitString.length; i++) {
-        result += ', ' + MethodDetailCourseTypePipe.mapCourseType(splitString[i]);
+        result += ', ' + MethodCourseTypePipe.mapCourseType(splitString[i]);
       }
     }
     return result;

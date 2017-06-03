@@ -28,7 +28,7 @@
           <a routerLinkActive="active" (click)="onNavigationPressed()" [routerLink]="['account']"
              style="cursor: pointer">Mein Konto</a>
         </li>
-        <li>
+        <li *ngIf="authService.getUserLevel() == 9">
           <a routerLinkActive="active" (click)="onNavigationPressed()" [routerLink]="['admin-center']"
              style="cursor: pointer">Admin Center</a>
         </li>

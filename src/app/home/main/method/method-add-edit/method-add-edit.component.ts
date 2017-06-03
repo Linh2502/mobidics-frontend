@@ -11,12 +11,21 @@ import { MethodService } from "../method.service";
   styleUrls: ['./method-add-edit.component.scss']
 })
 export class MethodAddEditComponent implements OnInit, OnDestroy {
-  methodForm: FormGroup;
   private methodId: number;
   private routerSubscription: Subscription;
   private isNew = true;
   private method: Method;
   private uploadedImages: string[] = [];
+
+  methodForm: FormGroup;
+
+  private socialFormOptions: any[] = [
+    { name: 'Plenum interaktiv', value: '0', checked: false },
+    { name: 'Partner/Gruppenarbeit', value: '1', checked: false },
+    { name: 'Plenum untereinander', value: '2', checked: false },
+    { name: 'Einzelarbeit', value: '3', checked: false },
+    { name: 'Plenum frontal', value: '4', checked: false }
+  ];
 
   constructor(private methodService: MethodService,
               private router: Router,
