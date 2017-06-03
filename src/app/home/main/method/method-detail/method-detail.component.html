@@ -7,6 +7,11 @@
     <span class="glyphicon glyphicon-edit"></span>
     Bearbeiten
   </button>
+  <button *ngIf="authService.getUserLevel() == 9" type="button" class="btn btn-danger"
+          (click)="onDeleteButtonClicked()">
+    <span class="glyphicon glyphicon-trash"></span>
+    Löschen
+  </button>
 </div>
 <hr>
 <div class="scrollable-content" #detailContainer>
@@ -34,6 +39,10 @@
     </div>
     <table class="table">
       <tbody>
+      <tr *ngIf="method.alternativeTitles">
+        <th>Alternativnamen</th>
+        <td>{{ method.alternativeTitles | splitArray }}</td>
+      </tr>
       <tr *ngIf="method.socialForm">
         <th>Sozialform</th>
         <td>{{ method.socialForm | socialform }}</td>
@@ -46,9 +55,17 @@
         <th>Unterphase</th>
         <td>{{ method.subPhase | subphase }}</td>
       </tr>
+      <tr *ngIf="method.result">
+        <th>Ergebnis</th>
+        <td>{{ method.socialForm }}</td>
+      </tr>
       <tr *ngIf="method.courseType">
         <th>Art der Veranstaltung</th>
         <td>{{ method.courseType | courseType }}</td>
+      </tr>
+      <tr *ngIf="method.groupType">
+        <th>Teilnehmerzusammensetzung</th>
+        <td>{{ method.groupType }}</td>
       </tr>
       <tr *ngIf="method.groupSizeMin">
         <th>Gruppengröße (min)</th>
@@ -58,13 +75,29 @@
         <th>Gruppengröße (max)</th>
         <td>{{ method.groupSizeMax }}</td>
       </tr>
+      <tr *ngIf="method.groupSizeComment">
+        <th>Gruppengröße (Kommentar)</th>
+        <td>{{ method.groupSizeComment }}</td>
+      </tr>
       <tr *ngIf="method.proceeding">
         <th>Ablauf</th>
         <td>{{ method.proceeding }}</td>
       </tr>
-      <tr *ngIf="method">
+      <tr *ngIf="method.phaseProceeding">
+        <th>Phasenspezifischer Ablauf</th>
+        <td>{{ method.phaseProceeding }}</td>
+      </tr>
+      <tr *ngIf="method.seating">
+        <th>Bestuhlung</th>
+        <td>{{ method.socialForm }}</td>
+      </tr>
+      <tr *ngIf="method.material">
         <th>Material</th>
         <td></td>
+      </tr>
+      <tr *ngIf="method.methodMaterial">
+        <th>Methodenspezifisches Material</th>
+        <td>{{ method.methodMaterial }}</td>
       </tr>
       <tr *ngIf="method.timeMin">
         <th>Zeitaufwand (min)</th>
@@ -74,6 +107,14 @@
         <th>Zeitaufwand (max)</th>
         <td>{{ method.timeMax }}</td>
       </tr>
+      <tr *ngIf="method.timeComment">
+        <th>Zeitaufwand (Kommentar)</th>
+        <td>{{ method.timeComment }}</td>
+      </tr>
+      <tr *ngIf="method.rating">
+        <th>Bewertung</th>
+        <td>{{ method.rating }}</td>
+      </tr>
       <tr *ngIf="method.experiences">
         <th>Erfahrungen der Profis</th>
         <td>{{ method.experiences }}</td>
@@ -82,6 +123,10 @@
         <th>Spielart</th>
         <td>{{ method.variations }}</td>
       </tr>
+      <tr *ngIf="method.examples">
+        <th>Beispiele</th>
+        <td>{{ method.examples }}</td>
+      </tr>
       <tr *ngIf="method.tips">
         <th>Tipps</th>
         <td>{{ method.tips }}</td>
@@ -89,6 +134,18 @@
       <tr *ngIf="method.visualization">
         <th>Visualisierung</th>
         <td>{{ method.visualization }}</td>
+      </tr>
+      <tr *ngIf="method.weblinks">
+        <th>Weblinks</th>
+        <td>{{ method.weblinks }}</td>
+      </tr>
+      <tr *ngIf="method.citations">
+        <th>Referenzen</th>
+        <td>{{ method.citations }}</td>
+      </tr>
+      <tr *ngIf="method.scope">
+        <th>Zugriff</th>
+        <td>{{ method.scope }}</td>
       </tr>
       </tbody>
     </table>

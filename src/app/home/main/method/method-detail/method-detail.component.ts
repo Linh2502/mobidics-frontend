@@ -4,6 +4,7 @@ import { Subscription } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MethodService } from "../method.service";
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { AuthService } from "../../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-method-detail',
@@ -27,6 +28,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
 
   constructor(private methodService: MethodService,
               private activatedRoute: ActivatedRoute,
+              private authService: AuthService,
               private router: Router) {
   }
 
@@ -37,6 +39,10 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
 
   onEditButtonClicked() {
     this.router.navigate(['edit'], { relativeTo: this.activatedRoute });
+  }
+
+  onDeleteButtonClicked() {
+    // TODO
   }
 
   ngOnInit() {

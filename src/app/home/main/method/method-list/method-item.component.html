@@ -1,11 +1,11 @@
 <li class="list-group-item" routerLinkActive="active" [@flyIn]="'in'">
   <div class="method-item">
-    <div class="flex-container__checkbox">
+    <div class="method-item__checkbox">
       <span class="glyphicon glyphicon-orange"
             [ngClass]="{ 'glyphicon-check': checked, 'glyphicon-unchecked': !checked }"
             (click)="checkboxClicked()" style="cursor: pointer"></span>
     </div>
-    <div class="flex-container__thumbnail" [routerLink]="[method.id]">
+    <div class="method-item__thumbnail" [routerLink]="[method.id]">
       <img
         [src]="method.thumbnail"
         alt="" class="media-object" style="height: 40px">

@@ -47,4 +47,8 @@ export class AuthService {
     this.loggedInStatusChanged.emit(false);
     this.router.navigate(['/login']);
   }
+
+  public getUserLevel(): number {
+    return this.loggedInUser.userLevel;
+  }
 }

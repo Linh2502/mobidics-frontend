@@ -20,7 +20,7 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
 
   constructor(private methodService: MethodService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute) {
   }
 
   onSubmit() {
@@ -39,7 +39,7 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
   }
 
   onNavigateBack() {
-    this.router.navigate(['/']);
+    this.router.navigate(['../'], { relativeTo: this.activatedRoute });
   }
 
   onAddIngredientControl(name: string, amount: string) {
@@ -60,7 +60,6 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
       'ingredients': new FormArray([]),
       'title': new FormControl(''),
       'alternativeTitles': new FormControl(''),
-      'creator': new FormControl(''),
       'socialForm': new FormControl(''),
       'phase': new FormControl(''),
       'subPhase': new FormControl(''),
@@ -89,16 +88,47 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
       'userRating': new FormControl(''),
       'visualization': new FormControl(''),
       'weblinks': new FormControl(''),
-      'references': new FormControl(''),
       'scope': new FormControl(''),
     });
-    this.routerSubscription = this.route.params.subscribe(
+    this.routerSubscription = this.activatedRoute.params.subscribe(
       params => {
         if (params.hasOwnProperty('id')) {
           this.isNew = false;
           this.methodId = params['id'];
           this.methodService.getMethodById(this.methodId).subscribe(
-            (method: Method) => null
+            (method: Method) => {
+              this.methodForm.get('ingredients').setValue([]);
+              this.methodForm.get('title').setValue(method.title);
+              this.methodForm.get('alternativeTitles').setValue(method.alternativeTitles);
+              this.methodForm.get('socialForm').setValue(method.socialForm);
+              this.methodForm.get('phase').setValue(method.phase);
+              this.methodForm.get('subPhase').setValue(method.subPhase);
+              this.methodForm.get('result').setValue(method.result);
+              this.methodForm.get('courseType').setValue(method.courseType);
+              this.methodForm.get('groupType').setValue(method.groupType);
+              this.methodForm.get('groupSizeMin').setValue(method.groupSizeMin);
+              this.methodForm.get('groupSizeMax').setValue(method.groupSizeMax);
+              this.methodForm.get('groupSizeComment').setValue(method.groupSizeComment);
+              this.methodForm.get('proceeding').setValue(method.proceeding);
+              this.methodForm.get('phaseProceeding').setValue(method.phaseProceeding);
+              this.methodForm.get('seating').setValue(method.seating);
+              this.methodForm.get('material').setValue(method.material);
+              this.methodForm.get('methodMaterial').setValue(method.methodMaterial);
+              this.methodForm.get('timeMax').setValue(method.timeMax);
+              this.methodForm.get('timeMin').setValue(method.timeMin);
+              this.methodForm.get('timeComment').setValue(method.timeComment);
+              this.methodForm.get('variations').setValue(method.variations);
+              this.methodForm.get('examples').setValue(method.examples);
+              this.methodForm.get('tips').setValue(method.tips);
+              this.methodForm.get('experiences').setValue(method.experiences);
+              this.methodForm.get('creationDate').setValue(method.creationDate);
+              this.methodForm.get('lastModifiedDate').setValue(method.lastModifiedDate);
+              this.methodForm.get('rating').setValue(method.rating);
+              this.methodForm.get('citations').setValue(method.citations);
+              this.methodForm.get('visualization').setValue(method.visualization);
+              this.methodForm.get('weblinks').setValue(method.weblinks);
+              this.methodForm.get('scope').setValue(method.scope);
+            }
           );
         } else {
           this.isNew = true;

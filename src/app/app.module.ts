@@ -31,6 +31,7 @@ import { AuthGuard } from "./services/auth/auth.guard";
 import { routing } from './app.routing';
 import { MethodDetailCommentsComponent } from './home/main/method/method-detail/method-detail-comments/method-detail-comments.component';
 import { MethodAddEditComponent } from './home/main/method/method-add-edit/method-add-edit.component';
+import { SplitArrayPipe } from './pipes/split-array.pipe';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { MethodAddEditComponent } from './home/main/method/method-add-edit/metho
     MethodDetailPhasePipe,
     MethodDetailSubphasePipe,
     MethodDetailCourseTypePipe,
+    SplitArrayPipe,
     MethodDetailCommentsComponent,
     MethodAddEditComponent
   ],

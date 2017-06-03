@@ -14,7 +14,8 @@
 
 .method-item__body:focus,
 .method-item__fav-and-chev:focus,
-.method-item__fav-and-chev__element:focus {
+.method-item__fav-and-chev__element:focus,
+.method-item__thumbnail:focus {
   outline: 0 none;
 }
 
@@ -35,11 +36,11 @@
   flex: 1;
 }
 
-.flex-container__checkbox {
+.method-item__checkbox {
   flex: 0 0 10%;
 }
 
-.flex-container__thumbnail {
+.method-item__thumbnail {
   flex: 0 0 10%;
 }
 
