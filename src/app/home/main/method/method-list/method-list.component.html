@@ -20,11 +20,11 @@
       </div>
     </div>
   </li>
-  <div class="scrollable-content">
-    <app-method-item
-      *ngFor="let method of methods"
-      [method]="method">
-    </app-method-item>
-  </div>
+  <perfect-scrollbar class="scrollable-content">
+      <app-method-item
+        *ngFor="let method of methods"
+        [method]="method">
+      </app-method-item>
+  </perfect-scrollbar>
 </ul>
 

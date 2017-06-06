@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { AuthService } from "../services/auth/auth.service";
-import { Observable } from "rxjs";
-import { Subscription } from "rxjs/Subscription";
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth/auth.service';
+import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +11,12 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class LoginComponent implements OnInit {
   loginForm: any = {
-    "username": "",
-    "password": "",
-    "shouldPersist": false
+    'username': '',
+    'password': '',
+    'shouldPersist': false
   };
-  loading: boolean = false;
-  errorMessage: string = '';
+  loading = false;
+  errorMessage = '';
 
   constructor(private authService: AuthService,
               private router: Router) {

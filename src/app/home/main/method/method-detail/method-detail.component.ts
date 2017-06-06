@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Method } from "../method.model";
-import { Subscription } from "rxjs";
-import { ActivatedRoute, Router } from "@angular/router";
-import { MethodService } from "../method.service";
+import { Method } from '../method.model';
+import { Subscription } from 'rxjs/Subscription';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MethodService } from '../method.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { AuthService } from "../../../../services/auth/auth.service";
+import { AuthService } from '../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-method-detail',
@@ -24,7 +24,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   @ViewChild('detailContainer') detailsContainer: ElementRef;
   method: Method;
   subscription: Subscription;
-  isFavorite: boolean = false;
+  isFavorite = false;
 
   constructor(private methodService: MethodService,
               private activatedRoute: ActivatedRoute,
