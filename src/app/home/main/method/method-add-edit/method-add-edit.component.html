@@ -67,15 +67,14 @@
         </div>
         <div class="row">
           <div class="col-xs-12">
-            <label for="socialform">Sozialform</label>
-            <div *ngFor="let option of socialFormOptions">
+            <label>Sozialform</label>
+            <div *ngFor="let socialFormOption of socialFormOptions">
               <label>
                 <input type="checkbox"
-                       value="{{ option.value }}"
-                       id="socialform"
-                       [(ngModel)]="option.checked"
+                       value="{{ socialFormOption.value }}"
+                       [(ngModel)]="socialFormOption.checked"
                        [ngModelOptions]="{standalone: true}">
-                {{ option.name }}
+                {{ socialFormOption.name }}
               </label>
             </div>
           </div>
@@ -83,26 +82,37 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="phase">Phase</label>
-              <input
-                type="text"
-                id="phase"
-                class="form-control"
-                formControlName="phase"
-                #phase>
+              <label>Phase</label>
+              <div *ngFor="let phaseOption of phaseOptions">
+                <label>
+                  <input type="checkbox"
+                         value="{{ phaseOption.value }}"
+                         [(ngModel)]="phaseOption.checked"
+                         [ngModelOptions]="{standalone: true}">
+                  {{ phaseOption.name }}
+                </label>
+              </div>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="subphase">Unterphase</label>
-              <input
-                type="text"
-                id="subphase"
-                class="form-control"
-                formControlName="subPhase"
-                #subPhase>
+              <label>Unterphase</label>
+              <div *ngFor="let phaseOption of phaseOptions; let i = index">
+                <div *ngIf="phaseOption.checked" [@pushInOut]="phaseOption.checked">
+                  <label>{{phaseOption.name}}</label>
+                  <div *ngFor="let subphaseOption of subphaseOptions[i]">
+                    <label>
+                      <input type="checkbox"
+                             value="{{ subphaseOption.value }}"
+                             [(ngModel)]="subphaseOption.checked"
+                             [ngModelOptions]="{standalone: true}">
+                      {{ subphaseOption.name }}
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -405,58 +415,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <ul class="list-group" formArrayName="ingredients">
-              <div
-                class="row"
-                *ngFor="let ingredient of methodForm.get('ingredients').controls; let i = index">
-                <div formGroupName="{{ i }}">
-                  <div class="col-sm-5">
-                    <input
-                      type="text"
-                      class="form-control"
-                      formControlName="name">
-                  </div>
-                  <div class="col-sm-5">
-                    <input
-                      type="text"
-                      class="form-control"
-                      formControlName="amount">
-                  </div>
-                  <div class="col-sm-2">
-                    <button class="btn btn-danger"
-                            (click)="onRemoveIngredientControl(i)">X
-                    </button>
-                  </div>
-                </div>
-                <br><br>
-              </div>
-            </ul>
-          </div>
-        </div>
       </form>
-    </div>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group row">
-        <div class="col-md-5">
-          <label for="itemName">Name</label>
-          <input id="itemName" type="text" class="form-control"
-                 #itemName></div>
-        <div class="col-md-5"><label for="itemAmount">Amount</label>
-          <input id="itemAmount" type="text"
-                 class="form-control" #itemAmount></div>
-        <div class="col-md-2">
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="onAddIngredientControl(itemName.value, itemAmount.value)">+
-          </button>
-        </div>
-      </div>
     </div>
   </div>
 </perfect-scrollbar>

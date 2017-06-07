@@ -32,7 +32,7 @@ export class MethodSubphasePipe implements PipeTransform {
       case '11':
         return 'Kennenlernen';
       case '12':
-        return 'Persönlicher Austausch (Erfahrung';
+        return 'Persönlicher Austausch (Erfahrung)';
       case '13':
         return 'Gruppengefühl stärken';
       case '14':

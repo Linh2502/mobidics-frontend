@@ -1,14 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { Method } from '../method.model';
-import { MethodService } from '../method.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
+import {Router, ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {Method} from '../method.model';
+import {MethodService} from '../method.service';
+import {Animations} from '../../../../animations';
 
 @Component({
   selector: 'app-method-add-edit',
   templateUrl: './method-add-edit.component.html',
-  styleUrls: ['./method-add-edit.component.scss']
+  styleUrls: ['./method-add-edit.component.scss'],
+  animations: [Animations.pushInOut]
 })
 export class MethodAddEditComponent implements OnInit, OnDestroy {
   private methodId: number;
@@ -20,11 +22,52 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
   methodForm: FormGroup;
 
   private socialFormOptions: any[] = [
-    { name: 'Plenum interaktiv', value: '0', checked: false },
-    { name: 'Partner/Gruppenarbeit', value: '1', checked: false },
-    { name: 'Plenum untereinander', value: '2', checked: false },
-    { name: 'Einzelarbeit', value: '3', checked: false },
-    { name: 'Plenum frontal', value: '4', checked: false }
+    {name: 'Plenum interaktiv', value: '0', checked: false},
+    {name: 'Partner/Gruppenarbeit', value: '1', checked: false},
+    {name: 'Plenum untereinander', value: '2', checked: false},
+    {name: 'Einzelarbeit', value: '3', checked: false},
+    {name: 'Plenum frontal', value: '4', checked: false}
+  ];
+
+  private phaseOptions: any[] = [
+    {name: '(Lern-)Atmosphäre fördern', value: '0', checked: false},
+    {name: 'Ausrichten', value: '1', checked: false},
+    {name: 'Vorwissen aktivieren', value: '2', checked: false},
+    {name: 'Informieren', value: '3', checked: false},
+    {name: 'Verarbeiten', value: '4', checked: false},
+    {name: 'Auswerten', value: '5', checked: false}
+  ];
+
+  private subphaseOptions: any[][] = [
+    [
+      {name: 'Auf Thema einstimmen / Sensibilisieren', value: '0', checked: false},
+      {name: 'Vorwissen erfragen', value: '1', checked: false}
+    ],
+    [
+      {name: 'Inhalte wiederholen', value: '2', checked: false},
+      {name: 'Wissensinput', value: '3', checked: false},
+      {name: 'Wissen generieren', value: '4', checked: false}
+    ],
+    [
+      {name: 'Kritische Auseinandersetzung mit Wissen', value: '5', checked: false},
+      {name: 'Auflockerung', value: '6', checked: false},
+      {name: 'Wissen anwenden / umsetzen', value: '7', checked: false}
+    ],
+    [
+      {name: 'Wissen festigen', value: '8', checked: false},
+      {name: 'Wissen abfragen', value: '9', checked: false},
+      {name: 'Lernprozess reflektieren', value: '10', checked: false},
+    ],
+    [
+      {name: 'Kennenlernen', value: '11', checked: false},
+      {name: 'Persönlicher Austausch (Erfahrung)', value: '12', checked: false},
+      {name: 'Gruppengefühl stärken', value: '13', checked: false},
+    ],
+    [
+      {name: 'Ausklang', value: '14', checked: false},
+      {name: 'Feedback einholen', value: '18', checked: false},
+      {name: 'Auflockerung', value: '19', checked: false}
+    ]
   ];
 
   constructor(private methodService: MethodService,
@@ -33,7 +76,8 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    const newMethod = this.methodForm.value;
+    const newMethod: Method = this.methodForm.value;
+    // TODO include checkbox values
     if (this.isNew) {
       this.methodService.addMethod(newMethod);
     } else {
@@ -48,29 +92,14 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
   }
 
   onNavigateBack() {
-    this.router.navigate(['../'], { relativeTo: this.activatedRoute });
-  }
-
-  onAddIngredientControl(name: string, amount: string) {
-    (<FormArray>this.methodForm.get('ingredients')).push(
-      new FormGroup({
-        'name': new FormControl(name, Validators.required),
-        'amount': new FormControl(amount, Validators.required)
-      })
-    );
-  }
-
-  onRemoveIngredientControl(index: number) {
-    (<FormArray> this.methodForm.get('ingredients')).removeAt(index);
+    this.router.navigate(['../'], {relativeTo: this.activatedRoute});
   }
 
   ngOnInit() {
     this.methodForm = new FormGroup({
-      'ingredients': new FormArray([]),
-      'title': new FormControl(''),
+      'title': new FormControl('', Validators.required),
       'alternativeTitles': new FormControl(''),
       'socialForm': new FormControl(''),
-      'phase': new FormControl(''),
       'subPhase': new FormControl(''),
       'result': new FormControl(''),
       'courseType': new FormControl(''),
@@ -106,11 +135,9 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
           this.methodId = params['id'];
           this.methodService.getMethodById(this.methodId).subscribe(
             (method: Method) => {
-              this.methodForm.get('ingredients').setValue([]);
               this.methodForm.get('title').setValue(method.title);
               this.methodForm.get('alternativeTitles').setValue(method.alternativeTitles);
               this.methodForm.get('socialForm').setValue(method.socialForm);
-              this.methodForm.get('phase').setValue(method.phase);
               this.methodForm.get('subPhase').setValue(method.subPhase);
               this.methodForm.get('result').setValue(method.result);
               this.methodForm.get('courseType').setValue(method.courseType);

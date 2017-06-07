@@ -1,8 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Method} from '../method.model';
 import {MethodService} from '../method.service';
-import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
+import {Observable, Subscription} from 'rxjs/Rx';
 import {Router} from '@angular/router';
 
 @Component({

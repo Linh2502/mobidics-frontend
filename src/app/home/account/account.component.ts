@@ -13,7 +13,7 @@ export class AccountDetailsComponent implements OnInit {
   userForm: FormGroup;
   userFormBackup: FormGroup;
   editModeOn = false;
-  profileImage = 'https://art.placefull.com/Content/Properties/shared/images/no-profile-image.png';
+  profileImage = 'assets/avatar_male.png';
 
   static
   convertGender(gender) {
