@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MethodService } from "./method/method.service";
-import { Subscription } from "rxjs";
+import { MethodService } from './method/method.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-main',
@@ -9,8 +9,8 @@ import { Subscription } from "rxjs";
   providers: [MethodService]
 })
 export class MainComponent implements OnInit, OnDestroy {
-  sideBarCollapsed: boolean = true;
-  detailPageSelected: boolean = false;
+  sideBarCollapsed = true;
+  detailPageSelected = false;
 
   private detailPageSubscription: Subscription;
 

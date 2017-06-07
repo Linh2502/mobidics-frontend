@@ -3,8 +3,8 @@ import { MainComponent } from './home/main/main.component';
 import { METHOD_ROUTES } from './home/main/method/method.routing';
 import { LoginComponent } from './login/login.component';
 import { AdminCenterComponent } from './home/admin-center/admin-center.component';
-import { AccountDetailsComponent } from "./home/account/account.component";
-import { AuthGuard } from "./services/auth/auth.guard";
+import { AccountDetailsComponent } from './home/account/account.component';
+import { AuthGuard } from './services/auth/auth.guard';
 
 const APP_ROUTES: Routes = [
   { path: 'login', component: LoginComponent },

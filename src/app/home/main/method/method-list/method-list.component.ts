@@ -1,8 +1,9 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Method } from '../method.model';
-import { MethodService } from '../method.service';
-import { Observable, Subscription } from 'rxjs';
-import { Router } from "@angular/router";
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Method} from '../method.model';
+import {MethodService} from '../method.service';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-method-list',
@@ -12,9 +13,9 @@ import { Router } from "@angular/router";
 export class MethodListComponent implements OnInit, OnDestroy {
 
   methods: Method[] = [];
-  searchQuery: string = "";
+  searchQuery = '';
   methodListSubscription: Subscription;
-  initialLoad: boolean = true;
+  initialLoad = true;
 
   @ViewChild('searchBar') searchBar: ElementRef;
 
@@ -34,7 +35,7 @@ export class MethodListComponent implements OnInit, OnDestroy {
         }
       }
     );
-    this.methodService.getAllMethodsByQuery("");
+    this.methodService.getAllMethodsByQuery('');
     Observable.fromEvent(
       this.searchBar.nativeElement, 'keyup')
       .debounceTime(500)

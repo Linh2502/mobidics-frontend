@@ -1,6 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { MethodService } from "./method.service";
-import { Subscription } from "rxjs";
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-method',
@@ -8,7 +6,7 @@ import { Subscription } from "rxjs";
   styleUrls: ['./method.component.css']
 })
 export class MethodComponent implements OnInit {
-  @Input() detailPageSelected: boolean = false;
+  @Input() detailPageSelected = false;
 
   constructor() {
   }

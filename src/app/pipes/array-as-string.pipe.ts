@@ -6,10 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ArrayAsStringPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    let result: string = '';
+    let result = '';
     if (value) {
       result = value[0];
-      for (let arrayValue of value) {
+      for (const arrayValue of value) {
         result += ', ' + arrayValue;
       }
     }

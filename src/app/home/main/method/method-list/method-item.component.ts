@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Method } from "../method.model";
-import { MethodService } from "../method.service";
-import { animate, state, style, transition, trigger } from "@angular/animations";
+import { Method } from '../method.model';
+import { MethodService } from '../method.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-method-item',
@@ -25,9 +25,9 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
 })
 export class MethodItemComponent implements OnInit {
 
-  @Input("method") method: Method;
-  checked: boolean = false;
-  isFavorite: boolean = false;
+  @Input('method') method: Method;
+  checked = false;
+  isFavorite = false;
 
   constructor(private methodService: MethodService) {
   }
@@ -35,12 +35,12 @@ export class MethodItemComponent implements OnInit {
   ngOnInit() {
     this.methodService.getFavoritesIds().subscribe(
       (favorites: string[]) => this.isFavorite = favorites.includes(this.method.id)
-    )
+    );
   }
 
   checkboxClicked() {
     if (this.checked) {
-      let methodIndex = this.methodService.checkedMethods.indexOf(this.method.id);
+      const methodIndex = this.methodService.checkedMethods.indexOf(this.method.id);
       this.methodService.checkedMethods.splice(methodIndex, 1);
     } else {
       this.methodService.checkedMethods.push(this.method.id);

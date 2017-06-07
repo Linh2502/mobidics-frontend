@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MethodService } from '../method/method.service';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.methodServiceSubscription = this.methodService.methodListChanged.subscribe(
-      () => console.log("TODO")
+      () => console.log('TODO')
     );
   }
 

@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { Method } from '../method.model';
-import { MethodService } from "../method.service";
+import { MethodService } from '../method.service';
 
 @Component({
-  selector: 'method-add-edit',
+  selector: 'app-method-add-edit',
   templateUrl: './method-add-edit.component.html',
   styleUrls: ['./method-add-edit.component.scss']
 })
@@ -150,15 +150,15 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
     this.routerSubscription.unsubscribe();
   }
 
-  readUrl(event) {
-    if (event.target.files && event.target.files[0]) {
-      let reader = new FileReader();
+  readUrl($event) {
+    if ($event.target.files && $event.target.files[0]) {
+      const reader = new FileReader();
 
       reader.onload = (event: any) => {
         this.uploadedImages.push(event.target.result);
       };
 
-      reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL($event.target.files[0]);
     }
   }
 

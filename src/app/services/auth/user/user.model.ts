@@ -1,5 +1,5 @@
-import { University } from "./university.model";
-import { Faculty } from "./faculty.model";
+import { University } from './university.model';
+import { Faculty } from './faculty.model';
 export class User {
   constructor(public firstname: string,
               public lastname: string,

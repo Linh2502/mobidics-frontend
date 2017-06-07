@@ -1,10 +1,11 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Method } from '../method.model';
-import { Subscription } from 'rxjs/Subscription';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MethodService } from '../method.service';
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { AuthService } from '../../../../services/auth/auth.service';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Method} from '../method.model';
+import {Subscription} from 'rxjs/Subscription';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MethodService} from '../method.service';
+import {trigger, state, style, animate, transition} from '@angular/animations';
+import {AuthService} from '../../../../services/auth/auth.service';
+import {PerfectScrollbarComponent} from 'ngx-perfect-scrollbar';
 
 @Component({
   selector: 'app-method-detail',
@@ -12,16 +13,16 @@ import { AuthService } from '../../../../services/auth/auth.service';
   styleUrls: ['./method-detail.component.scss'],
   animations: [
     trigger('detailsLoaded', [
-      state('in', style({ opacity: 1 })),
+      state('in', style({opacity: 1})),
       transition('void => *', [
-        style({ opacity: 0 }),
+        style({opacity: 0}),
         animate(500)
       ])
     ])
   ]
 })
 export class MethodDetailComponent implements OnInit, OnDestroy {
-  @ViewChild('detailContainer') detailsContainer: ElementRef;
+  @ViewChild('detailContainer') detailsContainer: PerfectScrollbarComponent;
   method: Method;
   subscription: Subscription;
   isFavorite = false;
@@ -33,12 +34,12 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   }
 
   onNavigateBack() {
-    this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+    this.router.navigate(['../'], {relativeTo: this.activatedRoute});
     this.methodService.notifyDetailPagedSelected(false);
   }
 
   onEditButtonClicked() {
-    this.router.navigate(['edit'], { relativeTo: this.activatedRoute });
+    this.router.navigate(['edit'], {relativeTo: this.activatedRoute});
   }
 
   onDeleteButtonClicked() {
@@ -55,7 +56,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
             this.methodService.getFavoritesIds().subscribe(
               (favorites: string[]) => this.isFavorite = favorites.includes(this.method.id)
             );
-            this.detailsContainer.nativeElement.scrollTop = 0;
+            this.detailsContainer.scrollToTop(0);
             this.methodService.notifyDetailPagedSelected(true);
           })
         ;

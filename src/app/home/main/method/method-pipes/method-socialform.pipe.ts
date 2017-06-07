@@ -1,21 +1,9 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'socialform'
 })
 export class MethodSocialformPipe implements PipeTransform {
-
-  transform(value: any, args?: any): any {
-    let result: string = null;
-    if (value) {
-      let splitString: string[] = value.split(':');
-      result = MethodSocialformPipe.mapSocialForm(splitString[0]);
-      for (let i = 1; i < splitString.length; i++) {
-        result += ', ' + MethodSocialformPipe.mapSocialForm(splitString[i]);
-      }
-    }
-    return result;
-  }
 
   static mapSocialForm(value: string): string {
     switch (value) {
@@ -33,4 +21,15 @@ export class MethodSocialformPipe implements PipeTransform {
     return 'Unbekannt';
   }
 
+  transform(value: any, args?: any): any {
+    let result: string = null;
+    if (value) {
+      const splitString: string[] = value.split(':');
+      result = MethodSocialformPipe.mapSocialForm(splitString[0]);
+      for (let i = 1; i < splitString.length; i++) {
+        result += ', ' + MethodSocialformPipe.mapSocialForm(splitString[i]);
+      }
+    }
+    return result;
+  }
 }

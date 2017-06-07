@@ -21,5 +21,5 @@ export class Animations {
       opacitiy: 0
     })),
     transition('* <=> *', animate('500ms'))
-  ])
+  ]);
 }

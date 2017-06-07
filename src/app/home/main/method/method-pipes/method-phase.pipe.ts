@@ -5,18 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MethodPhasePipe implements PipeTransform {
 
-  transform(value: any, args?: any): any {
-    let result: string = null;
-    if (value) {
-      let splitString: string[] = value.split(':');
-      result = MethodPhasePipe.mapPhases(splitString[0]);
-      for (let i = 1; i < splitString.length; i++) {
-        result += ', ' + MethodPhasePipe.mapPhases(splitString[i]);
-      }
-    }
-    return result;
-  }
-
   static mapPhases(phase: string): string {
     switch (phase) {
       case '0':
@@ -33,5 +21,17 @@ export class MethodPhasePipe implements PipeTransform {
         return 'Auswerten';
     }
     return 'Unbekannt';
+  }
+
+  transform(value: any, args?: any): any {
+    let result: string = null;
+    if (value) {
+      const splitString: string[] = value.split(':');
+      result = MethodPhasePipe.mapPhases(splitString[0]);
+      for (let i = 1; i < splitString.length; i++) {
+        result += ', ' + MethodPhasePipe.mapPhases(splitString[i]);
+      }
+    }
+    return result;
   }
 }

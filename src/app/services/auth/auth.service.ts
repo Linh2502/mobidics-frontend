@@ -1,9 +1,9 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { HttpService } from "../http/http.service";
-import { TokenStorageService } from "./token-storage.service";
-import { User } from "./user/user.model";
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { HttpService } from '../http/http.service';
+import { TokenStorageService } from './token-storage.service';
+import { User } from './user/user.model';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +15,7 @@ export class AuthService {
               private tokenStorage: TokenStorageService,
               private router: Router) {
     this.loggedInStatusChanged = new EventEmitter();
-    let authCache = JSON.parse(localStorage.getItem('authCache'));
+    const authCache = JSON.parse(localStorage.getItem('authCache'));
     this.isLoggedIn = !!authCache;
     this.tokenStorage.setJwtToken(authCache && authCache.jwtToken);
     this.loggedInUser = (authCache && authCache.user);
@@ -32,7 +32,7 @@ export class AuthService {
           localStorage.setItem('authCache', JSON.stringify({
             'jwtToken': this.tokenStorage.getJwtToken(),
             'user': this.loggedInUser
-          }))
+          }));
         }
       }
     ).catch(error => {

@@ -1,9 +1,8 @@
-import { EventEmitter, Injectable } from "@angular/core";
-import { Method } from "./method.model";
-import { HttpService } from "../../../services/http/http.service";
-import { Observable, ConnectableObservable } from "rxjs";
-import { AuthService } from "../../../services/auth/auth.service";
-import { User } from "../../../services/auth/user/user.model";
+import {EventEmitter, Injectable} from '@angular/core';
+import {Method} from './method.model';
+import {HttpService} from '../../../services/http/http.service';
+import {ConnectableObservable} from 'rxjs/observable/ConnectableObservable';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class MethodService {
@@ -32,7 +31,7 @@ export class MethodService {
   getFavorites(): void {
     this.httpService.getFavorites().subscribe(
       (methods: Method[]) => {
-        this.methodListChanged.emit(methods)
+        this.methodListChanged.emit(methods);
       }
     );
   }
@@ -43,6 +42,9 @@ export class MethodService {
 
   editMethod(method: Method) {
 
+  }
+
+  deleteMethod(method: Method) {
   }
 
   getFavoritesIds(): Observable<string[]> {

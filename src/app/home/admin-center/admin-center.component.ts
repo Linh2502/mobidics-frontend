@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Animations } from "../../animations";
+import { Animations } from '../../animations';
 
 @Component({
   selector: 'app-admin-center',
@@ -9,7 +9,7 @@ import { Animations } from "../../animations";
 })
 export class AdminCenterComponent implements OnInit {
 
-  toggleState: string = 'closed';
+  toggleState = 'closed';
 
   constructor() {
   }
@@ -18,7 +18,7 @@ export class AdminCenterComponent implements OnInit {
   }
 
   toggle() {
-    if (this.toggleState == 'closed') {
+    if (this.toggleState === 'closed') {
       this.toggleState = 'open';
     } else {
       this.toggleState = 'closed';
