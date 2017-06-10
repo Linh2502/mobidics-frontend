@@ -1,23 +1,31 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {Method} from '../method.model';
 import {MethodService} from '../method.service';
 import {Animations} from '../../../../animations';
+import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 
 @Component({
   selector: 'app-method-add-edit',
   templateUrl: './method-add-edit.component.html',
   styleUrls: ['./method-add-edit.component.scss'],
-  animations: [Animations.pushInOut]
+  animations: [
+    Animations.pushInOut,
+    Animations.fadeInOut]
 })
 export class MethodAddEditComponent implements OnInit, OnDestroy {
+  private localConfig: PerfectScrollbarConfigInterface = {
+    suppressScrollX: false
+  };
+
   private methodId: number;
   private routerSubscription: Subscription;
   private isNew = true;
   private method: Method;
   private uploadedImages: string[] = [];
+  private indexThumbnail = 0;
 
   methodForm: FormGroup;
 
@@ -77,13 +85,18 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     const newMethod: Method = this.methodForm.value;
+    // TODO make language dynamic
+    newMethod.language = 'de';
+    if (this.uploadedImages.length) {
+      newMethod.thumbnail = this.uploadedImages.splice(this.indexThumbnail, 1)[0];
+      newMethod.images = this.uploadedImages;
+    }
     // TODO include checkbox values
     if (this.isNew) {
-      this.methodService.addMethod(newMethod);
+      this.methodService.addMethod(newMethod).subscribe();
     } else {
-      this.methodService.editMethod(newMethod);
+      this.methodService.editMethod(newMethod).subscribe();
     }
-
     this.onNavigateBack();
   }
 
@@ -99,34 +112,29 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
     this.methodForm = new FormGroup({
       'title': new FormControl('', Validators.required),
       'alternativeTitles': new FormControl(''),
-      'socialForm': new FormControl(''),
-      'subPhase': new FormControl(''),
       'result': new FormControl(''),
       'courseType': new FormControl(''),
-      'groupType': new FormControl(''),
-      'groupSizeMin': new FormControl(''),
-      'groupSizeMax': new FormControl(''),
+      'groupType': new FormControl(0, Validators.pattern('\\d+')),
+      'groupSizeMin': new FormControl(0, Validators.pattern('\\d+')),
+      'groupSizeMax': new FormControl(0, Validators.pattern('\\d+')),
       'groupSizeComment': new FormControl(''),
       'proceeding': new FormControl(''),
       'phaseProceeding': new FormControl(''),
       'seating': new FormControl(''),
       'material': new FormControl(''),
       'methodMaterial': new FormControl(''),
-      'timeMax': new FormControl(''),
-      'timeMin': new FormControl(''),
+      'timeMax': new FormControl(0, Validators.pattern('\\d+')),
+      'timeMin': new FormControl(0, Validators.pattern('\\d+')),
       'timeComment': new FormControl(''),
       'variations': new FormControl(''),
       'examples': new FormControl(''),
       'tips': new FormControl(''),
       'experiences': new FormControl(''),
-      'creationDate': new FormControl(''),
-      'lastModifiedDate': new FormControl(''),
       'rating': new FormControl(''),
       'citations': new FormControl(''),
-      'userRating': new FormControl(''),
       'visualization': new FormControl(''),
       'weblinks': new FormControl(''),
-      'scope': new FormControl(''),
+      'scope': new FormControl(0, Validators.pattern('\\d+')),
     });
     this.routerSubscription = this.activatedRoute.params.subscribe(
       params => {
@@ -137,8 +145,6 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
             (method: Method) => {
               this.methodForm.get('title').setValue(method.title);
               this.methodForm.get('alternativeTitles').setValue(method.alternativeTitles);
-              this.methodForm.get('socialForm').setValue(method.socialForm);
-              this.methodForm.get('subPhase').setValue(method.subPhase);
               this.methodForm.get('result').setValue(method.result);
               this.methodForm.get('courseType').setValue(method.courseType);
               this.methodForm.get('groupType').setValue(method.groupType);
@@ -157,8 +163,6 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
               this.methodForm.get('examples').setValue(method.examples);
               this.methodForm.get('tips').setValue(method.tips);
               this.methodForm.get('experiences').setValue(method.experiences);
-              this.methodForm.get('creationDate').setValue(method.creationDate);
-              this.methodForm.get('lastModifiedDate').setValue(method.lastModifiedDate);
               this.methodForm.get('rating').setValue(method.rating);
               this.methodForm.get('citations').setValue(method.citations);
               this.methodForm.get('visualization').setValue(method.visualization);
@@ -184,12 +188,19 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
       reader.onload = (event: any) => {
         this.uploadedImages.push(event.target.result);
       };
-
       reader.readAsDataURL($event.target.files[0]);
     }
   }
 
   removeImage(index: number) {
     this.uploadedImages.splice(index, 1);
+  }
+
+  onPhaseOptionsChanged(index) {
+    if (this.phaseOptions[index].checked) {
+      this.subphaseOptions[index].forEach(
+        subphase => subphase.checked = false
+      );
+    }
   }
 }

@@ -14,8 +14,10 @@
   </button>
 </div>
 <hr>
-<perfect-scrollbar class="scrollable-content" #detailContainer>
-  <div *ngIf="method" [@detailsLoaded]="'in'">
+<perfect-scrollbar class="scrollable-content"
+                   #detailContainer>
+  <div *ngIf="method"
+       [@fadeInOut]="'in'">
     <div class="detail-header">
       <img *ngIf="method.thumbnail" class="media-object" height="60px"
            [src]="method.thumbnail">

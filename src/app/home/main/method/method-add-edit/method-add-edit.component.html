@@ -1,5 +1,5 @@
 <perfect-scrollbar class="scrollable-content">
-  <div class="row">
+  <div class="row" [@fadeInOut]="'in'">
     <div class="col-xs-12">
       <form [formGroup]="methodForm" (ngSubmit)="onSubmit()">
         <div class="row">
@@ -17,14 +17,15 @@
             <h4>
               Bilder hochladen
             </h4>
-            <div class="preview-container" *ngIf="uploadedImages.length != 0">
+            <perfect-scrollbar [config]="localConfig" class="preview-container"
+                               *ngIf="uploadedImages.length != 0">
               <div class="preview" *ngFor="let imageUrl of uploadedImages; let i = index">
                 <img class="img" [src]="imageUrl">
                 <button type="button" class="btn btn-danger btn-circle delete" (click)="removeImage(i)">
                   <i class="glyphicon glyphicon-remove"></i>
                 </button>
               </div>
-            </div>
+            </perfect-scrollbar>
             <label class="btn btn-default"
                    for="method-image-selector">
               <input id="method-image-selector" (change)="readUrl($event)" type="file" style="display:none;">
@@ -71,7 +72,6 @@
             <div *ngFor="let socialFormOption of socialFormOptions">
               <label>
                 <input type="checkbox"
-                       value="{{ socialFormOption.value }}"
                        [(ngModel)]="socialFormOption.checked"
                        [ngModelOptions]="{standalone: true}">
                 {{ socialFormOption.name }}
@@ -83,11 +83,11 @@
           <div class="col-xs-12">
             <div class="form-group">
               <label>Phase</label>
-              <div *ngFor="let phaseOption of phaseOptions">
+              <div *ngFor="let phaseOption of phaseOptions; let i = index">
                 <label>
                   <input type="checkbox"
-                         value="{{ phaseOption.value }}"
                          [(ngModel)]="phaseOption.checked"
+                         (change)="onPhaseOptionsChanged(i)"
                          [ngModelOptions]="{standalone: true}">
                   {{ phaseOption.name }}
                 </label>
@@ -105,7 +105,6 @@
                   <div *ngFor="let subphaseOption of subphaseOptions[i]">
                     <label>
                       <input type="checkbox"
-                             value="{{ subphaseOption.value }}"
                              [(ngModel)]="subphaseOption.checked"
                              [ngModelOptions]="{standalone: true}">
                       {{ subphaseOption.name }}

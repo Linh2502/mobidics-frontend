@@ -36,12 +36,13 @@ export class MethodService {
     );
   }
 
-  addMethod(method: Method) {
-
+  addMethod(method: Method): Observable<any> {
+    console.log(method);
+    return this.httpService.addMethod(method);
   }
 
-  editMethod(method: Method) {
-
+  editMethod(method: Method): Observable<any> {
+    return Observable.create();
   }
 
   deleteMethod(method: Method) {

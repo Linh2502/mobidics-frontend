@@ -6,19 +6,14 @@ import {MethodService} from '../method.service';
 import {trigger, state, style, animate, transition} from '@angular/animations';
 import {AuthService} from '../../../../services/auth/auth.service';
 import {PerfectScrollbarComponent} from 'ngx-perfect-scrollbar';
+import {Animations} from '../../../../animations';
 
 @Component({
   selector: 'app-method-detail',
   templateUrl: './method-detail.component.html',
   styleUrls: ['./method-detail.component.scss'],
   animations: [
-    trigger('detailsLoaded', [
-      state('in', style({opacity: 1})),
-      transition('void => *', [
-        style({opacity: 0}),
-        animate(500)
-      ])
-    ])
+    Animations.fadeInOut
   ]
 })
 export class MethodDetailComponent implements OnInit, OnDestroy {

@@ -20,11 +20,11 @@ export class Animations {
     state('out', style({
       opacitiy: 0
     })),
-    transition('* <=> *', animate('500ms')),
     transition('void => in', [
       style({opacity: 0}),
       animate('500ms')
-    ])
+    ]),
+    transition('* <=> *', animate('500ms'))
   ]);
 
   public static pushInOut = trigger('pushInOut', [
