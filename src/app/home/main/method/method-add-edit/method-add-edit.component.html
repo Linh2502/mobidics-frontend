@@ -15,20 +15,46 @@
         <div class="row">
           <div class="col-xs-12">
             <h4>
-              Bilder hochladen
+              Vorschaubild
+            </h4>
+            <perfect-scrollbar class="preview-container" *ngIf="thumbnailSrc">
+              <div class="preview">
+                <img class="img" [src]="thumbnailSrc">
+                <button type="button" class="btn btn-danger btn-circle delete" (click)="onRemoveThumbnail()">
+                  <i class="glyphicon glyphicon-remove"></i>
+                </button>
+              </div>
+            </perfect-scrollbar>
+            <label class="btn btn-default"
+                   for="method-thumbnail-selector">
+              <input type="file" imageUpload
+                     id="method-thumbnail-selector"
+                     (imageSelected)="onThumbnailSelected($event)"
+                     [resizeOptions]="resizeOptions"
+                     style="display:none">
+              Vorschaubild auswählen...
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <h4>
+              Methodenbilder
             </h4>
             <perfect-scrollbar [config]="localConfig" class="preview-container"
                                *ngIf="uploadedImages.length != 0">
               <div class="preview" *ngFor="let imageUrl of uploadedImages; let i = index">
                 <img class="img" [src]="imageUrl">
-                <button type="button" class="btn btn-danger btn-circle delete" (click)="removeImage(i)">
+                <button type="button" class="btn btn-danger btn-circle delete" (click)="onRemoveImage(i)">
                   <i class="glyphicon glyphicon-remove"></i>
                 </button>
               </div>
             </perfect-scrollbar>
             <label class="btn btn-default"
                    for="method-image-selector">
-              <input id="method-image-selector" (change)="readUrl($event)" type="file" style="display:none;">
+              <input type="file" imageUpload
+                     id="method-image-selector"
+                     (imageSelected)="onImageSelected($event)" style="display:none">
               Bild auswählen...
             </label>
           </div>

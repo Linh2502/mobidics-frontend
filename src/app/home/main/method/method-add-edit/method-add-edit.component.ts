@@ -6,6 +6,7 @@ import {Method} from '../method.model';
 import {MethodService} from '../method.service';
 import {Animations} from '../../../../animations';
 import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
+import {ResizeOptions, ImageResult} from 'ng2-imageupload';
 
 @Component({
   selector: 'app-method-add-edit',
@@ -19,13 +20,17 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
   private localConfig: PerfectScrollbarConfigInterface = {
     suppressScrollX: false
   };
+  private resizeOptions: ResizeOptions = {
+    resizeMaxHeight: 96,
+    resizeMaxWidth: 96
+  };
 
   private methodId: number;
   private routerSubscription: Subscription;
   private isNew = true;
   private method: Method;
   private uploadedImages: string[] = [];
-  private indexThumbnail = 0;
+  private thumbnailSrc;
 
   methodForm: FormGroup;
 
@@ -87,10 +92,9 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
     const newMethod: Method = this.methodForm.value;
     // TODO make language dynamic
     newMethod.language = 'de';
-    if (this.uploadedImages.length) {
-      newMethod.thumbnail = this.uploadedImages.splice(this.indexThumbnail, 1)[0];
-      newMethod.images = this.uploadedImages;
-    }
+    newMethod.thumbnail = this.thumbnailSrc;
+    newMethod.images = this.uploadedImages;
+
     // TODO include checkbox values
     if (this.isNew) {
       this.methodService.addMethod(newMethod).subscribe();
@@ -181,18 +185,24 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
     this.routerSubscription.unsubscribe();
   }
 
-  readUrl($event) {
-    if ($event.target.files && $event.target.files[0]) {
-      const reader = new FileReader();
-
-      reader.onload = (event: any) => {
-        this.uploadedImages.push(event.target.result);
-      };
-      reader.readAsDataURL($event.target.files[0]);
-    }
+  // TODO allow only images
+  onImageSelected(imageResult: ImageResult) {
+    this.uploadedImages.push(imageResult.resized
+      && imageResult.resized.dataURL
+      || imageResult.dataURL);
   }
 
-  removeImage(index: number) {
+  onThumbnailSelected(imageResult: ImageResult) {
+    this.thumbnailSrc = imageResult.resized
+      && imageResult.resized.dataURL
+      || imageResult.dataURL;
+  }
+
+  onRemoveThumbnail() {
+    this.thumbnailSrc = null;
+  }
+
+  onRemoveImage(index: number) {
     this.uploadedImages.splice(index, 1);
   }
 

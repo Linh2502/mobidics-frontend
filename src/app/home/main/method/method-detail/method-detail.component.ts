@@ -38,7 +38,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   }
 
   onDeleteButtonClicked() {
-    // TODO
+    // TODO implement
   }
 
   ngOnInit() {

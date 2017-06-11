@@ -35,6 +35,7 @@ import {SplitArrayPipe} from './pipes/split-array.pipe';
 import {ArrayAsStringPipe} from './pipes/array-as-string.pipe';
 import {StringAsArrayPipe} from './pipes/string-as-array.pipe';
 import {PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
+import {ImageUploadModule} from 'ng2-imageupload';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -75,6 +76,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AccordionModule.forRoot(),
     AlertModule.forRoot(),
     PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
+    ImageUploadModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     routing,
