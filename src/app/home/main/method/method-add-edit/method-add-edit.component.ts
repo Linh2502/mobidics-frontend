@@ -1,12 +1,13 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {Router, ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
-import {Method} from '../method.model';
-import {MethodService} from '../method.service';
-import {Animations} from '../../../../animations';
-import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
-import {ResizeOptions, ImageResult} from 'ng2-imageupload';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { Method } from '../method.model';
+import { MethodService } from '../method.service';
+import { Animations } from '../../../../animations';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { ResizeOptions, ImageResult } from 'ng2-imageupload';
+import { DataConverterService } from "../../../../services/data-converter/data-converter.service";
 
 @Component({
   selector: 'app-method-add-edit',
@@ -17,13 +18,16 @@ import {ResizeOptions, ImageResult} from 'ng2-imageupload';
     Animations.fadeInOut]
 })
 export class MethodAddEditComponent implements OnInit, OnDestroy {
-  private localConfig: PerfectScrollbarConfigInterface = {
+  @ViewChild('thumbnailUploadButton') thumbnailUploadButton: ElementRef;
+  @ViewChild('imageUploadButton') imageUploadButton: ElementRef;
+  private imagePreviewScrollbarConfig: PerfectScrollbarConfigInterface = {
     suppressScrollX: false
   };
   private resizeOptions: ResizeOptions = {
     resizeMaxHeight: 96,
     resizeMaxWidth: 96
   };
+  private allowedImageExtensions = ['jpg', 'png', 'gif', 'jpeg'];
 
   private methodId: number;
   private routerSubscription: Subscription;
@@ -32,84 +36,63 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
   private uploadedImages: string[] = [];
   private thumbnailSrc;
 
+  private thumbnailErrorMessage: string;
+  private imageUploadErrorMessage: string;
+
   methodForm: FormGroup;
 
   private socialFormOptions: any[] = [
-    {name: 'Plenum interaktiv', value: '0', checked: false},
-    {name: 'Partner/Gruppenarbeit', value: '1', checked: false},
-    {name: 'Plenum untereinander', value: '2', checked: false},
-    {name: 'Einzelarbeit', value: '3', checked: false},
-    {name: 'Plenum frontal', value: '4', checked: false}
+    { name: 'Plenum interaktiv', value: '0', checked: false },
+    { name: 'Partner/Gruppenarbeit', value: '1', checked: false },
+    { name: 'Plenum untereinander', value: '2', checked: false },
+    { name: 'Einzelarbeit', value: '3', checked: false },
+    { name: 'Plenum frontal', value: '4', checked: false }
   ];
 
   private phaseOptions: any[] = [
-    {name: '(Lern-)Atmosphäre fördern', value: '0', checked: false},
-    {name: 'Ausrichten', value: '1', checked: false},
-    {name: 'Vorwissen aktivieren', value: '2', checked: false},
-    {name: 'Informieren', value: '3', checked: false},
-    {name: 'Verarbeiten', value: '4', checked: false},
-    {name: 'Auswerten', value: '5', checked: false}
+    { name: '(Lern-)Atmosphäre fördern', value: '0', checked: false },
+    { name: 'Ausrichten', value: '1', checked: false },
+    { name: 'Vorwissen aktivieren', value: '2', checked: false },
+    { name: 'Informieren', value: '3', checked: false },
+    { name: 'Verarbeiten', value: '4', checked: false },
+    { name: 'Auswerten', value: '5', checked: false }
   ];
 
   private subphaseOptions: any[][] = [
     [
-      {name: 'Auf Thema einstimmen / Sensibilisieren', value: '0', checked: false},
-      {name: 'Vorwissen erfragen', value: '1', checked: false}
+      { name: 'Auf Thema einstimmen / Sensibilisieren', value: '0', checked: false },
+      { name: 'Vorwissen erfragen', value: '1', checked: false }
     ],
     [
-      {name: 'Inhalte wiederholen', value: '2', checked: false},
-      {name: 'Wissensinput', value: '3', checked: false},
-      {name: 'Wissen generieren', value: '4', checked: false}
+      { name: 'Inhalte wiederholen', value: '2', checked: false },
+      { name: 'Wissensinput', value: '3', checked: false },
+      { name: 'Wissen generieren', value: '4', checked: false }
     ],
     [
-      {name: 'Kritische Auseinandersetzung mit Wissen', value: '5', checked: false},
-      {name: 'Auflockerung', value: '6', checked: false},
-      {name: 'Wissen anwenden / umsetzen', value: '7', checked: false}
+      { name: 'Kritische Auseinandersetzung mit Wissen', value: '5', checked: false },
+      { name: 'Auflockerung', value: '6', checked: false },
+      { name: 'Wissen anwenden / umsetzen', value: '7', checked: false }
     ],
     [
-      {name: 'Wissen festigen', value: '8', checked: false},
-      {name: 'Wissen abfragen', value: '9', checked: false},
-      {name: 'Lernprozess reflektieren', value: '10', checked: false},
+      { name: 'Wissen festigen', value: '8', checked: false },
+      { name: 'Wissen abfragen', value: '9', checked: false },
+      { name: 'Lernprozess reflektieren', value: '10', checked: false },
     ],
     [
-      {name: 'Kennenlernen', value: '11', checked: false},
-      {name: 'Persönlicher Austausch (Erfahrung)', value: '12', checked: false},
-      {name: 'Gruppengefühl stärken', value: '13', checked: false},
+      { name: 'Kennenlernen', value: '11', checked: false },
+      { name: 'Persönlicher Austausch (Erfahrung)', value: '12', checked: false },
+      { name: 'Gruppengefühl stärken', value: '13', checked: false },
     ],
     [
-      {name: 'Ausklang', value: '14', checked: false},
-      {name: 'Feedback einholen', value: '18', checked: false},
-      {name: 'Auflockerung', value: '19', checked: false}
+      { name: 'Ausklang', value: '14', checked: false },
+      { name: 'Feedback einholen', value: '18', checked: false },
+      { name: 'Auflockerung', value: '19', checked: false }
     ]
   ];
 
   constructor(private methodService: MethodService,
-              private router: Router,
+              private router: Router, private dataConverter: DataConverterService,
               private activatedRoute: ActivatedRoute) {
-  }
-
-  onSubmit() {
-    const newMethod: Method = this.methodForm.value;
-    // TODO make language dynamic
-    newMethod.language = 'de';
-    newMethod.thumbnail = this.thumbnailSrc;
-    newMethod.images = this.uploadedImages;
-
-    // TODO include checkbox values
-    if (this.isNew) {
-      this.methodService.addMethod(newMethod).subscribe();
-    } else {
-      this.methodService.editMethod(newMethod).subscribe();
-    }
-    this.onNavigateBack();
-  }
-
-  onCancel() {
-    this.onNavigateBack();
-  }
-
-  onNavigateBack() {
-    this.router.navigate(['../'], {relativeTo: this.activatedRoute});
   }
 
   ngOnInit() {
@@ -172,6 +155,9 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
               this.methodForm.get('visualization').setValue(method.visualization);
               this.methodForm.get('weblinks').setValue(method.weblinks);
               this.methodForm.get('scope').setValue(method.scope);
+              this.uploadedImages = method.images;
+              this.thumbnailSrc = method.thumbnail;
+              this.precheckSocialForms(this.dataConverter.singleColonDataToArray(method.socialForm));
             }
           );
         } else {
@@ -179,23 +165,70 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
         }
       }
     );
+    this.methodService.notifyDetailPagedSelected(true);
+  }
+
+  precheckSocialForms(values: number[]): void {
+    this.socialFormOptions.forEach(
+      socialForm => {
+        if (values.indexOf(socialForm.value)) {
+          socialForm.checked = true;
+        }
+      }
+    )
   }
 
   ngOnDestroy() {
     this.routerSubscription.unsubscribe();
   }
 
-  // TODO allow only images
+  onSubmit() {
+    const newMethod: Method = this.methodForm.value;
+    // TODO make language dynamic
+    newMethod.language = 'de';
+    newMethod.thumbnail = this.thumbnailSrc;
+    newMethod.images = this.uploadedImages;
+
+    // TODO include checkbox values
+    if (this.isNew) {
+      this.methodService.addMethod(newMethod).subscribe();
+    } else {
+      this.methodService.editMethod(newMethod).subscribe();
+    }
+    this.onNavigateBack();
+  }
+
+  onCancel() {
+    this.onNavigateBack();
+  }
+
+  onNavigateBack() {
+    this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+    this.methodService.notifyDetailPagedSelected(false);
+  }
+
   onImageSelected(imageResult: ImageResult) {
-    this.uploadedImages.push(imageResult.resized
-      && imageResult.resized.dataURL
-      || imageResult.dataURL);
+    if (imageResult.error) {
+      this.imageUploadErrorMessage = "Ungültige Datei!"
+    } else {
+      this.imageUploadErrorMessage = null;
+      this.uploadedImages.push(imageResult.resized
+        && imageResult.resized.dataURL
+        || imageResult.dataURL);
+    }
+    this.imageUploadButton.nativeElement.value = "";
   }
 
   onThumbnailSelected(imageResult: ImageResult) {
-    this.thumbnailSrc = imageResult.resized
-      && imageResult.resized.dataURL
-      || imageResult.dataURL;
+    if (imageResult.error) {
+      this.thumbnailErrorMessage = "Ungültige Datei!"
+    } else {
+      this.thumbnailErrorMessage = null;
+      this.thumbnailSrc = imageResult.resized
+        && imageResult.resized.dataURL
+        || imageResult.dataURL;
+    }
+    this.thumbnailUploadButton.nativeElement.value = "";
   }
 
   onRemoveThumbnail() {
@@ -212,5 +245,13 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
         subphase => subphase.checked = false
       );
     }
+  }
+
+  onCloseThumbnailErrorMessage() {
+    this.thumbnailErrorMessage = null;
+  }
+
+  onCloseImageUploadErrorMessage() {
+    this.imageUploadErrorMessage = null;
   }
 }

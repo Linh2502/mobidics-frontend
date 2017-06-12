@@ -61,4 +61,6 @@ export class MethodService {
   notifyDetailPagedSelected(detailIsSelected: boolean) {
     this.detailPageSelected.emit(detailIsSelected);
   }
+
+
 }

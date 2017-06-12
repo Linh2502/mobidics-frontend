@@ -25,13 +25,21 @@
                 </button>
               </div>
             </perfect-scrollbar>
+            <alert type="danger"
+                   *ngIf="thumbnailErrorMessage"
+                   (onClose)="onCloseThumbnailErrorMessage()"
+                   [dismissible]="true">
+              {{ thumbnailErrorMessage }}
+            </alert>
             <label class="btn btn-default"
                    for="method-thumbnail-selector">
               <input type="file" imageUpload
                      id="method-thumbnail-selector"
                      (imageSelected)="onThumbnailSelected($event)"
                      [resizeOptions]="resizeOptions"
-                     style="display:none">
+                     [allowedExtensions]="allowedImageExtensions"
+                     style="display:none"
+                     #thumbnailUploadButton>
               Vorschaubild auswählen...
             </label>
           </div>
@@ -41,7 +49,7 @@
             <h4>
               Methodenbilder
             </h4>
-            <perfect-scrollbar [config]="localConfig" class="preview-container"
+            <perfect-scrollbar [config]="imagePreviewScrollbarConfig" class="preview-container"
                                *ngIf="uploadedImages.length != 0">
               <div class="preview" *ngFor="let imageUrl of uploadedImages; let i = index">
                 <img class="img" [src]="imageUrl">
@@ -50,11 +58,20 @@
                 </button>
               </div>
             </perfect-scrollbar>
+            <alert type="danger"
+                   *ngIf="imageUploadErrorMessage"
+                   (onClose)="onCloseImageUploadErrorMessage()"
+                   [dismissible]="true">
+              {{ imageUploadErrorMessage }}
+            </alert>
             <label class="btn btn-default"
                    for="method-image-selector">
               <input type="file" imageUpload
                      id="method-image-selector"
-                     (imageSelected)="onImageSelected($event)" style="display:none">
+                     [allowedExtensions]="allowedImageExtensions"
+                     (imageSelected)="onImageSelected($event)"
+                     style="display:none"
+                     #imageUploadButton>
               Bild auswählen...
             </label>
           </div>
