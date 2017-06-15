@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../../services/auth/user/user.model';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {User} from '../../services/auth/user/user.model';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth/auth.service';
+import {Animations} from '../../animations';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css']
+  styleUrls: ['./account.component.css'],
+  animations: [Animations.fadeInOut]
 })
 export class AccountDetailsComponent implements OnInit {
 

@@ -38,7 +38,14 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   }
 
   onDeleteButtonClicked() {
-    // TODO implement
+    console.log('DELETE');
+    this.methodService.deleteMethod(this.method).subscribe(
+      () => {
+        this.methodService.refreshMethods();
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+      },
+      () => console.log('ERROR')
+    );
   }
 
   ngOnInit() {
@@ -53,8 +60,8 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
             );
             this.detailsContainer.scrollToTop(0);
             this.methodService.notifyDetailPagedSelected(true);
-          })
-        ;
+          },
+          () => this.router.navigate(['../']));
       }
     );
   }

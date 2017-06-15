@@ -34,7 +34,7 @@ export class MethodListComponent implements OnInit, OnDestroy {
         }
       }
     );
-    this.methodService.getAllMethodsByQuery('');
+    this.refreshView();
     Observable.fromEvent(
       this.searchBar.nativeElement, 'keyup')
       .debounceTime(500)
@@ -44,12 +44,16 @@ export class MethodListComponent implements OnInit, OnDestroy {
       );
   }
 
+  refreshView() {
+    this.methodService.getAllMethodsByQuery(this.searchQuery);
+  }
+
   ngOnDestroy() {
     this.methodListSubscription.unsubscribe();
     this.methodService.checkedMethods = [];
   }
 
   onSearchButtonClicked() {
-    this.methodService.getAllMethodsByQuery(this.searchQuery);
+    this.refreshView();
   }
 }

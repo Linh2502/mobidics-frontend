@@ -10,6 +10,7 @@ export class MethodService {
   public methodListChanged: EventEmitter<Method[]>;
   public favoritesObservable: ConnectableObservable<string[]>;
   public checkedMethods: string[] = [];
+  private lastQuery = '';
 
   constructor(private httpService: HttpService) {
     this.detailPageSelected = new EventEmitter();
@@ -17,11 +18,16 @@ export class MethodService {
   }
 
   getAllMethodsByQuery(searchQuery: string): void {
+    this.lastQuery = searchQuery;
     this.httpService.getAllMethodsByName(searchQuery).subscribe(
       (methods: Method[]) => {
         this.methodListChanged.emit(methods);
       }
     );
+  }
+
+  refreshMethods(): void {
+    this.getAllMethodsByQuery(this.lastQuery);
   }
 
   getMethodById(id): Observable<Method> {
@@ -37,7 +43,6 @@ export class MethodService {
   }
 
   addMethod(method: Method): Observable<any> {
-    console.log(method);
     return this.httpService.addMethod(method);
   }
 
@@ -45,7 +50,8 @@ export class MethodService {
     return Observable.create();
   }
 
-  deleteMethod(method: Method) {
+  deleteMethod(method: Method): Observable<any> {
+    return this.httpService.deleteMethod(method.id);
   }
 
   getFavoritesIds(): Observable<string[]> {

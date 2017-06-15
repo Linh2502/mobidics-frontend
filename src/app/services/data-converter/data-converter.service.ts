@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class DataConverterService {
@@ -7,11 +7,10 @@ export class DataConverterService {
   }
 
   singleColonDataToArray(data: string): number[] {
-    let result: number[];
-    data.split(":").forEach(
+    const result: number[] = [];
+    data.split(':').forEach(
       (element: string) => result.push(+element)
     );
-    console.log(result);
     return result;
   }
 }
