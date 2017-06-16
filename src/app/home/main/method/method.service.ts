@@ -26,7 +26,7 @@ export class MethodService {
     );
   }
 
-  refreshMethods(): void {
+  private refreshMethods(): void {
     this.getAllMethodsByQuery(this.lastQuery);
   }
 
@@ -43,7 +43,8 @@ export class MethodService {
   }
 
   addMethod(method: Method): Observable<any> {
-    return this.httpService.addMethod(method);
+    return this.httpService.addMethod(method)
+      .do(() => this.refreshMethods());
   }
 
   editMethod(method: Method): Observable<any> {
@@ -51,7 +52,8 @@ export class MethodService {
   }
 
   deleteMethod(method: Method): Observable<any> {
-    return this.httpService.deleteMethod(method.id);
+    return this.httpService.deleteMethod(method.id)
+      .do(() => this.refreshMethods());
   }
 
   getFavoritesIds(): Observable<string[]> {

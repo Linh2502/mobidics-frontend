@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MethodService } from '../method/method.service';
-import { Subscription } from 'rxjs/Subscription';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MethodService} from '../method/method.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +11,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   methodServiceSubscription: Subscription;
 
   constructor(private methodService: MethodService) {
+  }
+
+  onFavoriteButtonClicked() {
+    this.methodService.getFavorites();
   }
 
   ngOnInit() {

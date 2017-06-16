@@ -54,7 +54,7 @@ export class HttpService {
 
   getFavoritesIds(): Observable<string[]> {
     const headers: Headers = this.generateHeaders();
-    return this.http.get(this.baseUri + 'methods/favoritesIds', {headers})
+    return this.http.get(this.baseUri + 'methods/favoriteIds', {headers})
       .map(response => response.json());
   }
 

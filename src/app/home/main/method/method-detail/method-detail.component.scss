@@ -33,4 +33,24 @@ carousel {
   flex: 8;
 }
 
+.range-input {
+  flex: 6
+}
+
+.flex-group-type {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-text-left {
+  flex: 1;
+  padding-right: 15px;
+}
+
+.flex-text-right {
+  padding-left: 15px;
+  flex: 1;
+}
 

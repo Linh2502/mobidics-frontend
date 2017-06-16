@@ -36,6 +36,7 @@ import { StringAsArrayPipe } from './pipes/string-as-array.pipe';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ImageUploadModule } from 'ng2-imageupload';
 import { DataConverterService } from "./services/data-converter/data-converter.service";
+import { MethodScopePipe } from './home/main/method/method-pipes/method-scope.pipe';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -64,7 +65,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MethodDetailCommentsComponent,
     MethodAddEditComponent,
     ArrayAsStringPipe,
-    StringAsArrayPipe
+    StringAsArrayPipe,
+    MethodScopePipe
   ],
   imports: [
     BrowserModule,

@@ -19,10 +19,11 @@
   <div *ngIf="method"
        [@fadeInOut]="'in'">
     <div class="detail-header">
-      <img *ngIf="method.thumbnail" class="media-object" height="60px"
-           [src]="method.thumbnail">
+      <img height="60px"
+           [src]="method.thumbnail"
+           onError="this.src='assets/default-icon.png'">
       <div class="header-body">
-        <h4 *ngIf="method.title" class="media-heading">{{method.title}}</h4>
+        <h4><strong>{{method.title}}</strong></h4>
         <rating [(ngModel)]="method.userRating" [max]="5"
                 [titles]="['eins','zwei','drei']" style="font-size: 1.4em"></rating>
       </div>
@@ -33,7 +34,7 @@
       </button>
     </div>
     <div class="row" *ngIf="method.images">
-      <carousel class="col-xs-6 col-xs-offset-3">
+      <carousel class="col-xs-4 col-xs-offset-4">
         <slide *ngFor="let image of method.images">
           <img [src]="image" class="img-responsive" width="100%">
         </slide>
@@ -66,16 +67,22 @@
         <td>{{ method.courseType | courseType }}</td>
       </tr>
       <tr *ngIf="method.groupType">
-        <th>Teilnehmerzusammensetzung</th>
-        <td>{{ method.groupType }}</td>
+        <th>Teilnehmer-<br>
+          zusammensetzung
+        </th>
+        <td>
+          <div class="flex-group-type">
+            <div class="flex-text-left">homogen</div>
+            <div class="range-input">
+              <input type="range" min="0" max="10" [value]="method.groupType" disabled title="">
+            </div>
+            <div class="flex-text-right">heterogen</div>
+          </div>
+        </td>
       </tr>
-      <tr *ngIf="method.groupSizeMin">
-        <th>Gruppengröße (min)</th>
-        <td>{{ method.groupSizeMin }}</td>
-      </tr>
-      <tr *ngIf="method.groupSizeMax">
-        <th>Gruppengröße (max)</th>
-        <td>{{ method.groupSizeMax }}</td>
+      <tr *ngIf="method.groupSizeMin || method.groupSizeMax">
+        <th>Gruppengröße</th>
+        <td>{{ method.groupSizeMin }} - {{ method.groupSizeMax }} Personen</td>
       </tr>
       <tr *ngIf="method.groupSizeComment">
         <th>Gruppengröße (Kommentar)</th>
@@ -101,13 +108,9 @@
         <th>Methodenspezifisches Material</th>
         <td>{{ method.methodMaterial }}</td>
       </tr>
-      <tr *ngIf="method.timeMin">
-        <th>Zeitaufwand (min)</th>
-        <td>{{ method.timeMin }}</td>
-      </tr>
-      <tr *ngIf="method.timeMax">
-        <th>Zeitaufwand (max)</th>
-        <td>{{ method.timeMax }}</td>
+      <tr *ngIf="method.timeMin || method.timeMax">
+        <th>Zeitaufwand</th>
+        <td>{{ method.timeMin }} - {{ method.timeMax }} Minuten</td>
       </tr>
       <tr *ngIf="method.timeComment">
         <th>Zeitaufwand (Kommentar)</th>
@@ -147,7 +150,7 @@
       </tr>
       <tr *ngIf="method.scope">
         <th>Zugriff</th>
-        <td>{{ method.scope }}</td>
+        <td>{{ method.scope | scope }}</td>
       </tr>
       </tbody>
     </table>

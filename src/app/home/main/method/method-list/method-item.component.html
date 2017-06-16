@@ -8,6 +8,7 @@
     <div class="method-item__thumbnail" [routerLink]="[method.id]">
       <img
         [src]="method.thumbnail"
+        onError="this.src='assets/default-icon.png';"
         alt="" class="media-object" style="height: 40px">
     </div>
     <div class="method-item__body" [routerLink]="[method.id]">

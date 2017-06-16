@@ -1,7 +1,6 @@
 <perfect-scrollbar class="side-bar scrollable-content">
-
   <div class="col-xs-12">
-    <button class="btn btn-default side-button" type="button">
+    <button class="btn btn-default side-button" type="button" (click)="onFavoriteButtonClicked()">
       <span class="glyphicon glyphicon-heart"></span>
       <strong>Meine Favoriten</strong>
     </button>
@@ -14,7 +13,6 @@
       <strong>Neueste</strong>
     </button>
   </div>
-
   <accordion>
     <accordion-group panelClass="customClass" #group1>
       <div accordion-heading>
