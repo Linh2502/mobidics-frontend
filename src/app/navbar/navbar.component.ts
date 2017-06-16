@@ -10,7 +10,7 @@ import {User} from '../services/auth/user/user.model';
 export class NavbarComponent implements OnInit, OnDestroy {
   isMenuCollapsed = true;
 
-  constructor(private authService: AuthService) {
+  constructor(public authService: AuthService) {
   }
 
   ngOnInit() {

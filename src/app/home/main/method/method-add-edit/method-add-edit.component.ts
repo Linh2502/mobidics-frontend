@@ -20,28 +20,28 @@ import {DataConverterService} from '../../../../services/data-converter/data-con
 export class MethodAddEditComponent implements OnInit, OnDestroy {
   @ViewChild('thumbnailUploadButton') thumbnailUploadButton: ElementRef;
   @ViewChild('imageUploadButton') imageUploadButton: ElementRef;
-  private imagePreviewScrollbarConfig: PerfectScrollbarConfigInterface = {
+  imagePreviewScrollbarConfig: PerfectScrollbarConfigInterface = {
     suppressScrollX: false
   };
-  private resizeOptions: ResizeOptions = {
+  resizeOptions: ResizeOptions = {
     resizeMaxHeight: 96,
     resizeMaxWidth: 96
   };
-  private allowedImageExtensions = ['jpg', 'png', 'gif', 'jpeg'];
+  allowedImageExtensions = ['jpg', 'png', 'gif', 'jpeg'];
 
-  private methodId: number;
-  private routerSubscription: Subscription;
-  private isNew = true;
-  private method: Method;
-  private uploadedImages: string[] = [];
-  private thumbnailSrc;
+  methodId: number;
+  routerSubscription: Subscription;
+  isNew = true;
+  method: Method;
+  uploadedImages: string[] = [];
+  thumbnailSrc;
 
-  private thumbnailErrorMessage: string;
-  private imageUploadErrorMessage: string;
+  thumbnailErrorMessage: string;
+  imageUploadErrorMessage: string;
 
   methodForm: FormGroup;
 
-  private socialFormOptions: any[] = [
+  socialFormOptions: any[] = [
     {name: 'Plenum interaktiv', value: '0', checked: false},
     {name: 'Partner/Gruppenarbeit', value: '1', checked: false},
     {name: 'Plenum untereinander', value: '2', checked: false},
@@ -49,7 +49,7 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
     {name: 'Plenum frontal', value: '4', checked: false}
   ];
 
-  private phaseOptions: any[] = [
+  phaseOptions: any[] = [
     {name: '(Lern-)Atmosphäre fördern', value: '0', checked: false},
     {name: 'Ausrichten', value: '1', checked: false},
     {name: 'Vorwissen aktivieren', value: '2', checked: false},
@@ -58,7 +58,7 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
     {name: 'Auswerten', value: '5', checked: false}
   ];
 
-  private subphaseOptions: any[][] = [
+  subphaseOptions: any[][] = [
     [
       {name: 'Kennenlernen', value: '11', checked: false},
       {name: 'Persönlicher Austausch (Erfahrung)', value: '12', checked: false},
@@ -89,7 +89,7 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
     ]
   ];
 
-  private courseTypeOptions: any[] = [
+  courseTypeOptions: any[] = [
     {name: 'Seminar', value: '0', checked: false},
     {name: 'Übung', value: '1', checked: false},
     {name: 'Vorlesung', value: '2', checked: false}

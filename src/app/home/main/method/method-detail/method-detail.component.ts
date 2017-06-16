@@ -24,7 +24,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
 
   constructor(private methodService: MethodService,
               private activatedRoute: ActivatedRoute,
-              private authService: AuthService,
+              public authService: AuthService,
               private router: Router) {
   }
 

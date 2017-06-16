@@ -1,9 +1,12 @@
 <div id="custom-search-input">
   <div class="input-group">
-    <input #searchBar [(ngModel)]="searchQuery" type="text" class="search-query form-control"
+    <input #searchBar [(ngModel)]="searchQuery"
+           type="text"
+           class="search-query form-control"
+           (keyup.enter)="refreshView()"
            placeholder="Methode finden..."/>
     <span class="input-group-btn">
-          <button class="btn btn-danger" type="button" (click)="onSearchButtonClicked()">
+          <button class="btn btn-danger" type="button" (click)="refreshView()">
             <span class="glyphicon glyphicon-search"></span>
           </button>
     </span>
@@ -21,10 +24,10 @@
     </div>
   </li>
   <perfect-scrollbar class="scrollable-content">
-      <app-method-item
-        *ngFor="let method of methods"
-        [method]="method">
-      </app-method-item>
+    <app-method-item
+      *ngFor="let method of methods"
+      [method]="method">
+    </app-method-item>
   </perfect-scrollbar>
 </ul>
 

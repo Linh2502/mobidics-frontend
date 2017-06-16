@@ -40,7 +40,7 @@ export class MethodListComponent implements OnInit, OnDestroy {
       .debounceTime(500)
       .distinctUntilChanged()
       .subscribe(
-        () => this.methodService.getAllMethodsByQuery(this.searchQuery)
+        () => this.refreshView()
       );
   }
 
@@ -51,9 +51,5 @@ export class MethodListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.methodListSubscription.unsubscribe();
     this.methodService.checkedMethods = [];
-  }
-
-  onSearchButtonClicked() {
-    this.refreshView();
   }
 }
