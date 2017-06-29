@@ -1,9 +1,9 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { HttpService } from '../http/http.service';
-import { TokenStorageService } from './token-storage.service';
-import { User } from './user/user.model';
+import {EventEmitter, Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import {HttpService} from '../http/http.service';
+import {TokenStorageService} from './token-storage.service';
+import {User} from './user/user.model';
 
 @Injectable()
 export class AuthService {
