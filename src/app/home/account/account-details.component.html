@@ -1,0 +1,33 @@
+<perfect-scrollbar class="container scrollable-content">
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2" [@fadeInOut]="'in'">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h4 class="panel-title pull-left" style="padding-top: 7.5px">
+          <span class="glyphicon glyphicon-user"></span>
+          Mein Konto
+        </h4>
+        <button (click)="onEditButtonClicked()"
+                class="btn btn-primary pull-right"
+                type="button">
+          <span class="glyphicon glyphicon-edit"></span>
+          Bearbeiten
+        </button>
+      </div>
+      <div class="panel-body">
+        <div class="flex-body">
+          <img class="img-responsive flex-child" src="{{user.profileImage || profileImage}}"/>
+          <h4 class="flex-child">{{user.firstname}} {{user.lastname}}</h4>
+          <app-label-value label="Nutzername:" value="{{user.username}}"></app-label-value>
+          <app-label-value label="E-Mail Addresse:" value="{{user.email}}"></app-label-value>
+          <app-label-value label="Sprachen:" value="{{user.language | accountLanguage}}"></app-label-value>
+          <app-label-value label="Geschlecht:" value="{{user.gender | accountGender}}"></app-label-value>
+          <app-label-value label="Nutzerstatus:" value="{{user.userStatus}}"></app-label-value>
+          <app-label-value label="Nutzertyp:" value="{{user.userType}}"></app-label-value>
+          <app-label-value label="Universität:" value="{{user.university.name}}"></app-label-value>
+          <app-label-value label="Fakultät:" value="{{user.faculty.name}}"></app-label-value>
+          <app-label-value label="Lehrerfahrung:" value="{{user.experience}} Jahre"></app-label-value>
+        </div>
+      </div>
+    </div>
+  </div>
+</perfect-scrollbar>

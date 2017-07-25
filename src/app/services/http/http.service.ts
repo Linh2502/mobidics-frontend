@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 
 @Injectable()
 export class HttpService {
-  private baseUri = 'http://localhost:8080/mobidics/api/';
+  private baseUri = 'http://lb-staging.dynv6.net:8080/mobidics/api/';
 
   constructor(private http: Http,
               private tokenStorageService: TokenStorageService,
@@ -72,6 +72,13 @@ export class HttpService {
   getFavorites(): Observable<Method[]> {
     const headers: Headers = this.generateHeaders();
     return this.http.get(this.baseUri + 'methods/favorites', {headers})
+      .map(response => response.json())
+      .catch(error => this.processError(error));
+  }
+
+  getAllUsers(): Observable<User[]> {
+    const headers: Headers = this.generateHeaders();
+    return this.http.get(this.baseUri + 'users', {headers})
       .map(response => response.json())
       .catch(error => this.processError(error));
   }

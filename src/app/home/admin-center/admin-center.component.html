@@ -2,10 +2,44 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      Heading 1
+      Inhalt der Benutzertabelle
     </div>
     <div class="panel-body">
-      Body 1
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Benutzername</th>
+          <th>Grad</th>
+          <th>E-Mail</th>
+          <th>Zuletzt aktiv</th>
+          <th>Freigabe</th>
+          <th>Aktionen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users; let i = index">
+          <td>
+            {{user.username}}
+          </td>
+          <td>
+            {{user.userLevel}}
+          </td>
+          <td>
+            {{user.email}}
+          </td>
+          <td>
+            {{user.lastActionDate | timeSince}}
+          </td>
+          <td>
+            {{user.approved? 'Freigegeben': 'Nicht Freigegeben'}}
+          </td>
+          <td>
+            <a>Löschen</a>
+            <a>Sperren</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
@@ -20,10 +54,18 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      Heading 1
+      Inhalt der Tabelle der gesperrten Benutzer
     </div>
     <div class="panel-body">
-      Body 1
+      <table class="table">
+        <thead>
+
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+      <button>Gesperrte Benutzer löschen</button>
     </div>
   </div>
 

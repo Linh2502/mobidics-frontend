@@ -1,29 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Animations } from '../../animations';
+import {Component, OnInit} from '@angular/core';
+import {HttpService} from '../../services/http/http.service';
+import {User} from '../../services/auth/user/user.model';
 
 @Component({
   selector: 'app-admin-center',
   templateUrl: './admin-center.component.html',
-  styleUrls: ['./admin-center.component.css'],
-  animations: [Animations.slideInOut]
+  styleUrls: ['./admin-center.component.css']
 })
 export class AdminCenterComponent implements OnInit {
 
-  toggleState = 'closed';
+  users: User[];
 
-  constructor() {
+  constructor(private httpService: HttpService) {
   }
 
   ngOnInit() {
-  }
-
-  toggle() {
-    if (this.toggleState === 'closed') {
-      this.toggleState = 'open';
-    } else {
-      this.toggleState = 'closed';
-    }
-    console.log(this.toggleState);
+    this.httpService.getAllUsers().subscribe(
+      users => this.users = users
+    );
   }
 
 }

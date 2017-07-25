@@ -1,0 +1,14 @@
+.flex-label-value-row {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.flex-label {
+  padding-left: 100px;
+  width: 50%;
+  font-weight: bold;
+}
+
+.flex-value {
+  width: 50%;
+}

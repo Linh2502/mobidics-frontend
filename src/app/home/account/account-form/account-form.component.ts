@@ -1,56 +1,25 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../services/auth/user/user.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../services/auth/auth.service';
-import {Animations} from '../../animations';
+import {User} from '../../../services/auth/user/user.model';
+import {AuthService} from '../../../services/auth/auth.service';
+import {AccountGenderPipe} from '../account-pipes/account-gender.pipe';
+import {AccountLanguagePipe} from '../account-pipes/account-language.pipe';
 
 @Component({
-  selector: 'app-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css'],
-  animations: [Animations.fadeInOut]
+  selector: 'app-account-form',
+  templateUrl: './account-form.component.html',
+  styleUrls: ['./account-form.component.scss']
 })
-export class AccountDetailsComponent implements OnInit {
+export class AccountFormComponent implements OnInit {
 
   userForm: FormGroup;
   userFormBackup: FormGroup;
   editModeOn = false;
   profileImage = 'assets/avatar_male.png';
 
-  static
-  convertGender(gender) {
-    if (gender === 0) {
-      return 'Männlich';
-    } else {
-      return 'Weiblich';
-    }
-  }
-
-  static
-  convertLanguages(languages) {
-    let result: string;
-    const languageArray: string[] = languages.split('::');
-    result = this.mapLanguage(languageArray[0]);
-    for (let i = 1; i < languageArray.length; i++) {
-      result = result.concat(', ', this.mapLanguage(languageArray[i]));
-    }
-    return result;
-  }
-
-  static mapLanguage(language) {
-    switch (language) {
-      case 'de':
-        return 'Deutsch';
-      case 'en':
-        return 'Englisch';
-      case 'fr':
-        return 'Französisch';
-      case 'es':
-        return 'Spanisch';
-    }
-  }
-
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private genderPipe: AccountGenderPipe,
+              private languagePipe: AccountLanguagePipe) {
   }
 
   ngOnInit() {
@@ -78,8 +47,8 @@ export class AccountDetailsComponent implements OnInit {
     this.userForm.get('lastname').setValue(user.lastname);
     this.userForm.get('username').setValue(user.username);
     this.userForm.get('email').setValue(user.email);
-    this.userForm.get('languages').setValue(AccountDetailsComponent.convertLanguages(user.language));
-    this.userForm.get('gender').setValue(AccountDetailsComponent.convertGender(user.gender));
+    this.userForm.get('languages').setValue(this.languagePipe.transform(user.language));
+    this.userForm.get('gender').setValue(this.genderPipe.transform(user.gender));
     this.userForm.get('userStatus').setValue(user.userStatus);
     this.userForm.get('userType').setValue(user.userType);
     this.userForm.get('university').setValue(user.university.name);
@@ -87,21 +56,4 @@ export class AccountDetailsComponent implements OnInit {
     this.userForm.get('experience').setValue(user.experience);
   }
 
-  onEditButtonClicked(): void {
-    this.editModeOn = !this.editModeOn;
-    this.userFormBackup = this.userForm;
-  }
-
-  onSubmit() {
-    console.log(this.userForm);
-    this.editModeOn = !this.editModeOn;
-  }
-
-  onAbortEdit() {
-    this.editModeOn = !this.editModeOn;
-    this.userForm = this.userFormBackup;
-  }
-
-  onUploadButtonClicked() {
-  }
 }
