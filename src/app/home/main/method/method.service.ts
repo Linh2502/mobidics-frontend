@@ -8,13 +8,15 @@ import {Observable} from 'rxjs/Observable';
 export class MethodService {
   public detailPageSelected: EventEmitter<boolean>;
   public methodListChanged: EventEmitter<Method[]>;
-  public favoritesObservable: ConnectableObservable<string[]>;
+  public favoritesChanged: EventEmitter<string[]>;
   public checkedMethods: string[] = [];
+  cachedFavorites: string[] = [];
   private lastQuery = '';
 
   constructor(private httpService: HttpService) {
     this.detailPageSelected = new EventEmitter();
     this.methodListChanged = new EventEmitter();
+    this.favoritesChanged = new EventEmitter();
   }
 
   getAllMethodsByQuery(searchQuery: string): void {
@@ -56,19 +58,29 @@ export class MethodService {
       .do(() => this.refreshMethods());
   }
 
-  getFavoritesIds(): Observable<string[]> {
-    if (!this.favoritesObservable) {
-      this.favoritesObservable = this.httpService.getFavoritesIds()
-        .share()
-        .publishReplay();
-      this.favoritesObservable.connect();
-    }
-    return this.favoritesObservable;
+  getFavoritesIds(): void {
+    this.httpService.getFavoritesIds().subscribe(
+      (favorites: string[]) => {
+        this.favoritesChanged.emit(favorites);
+        this.cachedFavorites = favorites;
+      }
+    );
+  }
+
+  addFavorite(id: string): void {
+    this.httpService.addFavorite(id).subscribe(
+      () => this.getFavoritesIds()
+    );
+  }
+
+  deleteFavorite(id: string): void {
+    this.httpService.deleteFavorite(id).subscribe(
+      () => this.getFavoritesIds()
+    );
   }
 
   notifyDetailPagedSelected(detailIsSelected: boolean) {
     this.detailPageSelected.emit(detailIsSelected);
   }
-
 
 }

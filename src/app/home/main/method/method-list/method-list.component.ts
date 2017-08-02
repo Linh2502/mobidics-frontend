@@ -14,6 +14,8 @@ export class MethodListComponent implements OnInit, OnDestroy {
   methods: Method[] = [];
   searchQuery = '';
   methodListSubscription: Subscription;
+  favoritesSubscription: Subscription;
+  favorites: string[] = [];
   initialLoad = true;
 
   @ViewChild('searchBar') searchBar: ElementRef;
@@ -23,6 +25,27 @@ export class MethodListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.subscribeToMethodListChanges();
+    this.subscribeToFavoriteChanges();
+    this.methodService.getFavoritesIds();
+    this.refreshView();
+    Observable.fromEvent(
+      this.searchBar.nativeElement, 'keyup')
+      .debounceTime(500)
+      .distinctUntilChanged()
+      .subscribe(
+        () => this.refreshView()
+      );
+  }
+
+  private subscribeToFavoriteChanges() {
+    this.favoritesSubscription = this.methodService.favoritesChanged.subscribe(
+      (favorites: string[]) => {
+        this.favorites = favorites;
+      });
+  }
+
+  private subscribeToMethodListChanges() {
     this.methodListSubscription = this.methodService.methodListChanged.subscribe(
       (methods: Method[]) => {
         this.methods = methods;
@@ -34,14 +57,6 @@ export class MethodListComponent implements OnInit, OnDestroy {
         }
       }
     );
-    this.refreshView();
-    Observable.fromEvent(
-      this.searchBar.nativeElement, 'keyup')
-      .debounceTime(500)
-      .distinctUntilChanged()
-      .subscribe(
-        () => this.refreshView()
-      );
   }
 
   refreshView() {
@@ -50,6 +65,7 @@ export class MethodListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.methodListSubscription.unsubscribe();
+    this.favoritesSubscription.unsubscribe();
     this.methodService.checkedMethods = [];
   }
 }

@@ -26,7 +26,8 @@
   <perfect-scrollbar class="scrollable-content">
     <app-method-item
       *ngFor="let method of methods"
-      [method]="method">
+      [method]="method"
+      [isFavorite]="favorites.includes(method.id)">
     </app-method-item>
   </perfect-scrollbar>
 </ul>

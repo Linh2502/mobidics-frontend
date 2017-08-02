@@ -54,9 +54,7 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
         this.methodService.getMethodById(params['id']).subscribe(
           method => {
             this.method = method;
-            this.methodService.getFavoritesIds().subscribe(
-              (favorites: string[]) => this.isFavorite = favorites.includes(this.method.id)
-            );
+            this.isFavorite = this.methodService.cachedFavorites.includes(this.method.id);
             this.detailsContainer.scrollToTop(0);
             this.methodService.notifyDetailPagedSelected(true);
           },
@@ -70,7 +68,11 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   }
 
   toggleFavorite() {
+    if (this.isFavorite) {
+      this.methodService.deleteFavorite(this.method.id);
+    } else {
+      this.methodService.addFavorite(this.method.id);
+    }
     this.isFavorite = !this.isFavorite;
-    // TODO make call to server
   }
 }

@@ -76,6 +76,16 @@ export class HttpService {
       .catch(error => this.processError(error));
   }
 
+  addFavorite(id: string): Observable<any> {
+    const headers: Headers = this.generateHeaders();
+    return this.http.put(this.baseUri + 'methods/favorites/' + id, null, {headers});
+  }
+
+  deleteFavorite(id: string): Observable<any> {
+    const headers: Headers = this.generateHeaders();
+    return this.http.delete(this.baseUri + 'methods/favorites/' + id, {headers});
+  }
+
   getAllUsers(): Observable<User[]> {
     const headers: Headers = this.generateHeaders();
     return this.http.get(this.baseUri + 'users', {headers})

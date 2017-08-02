@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Method } from '../method.model';
-import { MethodService } from '../method.service';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import {Component, Input, OnInit} from '@angular/core';
+import {Method} from '../method.model';
+import {MethodService} from '../method.service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-method-item',
@@ -26,16 +26,13 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class MethodItemComponent implements OnInit {
 
   @Input('method') method: Method;
+  @Input('isFavorite') isFavorite;
   checked = false;
-  isFavorite = false;
 
   constructor(private methodService: MethodService) {
   }
 
   ngOnInit() {
-    this.methodService.getFavoritesIds().subscribe(
-      (favorites: string[]) => this.isFavorite = favorites.includes(this.method.id)
-    );
   }
 
   checkboxClicked() {
