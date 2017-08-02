@@ -38,7 +38,6 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   }
 
   onDeleteButtonClicked() {
-    console.log('DELETE');
     this.methodService.deleteMethod(this.method).subscribe(
       () => {
         this.router.navigate(['../'], {relativeTo: this.activatedRoute});

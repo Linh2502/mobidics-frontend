@@ -13,13 +13,9 @@ import {AccountLanguagePipe} from '../account-pipes/account-language.pipe';
 export class AccountFormComponent implements OnInit {
 
   userForm: FormGroup;
-  userFormBackup: FormGroup;
-  editModeOn = false;
   profileImage = 'assets/avatar_male.png';
 
-  constructor(private authService: AuthService,
-              private genderPipe: AccountGenderPipe,
-              private languagePipe: AccountLanguagePipe) {
+  constructor() {
   }
 
   ngOnInit() {
@@ -41,19 +37,24 @@ export class AccountFormComponent implements OnInit {
           Validators.pattern('\\d+'),
           Validators.maxLength(2)])
     });
-    const user: User = this.authService.loggedInUser;
-    this.profileImage = user.profileImage ? user.profileImage : this.profileImage;
-    this.userForm.get('firstname').setValue(user.firstname);
-    this.userForm.get('lastname').setValue(user.lastname);
-    this.userForm.get('username').setValue(user.username);
-    this.userForm.get('email').setValue(user.email);
-    this.userForm.get('languages').setValue(this.languagePipe.transform(user.language));
-    this.userForm.get('gender').setValue(this.genderPipe.transform(user.gender));
-    this.userForm.get('userStatus').setValue(user.userStatus);
-    this.userForm.get('userType').setValue(user.userType);
-    this.userForm.get('university').setValue(user.university.name);
-    this.userForm.get('faculty').setValue(user.faculty.name);
-    this.userForm.get('experience').setValue(user.experience);
+    // const user: User = this.authService.loggedInUser;
+    // this.profileImage = user.profileImage ? user.profileImage : this.profileImage;
+    // this.userForm.get('firstname').setValue(user.firstname);
+    // this.userForm.get('lastname').setValue(user.lastname);
+    // this.userForm.get('username').setValue(user.username);
+    // this.userForm.get('email').setValue(user.email);
+    // this.userForm.get('languages').setValue(this.languagePipe.transform(user.language));
+    // this.userForm.get('gender').setValue(this.genderPipe.transform(user.gender));
+    // this.userForm.get('userStatus').setValue(user.userStatus);
+    // this.userForm.get('userType').setValue(user.userType);
+    // this.userForm.get('university').setValue(user.university.name);
+    // this.userForm.get('faculty').setValue(user.faculty.name);
+    // this.userForm.get('experience').setValue(user.experience);
   }
 
+  onSubmit() {
+  }
+
+  onAbortEdit() {
+  }
 }

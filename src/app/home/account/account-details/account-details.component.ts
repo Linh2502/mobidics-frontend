@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../services/auth/user/user.model';
+import {User} from '../../../services/auth/user/user.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../services/auth/auth.service';
-import {Animations} from '../../animations';
+import {AuthService} from '../../../services/auth/auth.service';
+import {Animations} from '../../../animations';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -14,7 +15,9 @@ export class AccountDetailsComponent implements OnInit {
   user: User;
   profileImage = 'assets/avatar_male.png';
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -22,6 +25,6 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   onEditButtonClicked(): void {
-    // TODO: route to edit
+    this.router.navigate(['edit'], {relativeTo: this.activatedRoute});
   }
 }

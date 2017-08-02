@@ -9,12 +9,3 @@
 .glyphicon.glyphicon-user {
   color: white;
 }
-
-.flex-body {
-  display: flex;
-  flex-flow: column nowrap;
-}
-
-.flex-child {
-  align-self: center;
-}

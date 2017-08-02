@@ -1,9 +1,9 @@
-<div class="flex-label-value-row">
-  <div class="flex-label">
+<div class="row container-style" *ngIf="label && value">
+  <div class="row label-style">
     {{label}}
   </div>
-  <div class="flex-value">
-    {{value || "xx"}}
+  <div class="row value-style">
+    {{value}}
   </div>
 </div>
 
