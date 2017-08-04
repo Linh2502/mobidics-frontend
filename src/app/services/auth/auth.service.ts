@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {HttpService} from '../http/http.service';
 import {TokenStorageService} from './token-storage.service';
-import {User} from './user/user.model';
+import {User} from '../../models/user/user.model';
 
 @Injectable()
 export class AuthService {

@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Method} from '../method.model';
+import {Method} from '../../../../models/method.model';
 import {MethodService} from '../method.service';
 import {Observable, Subscription} from 'rxjs/Rx';
 import {Router} from '@angular/router';

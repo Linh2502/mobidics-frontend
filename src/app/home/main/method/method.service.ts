@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Method} from './method.model';
+import {Method} from '../../../models/method.model';
 import {HttpService} from '../../../services/http/http.service';
 import {ConnectableObservable} from 'rxjs/observable/ConnectableObservable';
 import {Observable} from 'rxjs/Observable';

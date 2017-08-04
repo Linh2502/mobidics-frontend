@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {Observable, ObservableInput} from 'rxjs/Observable';
-import {User} from '../auth/user/user.model';
-import {Method} from '../../home/main/method/method.model';
+import {User} from '../../models/user/user.model';
+import {Method} from '../../models/method.model';
+import {Comment} from '../../models/comment.model';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {Router} from '@angular/router';
 
@@ -89,6 +90,27 @@ export class HttpService {
   getAllUsers(): Observable<User[]> {
     const headers: Headers = this.generateHeaders();
     return this.http.get(this.baseUri + 'users', {headers})
+      .map(response => response.json())
+      .catch(error => this.processError(error));
+  }
+
+  getCommentsByMethodId(id: string): Observable<Comment[]> {
+    const headers: Headers = this.generateHeaders();
+    return this.http.get(this.baseUri + 'methods/' + id + '/comments', {headers})
+      .map(response => response.json())
+      .catch(error => this.processError(error));
+  }
+
+  addCommentByMethodId(id: string, comment: Comment): Observable<any> {
+    const headers: Headers = this.generateHeaders();
+    return this.http.post(this.baseUri + 'methods/' + id + '/comments', comment, {headers})
+      .map(response => response.json())
+      .catch(error => this.processError(error));
+  }
+
+  deleteCommentById(methodId: string, commentId: string): Observable<any> {
+    const headers: Headers = this.generateHeaders();
+    return this.http.delete(this.baseUri + 'methods/' + methodId + '/comments/' + commentId, {headers})
       .map(response => response.json())
       .catch(error => this.processError(error));
   }

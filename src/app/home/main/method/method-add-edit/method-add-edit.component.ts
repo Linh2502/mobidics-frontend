@@ -2,7 +2,7 @@ import {Component, OnInit, OnDestroy, ViewChild, ElementRef} from '@angular/core
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {Method} from '../method.model';
+import {Method} from '../../../../models/method.model';
 import {MethodService} from '../method.service';
 import {Animations} from '../../../../animations';
 import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
@@ -18,6 +18,7 @@ import {DataConverterService} from '../../../../services/data-converter/data-con
     Animations.fadeInOut]
 })
 export class MethodAddEditComponent implements OnInit, OnDestroy {
+
   @ViewChild('thumbnailUploadButton') thumbnailUploadButton: ElementRef;
   @ViewChild('imageUploadButton') imageUploadButton: ElementRef;
   imagePreviewScrollbarConfig: PerfectScrollbarConfigInterface = {

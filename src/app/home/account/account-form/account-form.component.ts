@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {User} from '../../../services/auth/user/user.model';
+import {User} from '../../../models/user/user.model';
 import {AuthService} from '../../../services/auth/auth.service';
 import {AccountGenderPipe} from '../account-pipes/account-gender.pipe';
 import {AccountLanguagePipe} from '../account-pipes/account-language.pipe';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-account-form',
@@ -15,7 +16,8 @@ export class AccountFormComponent implements OnInit {
   userForm: FormGroup;
   profileImage = 'assets/avatar_male.png';
 
-  constructor() {
+  constructor(private router: Router,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -56,5 +58,6 @@ export class AccountFormComponent implements OnInit {
   }
 
   onAbortEdit() {
+    this.router.navigate(['../'], {relativeTo: this.activatedRoute});
   }
 }

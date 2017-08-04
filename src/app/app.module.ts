@@ -3,11 +3,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-
 import {AppComponent} from './app.component';
-import {LoginComponent} from './login/login.component';
+import {LoginComponent} from './components/login/login.component';
 import {HomeComponent} from './home/home.component';
-import {NavbarComponent} from './navbar/navbar.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
 import {SidebarComponent} from './home/main/sidebar/sidebar.component';
 import {MethodComponent} from './home/main/method/method.component';
 import {MethodListComponent} from './home/main/method/method-list/method-list.component';
@@ -15,7 +14,7 @@ import {MethodDetailComponent} from './home/main/method/method-detail/method-det
 import {MainComponent} from './home/main/main.component';
 import {MethodStartComponent} from './home/main/method/method-detail/method-start.component';
 import {MethodItemComponent} from './home/main/method/method-list/method-item.component';
-import {AdminCenterComponent} from './home/admin-center/admin-center.component';
+import {AdminCenterComponent} from './components/admin-center/admin-center.component';
 import {MethodSocialformPipe} from './home/main/method/method-pipes/method-socialform.pipe';
 import {MethodPhasePipe} from './home/main/method/method-pipes/method-phase.pipe';
 import {MethodSubphasePipe} from './home/main/method/method-pipes/method-subphase.pipe';
@@ -27,7 +26,6 @@ import {HttpService} from './services/http/http.service';
 import {AuthService} from './services/auth/auth.service';
 import {AuthGuard} from './services/auth/auth.guard';
 import {routing} from './app.routing';
-import {MethodDetailCommentsComponent} from './home/main/method/method-detail/method-detail-comments/method-detail-comments.component';
 import {MethodAddEditComponent} from './home/main/method/method-add-edit/method-add-edit.component';
 import {SplitArrayPipe} from './pipes/split-array.pipe';
 import {ArrayAsStringPipe} from './pipes/array-as-string.pipe';
@@ -45,6 +43,10 @@ import {AccountGenderPipe} from './home/account/account-pipes/account-gender.pip
 import {AccountLanguagePipe} from './home/account/account-pipes/account-language.pipe';
 import {TimeSincePipe} from './pipes/time-since.pipe';
 import {AccountComponent} from './home/account/account.component';
+import {CommentsComponent} from './components/comments/comments.component';
+import {CommentListComponent} from './components/comments/comment-list/comment-list.component';
+import {CommentFormComponent} from './components/comments/comment-form/comment-form.component';
+import { CommentListItemComponent } from './components/comments/comment-list/comment-list-item/comment-list-item.component';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -70,7 +72,6 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MethodSubphasePipe,
     MethodCourseTypePipe,
     SplitArrayPipe,
-    MethodDetailCommentsComponent,
     MethodAddEditComponent,
     ArrayAsStringPipe,
     StringAsArrayPipe,
@@ -82,7 +83,11 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AccountGenderPipe,
     AccountLanguagePipe,
     TimeSincePipe,
-    AccountComponent
+    AccountComponent,
+    CommentsComponent,
+    CommentListComponent,
+    CommentFormComponent,
+    CommentListItemComponent
   ],
   imports: [
     BrowserModule,

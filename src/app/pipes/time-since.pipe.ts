@@ -6,8 +6,6 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class TimeSincePipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    console.log(value);
-    console.log(Date.now());
     const seconds = Math.floor(Date.now() / 1000 - value);
 
     let interval = Math.floor(seconds / 31536000);

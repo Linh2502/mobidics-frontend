@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-method-start',
-  templateUrl: './method-start.component.html',
+  template: `
+    <h4>
+      Keine Methode ausgewählt!
+    </h4>
+  `,
   styleUrls: ['./method-start.component.css']
 })
 export class MethodStartComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

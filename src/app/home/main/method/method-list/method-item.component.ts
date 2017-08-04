@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Method} from '../method.model';
+import {Method} from '../../../../models/method.model';
 import {MethodService} from '../method.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
