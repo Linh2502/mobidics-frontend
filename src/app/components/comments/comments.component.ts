@@ -24,12 +24,12 @@ export class CommentsComponent implements OnInit, OnDestroy {
     this.commentEmitterSubscription = this.commentService.commentEmitter.subscribe(
       (comments: Comment[]) => {
         this.comments = comments;
-        this.comments = [
-          new Comment('asd', 'asd', new Date(), 'admin', 'Hallo Welt', '', '', 3, 2),
-          new Comment('asd', 'asd', new Date(), 'admin', 'Hallo Welt', '', '', 3, 2),
-          new Comment('asd', 'asd', new Date(), 'admin', 'Hallo Welt', '', '', 3, 2),
-          new Comment('asd', 'asd', new Date(), 'admin', 'Hallo Welt', '', '', 3, 2),
-          new Comment('asd', 'asd', new Date(), 'admin', 'Hallo Welt', '', '', 3, 2)];
+        console.log(this.comments);
+        this.comments.sort(
+          (c1: Comment, c2: Comment) =>
+            -(c1.creationDate - c2.creationDate)
+        );
+        console.log(this.comments);
       }
     );
     this.commentService.getComments();
@@ -38,5 +38,4 @@ export class CommentsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.commentEmitterSubscription.unsubscribe();
   }
-
 }

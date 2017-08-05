@@ -1,11 +1,22 @@
 <div class="comment-list-item row">
+  <!--[ngClass]="{'response-comment': comment.inResponseTo}"-->
   <div class="col-xs-12">
-    {{comment.username}}, {{comment.creationDate}}
+    <a class="pointer-cursor" style="font-size: 1.1em; font-weight:bold">{{comment.username}}</a>, am
+    {{comment.creationDate | ddmmyyyyDate}}
   </div>
-  <div class="col-xs-12">
+  <div class="col-xs-12 comment-text">
     {{comment.text}}
   </div>
   <div class="col-xs-12">
-    <a>Antworten</a> <a>Löschen</a> <a>Thumbs Up</a> <a>Thumbs Down</a>
+    <a class="pointer-cursor"
+       (click)="onRespondButtonClicked()">
+      Antworten
+    </a>
+    <a class="pointer-cursor"
+       *ngIf="comment.username == authService.loggedInUser.username || authService.getUserLevel() == 9">
+      Löschen
+    </a>
+    <a class="pointer-cursor">Thumbs Up</a>
+    <a class="pointer-cursor">Thumbs Down</a>
   </div>
 </div>

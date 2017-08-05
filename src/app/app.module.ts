@@ -47,6 +47,7 @@ import {CommentsComponent} from './components/comments/comments.component';
 import {CommentListComponent} from './components/comments/comment-list/comment-list.component';
 import {CommentFormComponent} from './components/comments/comment-form/comment-form.component';
 import { CommentListItemComponent } from './components/comments/comment-list/comment-list-item/comment-list-item.component';
+import { DdmmyyyyDatePipe } from './pipes/ddmmyyyy-date.pipe';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -87,7 +88,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CommentsComponent,
     CommentListComponent,
     CommentFormComponent,
-    CommentListItemComponent
+    CommentListItemComponent,
+    DdmmyyyyDatePipe
   ],
   imports: [
     BrowserModule,

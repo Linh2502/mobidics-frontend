@@ -1,5 +1,27 @@
 .comment-list-item {
+  padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  border: 2px black;
+  border: 1px forestgreen solid;
+  border-radius: 10px;
+  box-shadow: -1px 1px lightgrey,
+  -2px 2px lightgrey
+}
+
+.pointer-cursor {
+  cursor: pointer;
+}
+
+.comment-text {
+  padding-top: 2px;
+  padding-bottom: 5px;
+}
+
+.response-comment {
+  margin-left: 20px;
+}
+
+.response-form {
+  padding-top: 30px;
+  margin: 20px;
 }

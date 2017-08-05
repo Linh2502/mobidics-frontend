@@ -17,10 +17,11 @@ export class CommentFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.comment = new Comment('', '', new Date(), '', '', '', '', 0, 0);
+    this.comment = new Comment('', '', 0, '', '', '', '', 0, 0);
   }
 
   onSubmit() {
     this.commentService.addComment(this.comment);
+    this.comment.text = '';
   }
 }
