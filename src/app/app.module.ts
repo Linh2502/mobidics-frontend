@@ -19,7 +19,7 @@ import {MethodSocialformPipe} from './home/main/method/method-pipes/method-socia
 import {MethodPhasePipe} from './home/main/method/method-pipes/method-phase.pipe';
 import {MethodSubphasePipe} from './home/main/method/method-pipes/method-subphase.pipe';
 import {MethodCourseTypePipe} from './home/main/method/method-pipes/method-coursetype.pipe';
-import {RatingModule, CarouselModule, CollapseModule, AccordionModule, AlertModule} from 'ngx-bootstrap';
+import {RatingModule, CarouselModule, CollapseModule, AccordionModule, AlertModule, ModalModule} from 'ngx-bootstrap';
 import {TokenStorageService} from './services/auth/token-storage.service';
 import {ExportService} from './services/export/export.service';
 import {HttpService} from './services/http/http.service';
@@ -100,6 +100,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RatingModule.forRoot(),
     AccordionModule.forRoot(),
     AlertModule.forRoot(),
+    ModalModule.forRoot(),
     PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
     ImageUploadModule,
     BrowserAnimationsModule,

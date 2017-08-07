@@ -1,7 +1,8 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CommentService} from './comment.service';
-import {Comment} from '../../models/comment.model';
+import {Comment} from '../../models/comment/comment.model';
 import {Subscription} from 'rxjs/Subscription';
+import {Animations} from '../../animations';
 
 @Component({
   selector: 'app-comments',
@@ -22,15 +23,8 @@ export class CommentsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.commentService.methodId = this.methodId;
     this.commentEmitterSubscription = this.commentService.commentEmitter.subscribe(
-      (comments: Comment[]) => {
-        this.comments = comments;
-        console.log(this.comments);
-        this.comments.sort(
-          (c1: Comment, c2: Comment) =>
-            -(c1.creationDate - c2.creationDate)
-        );
-        console.log(this.comments);
-      }
+      (comments: Comment[]) =>
+        this.comments = comments
     );
     this.commentService.getComments();
   }

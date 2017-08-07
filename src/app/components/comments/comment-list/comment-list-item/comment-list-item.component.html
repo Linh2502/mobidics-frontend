@@ -1,5 +1,5 @@
-<div class="comment-list-item row">
-  <!--[ngClass]="{'response-comment': comment.inResponseTo}"-->
+<div class="comment-list-item row"
+     [ngClass]="{'response-comment': comment.inResponseTo}">
   <div class="col-xs-12">
     <a class="pointer-cursor" style="font-size: 1.1em; font-weight:bold">{{comment.username}}</a>, am
     {{comment.creationDate | ddmmyyyyDate}}
@@ -12,11 +12,38 @@
        (click)="onRespondButtonClicked()">
       Antworten
     </a>
+    |
     <a class="pointer-cursor"
-       *ngIf="comment.username == authService.loggedInUser.username || authService.getUserLevel() == 9">
+       *ngIf="comment.username == authService.loggedInUser.username || authService.getUserLevel() == 9"
+       (click)="staticModal.show()">
       Löschen
     </a>
-    <a class="pointer-cursor">Thumbs Up</a>
+    |
+    <a class="pointer-cursor">
+      Thumbs Up
+    </a>
+    |
     <a class="pointer-cursor">Thumbs Down</a>
+  </div>
+</div>
+<div class="response-form" *ngIf="respondMode">
+  <app-comment-form [inResponseTo]="comment.id"
+                    [rootCommentId]="comment.rootCommentId?comment.rootCommentId : comment.id"
+                    (aborted)="onAbort()">
+  </app-comment-form>
+</div>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Kommentar wirklich löschen?</h4>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-success" (click)="onAcceptDeletion()">Ja</button>
+        <button type="button" class="btn btn-danger" (click)="staticModal.hide()">Nein</button>
+      </div>
+    </div>
   </div>
 </div>

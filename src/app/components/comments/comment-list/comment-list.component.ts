@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Comment} from '../../../models/comment.model';
+import {Comment} from '../../../models/comment/comment.model';
 
 @Component({
   selector: 'app-comment-list',
@@ -7,7 +7,7 @@ import {Comment} from '../../../models/comment.model';
   styleUrls: ['./comment-list.component.scss']
 })
 export class CommentListComponent implements OnInit {
-  @Input('comments') comments: Comment[];
+  @Input() comments: Comment[];
 
   constructor() {
   }

@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {HttpService} from '../../services/http/http.service';
-import {Comment} from '../../models/comment.model';
+import {Comment} from '../../models/comment/comment.model';
 
 @Injectable()
 export class CommentService {

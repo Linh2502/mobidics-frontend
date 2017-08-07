@@ -3,7 +3,7 @@ import {Http, Headers} from '@angular/http';
 import {Observable, ObservableInput} from 'rxjs/Observable';
 import {User} from '../../models/user/user.model';
 import {Method} from '../../models/method.model';
-import {Comment} from '../../models/comment.model';
+import {Comment} from '../../models/comment/comment.model';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {Router} from '@angular/router';
 

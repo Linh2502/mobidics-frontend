@@ -1,11 +1,29 @@
 <div class="row">
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit(); commentInput.reset()">
     <div class="form-group">
       <textarea class="form-control" name="comment" placeholder="Kommentar verfassen..."
-                [(ngModel)]="comment.text"></textarea>
+                [(ngModel)]="comment.text"
+                minlength="3"
+                required
+                #commentInput="ngModel"
+      ></textarea>
+      <div *ngIf="commentInput.invalid && (commentInput.dirty || commentInput.touched)"
+           class="alert alert-danger">
+        <div *ngIf="commentInput.errors.required">
+          Bitte Kommentar eingeben!
+        </div>
+        <div *ngIf="commentInput.errors.minlength">
+          Bitte mindestens drei Zeichen eingeben!
+        </div>
+      </div>
     </div>
     <div class="form-group">
-      <button class="btn btn-primary">Abschicken</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!commentInput.valid">Abschicken</button>
+      <button type="button" class="btn btn-danger"
+              (click)="onAbortButtonClicked()"
+              *ngIf="comment.rootCommentId">
+        Abbrechen
+      </button>
     </div>
   </form>
 </div>

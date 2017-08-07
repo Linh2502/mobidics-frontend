@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Comment} from '../../../../models/comment.model';
+import {Comment} from '../../../../models/comment/comment.model';
 import {CommentService} from '../../comment.service';
 import {AuthService} from '../../../../services/auth/auth.service';
 
@@ -23,8 +23,12 @@ export class CommentListItemComponent implements OnInit {
     this.respondMode = true;
   }
 
-  onDeleteButtonClicked() {
-    // TODO: Modal with accept and decline button
+  onAbort() {
+    this.respondMode = false;
+  }
+
+  onAcceptDeletion() {
+    this.commentService.deleteComment(this.comment.id);
   }
 
   onThumbsUpButtonClicked() {

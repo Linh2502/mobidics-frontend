@@ -17,8 +17,13 @@ export class DdmmyyyyDatePipe implements PipeTransform {
     const day = date.getDate();
     const monthIndex = date.getMonth();
     const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
 
-    return (day < 10 ? '0' + day : day) + '.' + monthNames[monthIndex] + ' ' + year;
+    return 'am ' +
+      (day < 10 ? '0' + day : day) + '.' + monthNames[monthIndex] + ' ' + year +
+      ' um ' + (hours < 10 ? '0' + hours : hours) + ':' +
+      (minutes < 10 ? '0' + minutes : minutes);
   }
 
 }
