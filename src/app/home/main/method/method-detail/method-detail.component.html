@@ -24,8 +24,20 @@
            onError="this.src='assets/default-icon.png'">
       <div class="header-body">
         <h4><strong>{{method.title}}</strong></h4>
-        <rating [(ngModel)]="method.userRating" [max]="5"
-                [titles]="['eins','zwei','drei']" style="font-size: 1.4em"></rating>
+        Durchschnittliche Bewertung:
+        <rating [ngModel]="method.userRating"
+                [max]="5"
+                [titles]="['eins','zwei','drei','vier','fünf']"
+                style="font-size: 1.4em"
+                [readonly]="true">
+        </rating>
+        Deine Bewertung:
+        <rating [(ngModel)]="selectedRating"
+                (ngModelChange)="updateUserrating()"
+                [max]="5"
+                [titles]="['eins','zwei','drei','vier','fünf']"
+                style="font-size: 1.4em">
+        </rating>
       </div>
       <button class="btn btn-default" (click)="toggleFavorite()">
         <span class="glyphicon"

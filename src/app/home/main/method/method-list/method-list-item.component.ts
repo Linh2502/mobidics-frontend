@@ -4,9 +4,9 @@ import {MethodService} from '../method.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
-  selector: 'app-method-item',
-  templateUrl: './method-item.component.html',
-  styleUrls: ['./method-item.component.scss'],
+  selector: 'app-method-list-item',
+  templateUrl: './method-list-item.component.html',
+  styleUrls: ['./method-list-item.component.scss'],
   animations: [
     trigger('flyIn', [
       state('in', style({
@@ -23,7 +23,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ])
   ]
 })
-export class MethodItemComponent implements OnInit {
+export class MethodListItemComponent implements OnInit {
 
   @Input('method') method: Method;
   @Input('isFavorite') isFavorite;

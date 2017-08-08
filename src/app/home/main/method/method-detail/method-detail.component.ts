@@ -7,6 +7,7 @@ import {trigger, state, style, animate, transition} from '@angular/animations';
 import {AuthService} from '../../../../services/auth/auth.service';
 import {PerfectScrollbarComponent} from 'ngx-perfect-scrollbar';
 import {Animations} from '../../../../animations';
+import {Rating} from '../../../../models/rating.model';
 
 @Component({
   selector: 'app-method-detail',
@@ -21,10 +22,11 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   method: Method;
   subscription: Subscription;
   isFavorite = false;
+  selectedRating: number;
 
-  constructor(private methodService: MethodService,
+  constructor(public authService: AuthService,
+              private methodService: MethodService,
               private activatedRoute: ActivatedRoute,
-              public authService: AuthService,
               private router: Router) {
   }
 
@@ -49,16 +51,28 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.activatedRoute.params.subscribe(
       params => {
-        this.method = null;
-        this.methodService.getMethodById(params['id']).subscribe(
-          method => {
-            this.method = method;
-            this.isFavorite = this.methodService.cachedFavorites.includes(this.method.id);
-            this.detailsContainer.scrollToTop(0);
-            this.methodService.notifyDetailPagedSelected(true);
-          },
-          () => this.router.navigate(['../']));
+        const selectedMethodId = params['id'];
+        this.fetchMethod(selectedMethodId);
       }
+    );
+  }
+
+  fetchMethod(methodId: string) {
+    this.method = null;
+    this.methodService.getMethodById(methodId).subscribe(
+      method => {
+        this.method = method;
+        this.isFavorite = this.methodService.cachedFavorites.includes(this.method.id);
+        this.detailsContainer.scrollToTop(0);
+        this.methodService.notifyDetailPagedSelected(true);
+      },
+      (error) => {
+        console.log(error);
+        this.router.navigate(['../']);
+      });
+    this.methodService.getUserrating(methodId).subscribe(
+      (rating: Rating) =>
+        this.selectedRating = rating.rating ? rating.rating : null
     );
   }
 
@@ -73,5 +87,11 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
       this.methodService.addFavorite(this.method.id);
     }
     this.isFavorite = !this.isFavorite;
+  }
+
+  updateUserrating() {
+    this.methodService.updateUserrating(this.method.id, this.selectedRating).subscribe(
+      () => this.fetchMethod(this.method.id)
+    );
   }
 }

@@ -13,7 +13,7 @@ import {MethodListComponent} from './home/main/method/method-list/method-list.co
 import {MethodDetailComponent} from './home/main/method/method-detail/method-detail.component';
 import {MainComponent} from './home/main/main.component';
 import {MethodStartComponent} from './home/main/method/method-detail/method-start.component';
-import {MethodItemComponent} from './home/main/method/method-list/method-item.component';
+import {MethodListItemComponent} from './home/main/method/method-list/method-list-item.component';
 import {AdminCenterComponent} from './components/admin-center/admin-center.component';
 import {MethodSocialformPipe} from './home/main/method/method-pipes/method-socialform.pipe';
 import {MethodPhasePipe} from './home/main/method/method-pipes/method-phase.pipe';
@@ -65,7 +65,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MethodDetailComponent,
     MainComponent,
     MethodStartComponent,
-    MethodItemComponent,
+    MethodListItemComponent,
     AdminCenterComponent,
     AccountDetailsComponent,
     MethodSocialformPipe,

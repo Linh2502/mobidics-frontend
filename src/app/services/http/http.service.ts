@@ -6,6 +6,7 @@ import {Method} from '../../models/method.model';
 import {Comment} from '../../models/comment/comment.model';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {Router} from '@angular/router';
+import {Rating} from '../../models/rating.model';
 
 @Injectable()
 export class HttpService {
@@ -60,6 +61,19 @@ export class HttpService {
   deleteMethod(id: string): Observable<any> {
     const headers: Headers = this.generateHeaders();
     return this.http.delete(this.baseUri + 'methods/' + id, {headers})
+      .catch(error => this.processError(error));
+  }
+
+  updateUserrating(methodId: string, rating: number): Observable<any> {
+    const headers: Headers = this.generateHeaders();
+    return this.http.put(this.baseUri + 'methods/' + methodId + '/rating/' + rating, null, {headers})
+      .catch(error => this.processError(error));
+  }
+
+  getUserrating(methodId: string): Observable<Rating> {
+    const headers: Headers = this.generateHeaders();
+    return this.http.get(this.baseUri + 'methods/' + methodId + '/rating', {headers})
+      .map(response => response.json())
       .catch(error => this.processError(error));
   }
 

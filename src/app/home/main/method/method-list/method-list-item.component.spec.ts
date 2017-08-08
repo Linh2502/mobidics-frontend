@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MethodItemComponent } from './method-item.component';
+import { MethodListItemComponent } from './method-list-item.component';
 
-describe('MethodItemComponent', () => {
-  let component: MethodItemComponent;
-  let fixture: ComponentFixture<MethodItemComponent>;
+describe('MethodListItemComponent', () => {
+  let component: MethodListItemComponent;
+  let fixture: ComponentFixture<MethodListItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MethodItemComponent ]
+      declarations: [ MethodListItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MethodItemComponent);
+    fixture = TestBed.createComponent(MethodListItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

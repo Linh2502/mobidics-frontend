@@ -3,6 +3,7 @@ import {Method} from '../../../models/method.model';
 import {HttpService} from '../../../services/http/http.service';
 import {ConnectableObservable} from 'rxjs/observable/ConnectableObservable';
 import {Observable} from 'rxjs/Observable';
+import {Rating} from '../../../models/rating.model';
 
 @Injectable()
 export class MethodService {
@@ -77,6 +78,14 @@ export class MethodService {
     this.httpService.deleteFavorite(id).subscribe(
       () => this.getFavoritesIds()
     );
+  }
+
+  getUserrating(id: string): Observable<Rating> {
+    return this.httpService.getUserrating(id);
+  }
+
+  updateUserrating(methodId: string, rating: number): Observable<any> {
+    return this.httpService.updateUserrating(methodId, rating);
   }
 
   notifyDetailPagedSelected(detailIsSelected: boolean) {

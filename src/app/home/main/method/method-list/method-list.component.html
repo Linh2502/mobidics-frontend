@@ -24,11 +24,11 @@
     </div>
   </li>
   <perfect-scrollbar class="scrollable-content">
-    <app-method-item
+    <app-method-list-item
       *ngFor="let method of methods"
       [method]="method"
       [isFavorite]="favorites.includes(method.id)">
-    </app-method-item>
+    </app-method-list-item>
   </perfect-scrollbar>
 </ul>
 
