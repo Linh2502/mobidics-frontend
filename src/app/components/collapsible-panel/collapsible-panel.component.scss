@@ -1,0 +1,19 @@
+@import "../../../variables";
+
+.panel-container {
+  margin-bottom: 5px;
+}
+
+.header {
+  font-weight: bold;
+  cursor: pointer;
+  color: $color-primary;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  font-size: 1.1em;
+}
+
+.body {
+  margin-left: 15px;
+}

@@ -1,0 +1,10 @@
+<div class="panel-container">
+  <div class="header" (click)="togglePanel()">
+    <strong>{{title}}</strong>
+    <span class="pull-right float-xs-right glyphicon"
+          [ngClass]="{'glyphicon-collapse-up': isOpen, 'glyphicon-collapse-down': !isOpen}"></span>
+  </div>
+  <div class="body" *ngIf="isOpen" [@pushInOut]="isOpen">
+    <ng-content></ng-content>
+  </div>
+</div>

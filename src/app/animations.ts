@@ -36,12 +36,12 @@ export class Animations {
       height: 0,
       opacity: 0
     })),
-    transition('void => 1', animate(500, keyframes([
+    transition('void => 1', animate(300, keyframes([
       style({height: 0, opacity: 0, offset: 0}),
       style({height: '*', offset: 0.5}),
       style({opacity: 1, offset: 1.0})
     ]))),
-    transition('1 => void', animate(500, keyframes([
+    transition('1 => void', animate(300, keyframes([
       style({height: '*', opacity: 1, offset: 0}),
       style({opacity: 0, offset: 0.5}),
       style({height: 0, offset: 1.0})

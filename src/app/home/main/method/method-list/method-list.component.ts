@@ -2,7 +2,7 @@ import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core
 import {Method} from '../../../../models/method.model';
 import {MethodService} from '../method.service';
 import {Observable, Subscription} from 'rxjs/Rx';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-method-list',
@@ -16,25 +16,25 @@ export class MethodListComponent implements OnInit, OnDestroy {
   methodListSubscription: Subscription;
   favoritesSubscription: Subscription;
   favorites: string[] = [];
-  initialLoad = true;
 
   @ViewChild('searchBar') searchBar: ElementRef;
 
-  constructor(private methodService: MethodService,
-              private router: Router) {
+  constructor(public methodService: MethodService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.subscribeToMethodListChanges();
     this.subscribeToFavoriteChanges();
-    this.methodService.getFavoritesIds();
-    this.refreshView();
+    this.methodService.updateFavoriteIds();
+    this.methodService.setQuery(this.searchQuery);
     Observable.fromEvent(
       this.searchBar.nativeElement, 'keyup')
-      .debounceTime(500)
+      .debounceTime(200)
       .distinctUntilChanged()
       .subscribe(
-        () => this.refreshView()
+        () => this.methodService.setQuery(this.searchQuery)
       );
   }
 
@@ -49,23 +49,18 @@ export class MethodListComponent implements OnInit, OnDestroy {
     this.methodListSubscription = this.methodService.methodListChanged.subscribe(
       (methods: Method[]) => {
         this.methods = methods;
-        if (this.initialLoad) {
-          this.initialLoad = false;
-        } else {
-          this.router.navigate(['/methods']);
-          this.methodService.notifyDetailPagedSelected(false);
-        }
       }
     );
-  }
-
-  refreshView() {
-    this.methodService.getAllMethodsByQuery(this.searchQuery);
   }
 
   ngOnDestroy() {
     this.methodListSubscription.unsubscribe();
     this.favoritesSubscription.unsubscribe();
     this.methodService.checkedMethods = [];
+  }
+
+  onNewMethodButtonClicked() {
+    this.methodService.notifyDetailPagedSelected(true);
+    this.router.navigate(['new'], {relativeTo: this.activatedRoute});
   }
 }

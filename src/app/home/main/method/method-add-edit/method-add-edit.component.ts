@@ -172,7 +172,6 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
         }
       }
     );
-    this.methodService.notifyDetailPagedSelected(true);
   }
 
   precheckSocialForms(values: number[]): void {
@@ -230,7 +229,9 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
 
   onNavigateBack() {
     this.router.navigate(['../'], {relativeTo: this.activatedRoute});
-    this.methodService.notifyDetailPagedSelected(false);
+    if (this.isNew) {
+      this.methodService.notifyDetailPagedSelected(false);
+    }
   }
 
   onImageSelected(imageResult: ImageResult) {

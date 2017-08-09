@@ -1,7 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Method} from '../../../models/method.model';
 import {HttpService} from '../../../services/http/http.service';
-import {ConnectableObservable} from 'rxjs/observable/ConnectableObservable';
 import {Observable} from 'rxjs/Observable';
 import {Rating} from '../../../models/rating.model';
 
@@ -11,8 +10,18 @@ export class MethodService {
   public methodListChanged: EventEmitter<Method[]>;
   public favoritesChanged: EventEmitter<string[]>;
   public checkedMethods: string[] = [];
-  cachedFavorites: string[] = [];
-  private lastQuery = '';
+  public cachedFavorites: string[] = [];
+
+  private searchQuery = '';
+  private selectedPhases: string[] = [];
+  private selectedSubPhases: string[] = [];
+  private selectedCourseTypes: string[] = [];
+  private selectedGroupMin = 0;
+  private selectedGroupMax = 0;
+  private selectedMinTime = 0;
+  private selectedMaxTime = 0;
+  private selectedMinRating = 0;
+  private selectedSocialForms: string[] = [];
 
   constructor(private httpService: HttpService) {
     this.detailPageSelected = new EventEmitter();
@@ -20,17 +29,26 @@ export class MethodService {
     this.favoritesChanged = new EventEmitter();
   }
 
-  getAllMethodsByQuery(searchQuery: string): void {
-    this.lastQuery = searchQuery;
-    this.httpService.getAllMethodsByName(searchQuery).subscribe(
-      (methods: Method[]) => {
-        this.methodListChanged.emit(methods);
-      }
-    );
+  private refreshMethods(): void {
+    this.httpService.getMethods(
+      this.searchQuery,
+      this.selectedPhases,
+      this.selectedSubPhases,
+      this.selectedCourseTypes,
+      this.selectedGroupMin, this.selectedGroupMax,
+      this.selectedMinTime, this.selectedMaxTime,
+      this.selectedMinRating,
+      this.selectedSocialForms)
+      .subscribe(
+        (methods: Method[]) => {
+          this.methodListChanged.emit(methods);
+        }
+      );
   }
 
-  private refreshMethods(): void {
-    this.getAllMethodsByQuery(this.lastQuery);
+  public setQuery(query: string): void {
+    this.searchQuery = query;
+    this.refreshMethods();
   }
 
   getMethodById(id): Observable<Method> {
@@ -59,7 +77,7 @@ export class MethodService {
       .do(() => this.refreshMethods());
   }
 
-  getFavoritesIds(): void {
+  updateFavoriteIds(): void {
     this.httpService.getFavoritesIds().subscribe(
       (favorites: string[]) => {
         this.favoritesChanged.emit(favorites);
@@ -70,13 +88,13 @@ export class MethodService {
 
   addFavorite(id: string): void {
     this.httpService.addFavorite(id).subscribe(
-      () => this.getFavoritesIds()
+      () => this.updateFavoriteIds()
     );
   }
 
   deleteFavorite(id: string): void {
     this.httpService.deleteFavorite(id).subscribe(
-      () => this.getFavoritesIds()
+      () => this.updateFavoriteIds()
     );
   }
 
@@ -90,5 +108,25 @@ export class MethodService {
 
   notifyDetailPagedSelected(detailIsSelected: boolean) {
     this.detailPageSelected.emit(detailIsSelected);
+  }
+
+  addCourseTypeSelection(courseType: string) {
+    this.selectedCourseTypes.push(courseType);
+    this.refreshMethods();
+  }
+
+  removeCourseTypeSelection(courseType: string) {
+    this.selectedCourseTypes.splice(this.selectedCourseTypes.indexOf(courseType), 1);
+    this.refreshMethods();
+  }
+
+  addSocialFormSelection(socialForm: string) {
+    this.selectedSocialForms.push(socialForm);
+    this.refreshMethods();
+  }
+
+  removeSocialFormSelection(socialForm: string) {
+    this.selectedSocialForms.splice(this.selectedSocialForms.indexOf(socialForm), 1);
+    this.refreshMethods();
   }
 }

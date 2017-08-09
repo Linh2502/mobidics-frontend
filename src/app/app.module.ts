@@ -7,7 +7,7 @@ import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
 import {HomeComponent} from './home/home.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
-import {SidebarComponent} from './home/main/sidebar/sidebar.component';
+import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {MethodComponent} from './home/main/method/method.component';
 import {MethodListComponent} from './home/main/method/method-list/method-list.component';
 import {MethodDetailComponent} from './home/main/method/method-detail/method-detail.component';
@@ -48,6 +48,8 @@ import {CommentListComponent} from './components/comments/comment-list/comment-l
 import {CommentFormComponent} from './components/comments/comment-form/comment-form.component';
 import { CommentListItemComponent } from './components/comments/comment-list/comment-list-item/comment-list-item.component';
 import { DdmmyyyyDatePipe } from './pipes/ddmmyyyy-date.pipe';
+import { CollapsiblePanelComponent } from './components/collapsible-panel/collapsible-panel.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -89,7 +91,9 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CommentListComponent,
     CommentFormComponent,
     CommentListItemComponent,
-    DdmmyyyyDatePipe
+    DdmmyyyyDatePipe,
+    CollapsiblePanelComponent,
+    CheckboxComponent
   ],
   imports: [
     BrowserModule,

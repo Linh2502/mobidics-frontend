@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CommentService} from './comment.service';
-import {Comment} from '../../models/comment/comment.model';
+import {Comment} from '../../models/comment.model';
 import {Subscription} from 'rxjs/Subscription';
 import {Animations} from '../../animations';
 

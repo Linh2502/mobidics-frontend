@@ -3,17 +3,18 @@
     <input #searchBar [(ngModel)]="searchQuery"
            type="text"
            class="search-query form-control"
-           (keyup.enter)="refreshView()"
+           (keyup.enter)="methodService.setQuery(searchQuery)"
            placeholder="Methode finden..."/>
     <span class="input-group-btn">
-          <button class="btn btn-danger" type="button" (click)="refreshView()">
+          <button class="btn btn-danger" type="button" (click)="updateQuery()">
             <span class="glyphicon glyphicon-search"></span>
           </button>
     </span>
   </div>
 </div>
 <ul class="list-group">
-  <li [routerLink]="['new']" class="list-group-item add-item" routerLinkActive="active" style="cursor: pointer">
+  <li (click)="onNewMethodButtonClicked()" class="list-group-item add-item" routerLinkActive="active"
+      style="cursor: pointer">
     <div class="media">
       <div class="media-left media-middle">
         <span class="glyphicon glyphicon-plus-sign"></span>
