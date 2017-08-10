@@ -28,14 +28,18 @@ export class MethodListComponent implements OnInit, OnDestroy {
     this.subscribeToMethodListChanges();
     this.subscribeToFavoriteChanges();
     this.methodService.updateFavoriteIds();
-    this.methodService.setQuery(this.searchQuery);
+    this.updateMethods();
     Observable.fromEvent(
       this.searchBar.nativeElement, 'keyup')
       .debounceTime(200)
       .distinctUntilChanged()
       .subscribe(
-        () => this.methodService.setQuery(this.searchQuery)
+        () => this.updateMethods()
       );
+  }
+
+  updateMethods() {
+    this.methodService.setQuery(this.searchQuery);
   }
 
   private subscribeToFavoriteChanges() {

@@ -8,6 +8,9 @@ import {Animations} from '../../../../animations';
 import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 import {ResizeOptions, ImageResult} from 'ng2-imageupload';
 import {DataConverterService} from '../../../../services/data-converter/data-converter.service';
+import {courseTypes, phases, socialForms, subPhases} from '../../../../models/constants';
+import {CheckboxState} from '../../../../components/checkbox/checkbox-state.model';
+import {mapSubphaseToPhaseIndex, updateSelectionArray} from '../../../../functions';
 
 @Component({
   selector: 'app-method-add-edit',
@@ -19,8 +22,6 @@ import {DataConverterService} from '../../../../services/data-converter/data-con
 })
 export class MethodAddEditComponent implements OnInit, OnDestroy {
 
-  @ViewChild('thumbnailUploadButton') thumbnailUploadButton: ElementRef;
-  @ViewChild('imageUploadButton') imageUploadButton: ElementRef;
   imagePreviewScrollbarConfig: PerfectScrollbarConfigInterface = {
     suppressScrollX: false
   };
@@ -29,6 +30,9 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
     resizeMaxWidth: 96
   };
   allowedImageExtensions = ['jpg', 'png', 'gif', 'jpeg'];
+
+  @ViewChild('thumbnailUploadButton') thumbnailUploadButton: ElementRef;
+  @ViewChild('imageUploadButton') imageUploadButton: ElementRef;
 
   methodId: number;
   routerSubscription: Subscription;
@@ -42,59 +46,15 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
 
   methodForm: FormGroup;
 
-  socialFormOptions: any[] = [
-    {name: 'Plenum interaktiv', value: '0', checked: false},
-    {name: 'Partner/Gruppenarbeit', value: '1', checked: false},
-    {name: 'Plenum untereinander', value: '2', checked: false},
-    {name: 'Einzelarbeit', value: '3', checked: false},
-    {name: 'Plenum frontal', value: '4', checked: false}
-  ];
+  socialForms: any[] = socialForms;
+  phases: any[] = phases;
+  subphases: any[][] = subPhases;
+  courseTypes: any[] = courseTypes;
 
-  phaseOptions: any[] = [
-    {name: '(Lern-)Atmosphäre fördern', value: '0', checked: false},
-    {name: 'Ausrichten', value: '1', checked: false},
-    {name: 'Vorwissen aktivieren', value: '2', checked: false},
-    {name: 'Informieren', value: '3', checked: false},
-    {name: 'Verarbeiten', value: '4', checked: false},
-    {name: 'Auswerten', value: '5', checked: false}
-  ];
-
-  subphaseOptions: any[][] = [
-    [
-      {name: 'Kennenlernen', value: '11', checked: false},
-      {name: 'Persönlicher Austausch (Erfahrung)', value: '12', checked: false},
-      {name: 'Gruppengefühl stärken', value: '13', checked: false},
-      {name: 'Auflockerung', value: '6', checked: false},
-      {name: 'Ausklang', value: '14', checked: false}
-    ],
-    [
-      {name: 'Auf Thema einstimmen / Sensibilisieren', value: '0', checked: false},
-    ],
-    [
-      {name: 'Vorwissen erfragen', value: '1', checked: false},
-      {name: 'Inhalte wiederholen', value: '2', checked: false}],
-    [
-      {name: 'Wissensinput', value: '3', checked: false},
-      {name: 'Wissen generieren', value: '4', checked: false}
-    ],
-    [
-      {name: 'Kritische Auseinandersetzung mit Wissen', value: '5', checked: false},
-      {name: 'Wissen anwenden / umsetzen', value: '7', checked: false},
-      {name: 'Wissen festigen', value: '8', checked: false},
-      {name: 'Auflockerung', value: '19', checked: false},
-    ],
-    [
-      {name: 'Wissen abfragen', value: '9', checked: false},
-      {name: 'Lernprozess reflektieren', value: '10', checked: false},
-      {name: 'Feedback einholen', value: '18', checked: false}
-    ]
-  ];
-
-  courseTypeOptions: any[] = [
-    {name: 'Seminar', value: '0', checked: false},
-    {name: 'Übung', value: '1', checked: false},
-    {name: 'Vorlesung', value: '2', checked: false}
-  ];
+  selectedSocialForms: string[] = [];
+  selectedPhases: string[] = [];
+  selectedSubphases: string[][] = [[], [], [], [], [], []];
+  selectedCourseTypes: string[] = [];
 
   constructor(private methodService: MethodService,
               private router: Router, private dataConverter: DataConverterService,
@@ -161,10 +121,10 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
               this.methodForm.get('scope').setValue(method.scope);
               this.uploadedImages = method.images;
               this.thumbnailSrc = method.thumbnail;
-              this.precheckSocialForms(this.dataConverter.singleColonDataToArray(method.socialForm));
-              this.precheckPhases(this.dataConverter.singleColonDataToArray(method.phase));
-              this.precheckSubphases(this.dataConverter.singleColonDataToArray(method.subPhase));
-              this.precheckCourseTypes(this.dataConverter.singleColonDataToArray(method.courseType));
+              this.selectedSocialForms = this.dataConverter.singleColonDataToArray(method.socialForm);
+              this.selectedPhases = this.dataConverter.singleColonDataToArray(method.phase);
+              this.preselectSubphases(this.dataConverter.singleColonDataToArray(method.subPhase));
+              this.selectedCourseTypes = this.dataConverter.singleColonDataToArray(method.courseType);
             }
           );
         } else {
@@ -174,33 +134,29 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  precheckSocialForms(values: number[]): void {
-    this.socialFormOptions.forEach(
-      socialForm => {
-        socialForm.checked = values.includes(+socialForm.value);
-      });
+  preselectSubphases(subphases: string[]) {
+    subphases.forEach(subphase => {
+      this.selectedSubphases[mapSubphaseToPhaseIndex(subphase)].push(subphase);
+    });
   }
 
-  precheckPhases(values: number[]): void {
-    this.phaseOptions.forEach(
-      phase => {
-        phase.checked = values.includes(+phase.value);
-      });
+  onSocialFormSelect(checkBoxState: CheckboxState) {
+    updateSelectionArray(this.selectedSocialForms, checkBoxState);
   }
 
-  precheckSubphases(values: number[]): void {
-    this.subphaseOptions.forEach(
-      phaseSubphases => phaseSubphases.forEach(
-        subphase =>
-          subphase.checked = values.includes(+subphase.value)
-      )
-    );
+  onPhaseSelect(checkBoxState: CheckboxState) {
+    updateSelectionArray(this.selectedPhases, checkBoxState);
+    if (!checkBoxState.selectionState) {
+      this.selectedSubphases[+checkBoxState.value] = [];
+    }
   }
 
-  precheckCourseTypes(values: number[]): void {
-    this.courseTypeOptions.forEach(
-      courseType => courseType.checked = values.includes(+courseType.value)
-    );
+  onSubphaseSelect(checkBoxState: CheckboxState) {
+    updateSelectionArray(this.selectedSubphases[mapSubphaseToPhaseIndex(checkBoxState.value)], checkBoxState);
+  }
+
+  onCourseTypeSelect(checkBoxState: CheckboxState) {
+    updateSelectionArray(this.selectedCourseTypes, checkBoxState);
   }
 
   ngOnDestroy() {
@@ -220,14 +176,14 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
     } else {
       this.methodService.editMethod(newMethod).subscribe();
     }
-    this.onNavigateBack();
+    this.navigateBack();
   }
 
   onCancel() {
-    this.onNavigateBack();
+    this.navigateBack();
   }
 
-  onNavigateBack() {
+  navigateBack() {
     this.router.navigate(['../'], {relativeTo: this.activatedRoute});
     if (this.isNew) {
       this.methodService.notifyDetailPagedSelected(false);
@@ -264,14 +220,6 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
 
   onRemoveImage(index: number) {
     this.uploadedImages.splice(index, 1);
-  }
-
-  onPhaseOptionsChanged(index) {
-    if (this.phaseOptions[index].checked) {
-      this.subphaseOptions[index].forEach(
-        subphase => subphase.checked = false
-      );
-    }
   }
 
   onCloseThumbnailErrorMessage() {

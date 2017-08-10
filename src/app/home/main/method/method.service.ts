@@ -3,6 +3,8 @@ import {Method} from '../../../models/method.model';
 import {HttpService} from '../../../services/http/http.service';
 import {Observable} from 'rxjs/Observable';
 import {Rating} from '../../../models/rating.model';
+import {CheckboxState} from '../../../components/checkbox/checkbox-state.model';
+import {mapSubphaseToPhaseIndex, updateSelectionArray} from '../../../functions';
 
 @Injectable()
 export class MethodService {
@@ -14,14 +16,14 @@ export class MethodService {
 
   private searchQuery = '';
   private selectedPhases: string[] = [];
-  private selectedSubPhases: string[] = [];
+  private selectedSubphases: string[][] = [[], [], [], [], [], []];
   private selectedCourseTypes: string[] = [];
+  private selectedSocialForms: string[] = [];
   private selectedGroupMin = 0;
   private selectedGroupMax = 0;
   private selectedMinTime = 0;
   private selectedMaxTime = 0;
   private selectedMinRating = 0;
-  private selectedSocialForms: string[] = [];
 
   constructor(private httpService: HttpService) {
     this.detailPageSelected = new EventEmitter();
@@ -33,7 +35,7 @@ export class MethodService {
     this.httpService.getMethods(
       this.searchQuery,
       this.selectedPhases,
-      this.selectedSubPhases,
+      [].concat(this.selectedSubphases),
       this.selectedCourseTypes,
       this.selectedGroupMin, this.selectedGroupMax,
       this.selectedMinTime, this.selectedMaxTime,
@@ -110,23 +112,26 @@ export class MethodService {
     this.detailPageSelected.emit(detailIsSelected);
   }
 
-  addCourseTypeSelection(courseType: string) {
-    this.selectedCourseTypes.push(courseType);
+  updateCourseTypeSelection(checkBoxState: CheckboxState) {
+    updateSelectionArray(this.selectedCourseTypes, checkBoxState);
     this.refreshMethods();
   }
 
-  removeCourseTypeSelection(courseType: string) {
-    this.selectedCourseTypes.splice(this.selectedCourseTypes.indexOf(courseType), 1);
+  updateSocialFormSelection(checkBoxState: CheckboxState) {
+    updateSelectionArray(this.selectedSocialForms, checkBoxState);
     this.refreshMethods();
   }
 
-  addSocialFormSelection(socialForm: string) {
-    this.selectedSocialForms.push(socialForm);
+  updatePhaseSelection(checkBoxState: CheckboxState) {
+    updateSelectionArray(this.selectedPhases, checkBoxState);
+    if (!checkBoxState.selectionState) {
+      this.selectedSubphases[+checkBoxState.value] = [];
+    }
     this.refreshMethods();
   }
 
-  removeSocialFormSelection(socialForm: string) {
-    this.selectedSocialForms.splice(this.selectedSocialForms.indexOf(socialForm), 1);
+  updateSubphaseSelection(checkBoxState: CheckboxState) {
+    updateSelectionArray(this.selectedSubphases[mapSubphaseToPhaseIndex(checkBoxState.value)], checkBoxState);
     this.refreshMethods();
   }
 }

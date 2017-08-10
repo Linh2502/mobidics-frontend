@@ -4,6 +4,10 @@
   padding-top: 20px;
 }
 
+.filters {
+  padding-top: 10px;
+}
+
 .side-button {
   margin-bottom: 10px;
   border: 1px solid $color-primary;
@@ -24,3 +28,18 @@
     height: calc(100vh - 100px);
   }
 }
+
+.phase-selections {
+  margin-bottom: 5px;
+}
+
+.selections-body {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.subphase-selections {
+  margin-left: 20px;
+}
+
+

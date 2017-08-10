@@ -1,0 +1,6 @@
+<app-checkbox *ngFor="let option of options"
+              [label]="option.label"
+              [value]="option.value"
+              [isSelected]="preSelection.includes(option.value)"
+              (selected)="onSelectionChanged($event)"
+></app-checkbox>

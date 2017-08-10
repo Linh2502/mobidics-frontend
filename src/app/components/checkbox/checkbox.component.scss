@@ -1,0 +1,16 @@
+@import '../../../variables';
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.flex-label {
+  margin-left: 5px;
+}
+
+.glyphicon-orange {
+  color: #E56803;
+}

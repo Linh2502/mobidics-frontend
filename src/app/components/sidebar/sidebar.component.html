@@ -1,52 +1,58 @@
 <perfect-scrollbar class="side-bar scrollable-content">
-  <div class="col-xs-12">
-    <button class="btn btn-default side-button" type="button" (click)="onFavoriteButtonClicked()">
-      <span class="glyphicon glyphicon-heart"></span>
-      <strong>Meine Favoriten</strong>
-    </button>
-    <button class="btn btn-default side-button" type="button">
-      <span class="glyphicon glyphicon-star"></span>
-      <strong>Am besten bewertet</strong>
-    </button>
-    <button class="btn btn-default side-button" type="button">
-      <span class="glyphicon glyphicon-calendar"></span>
-      <strong>Neueste</strong>
-    </button>
+  <h4>Erweiterte Suche:</h4>
+  <button class="btn btn-default side-button" type="button" (click)="onFavoriteButtonClicked()">
+    <span class="glyphicon glyphicon-heart"></span>
+    <strong>Meine Favoriten</strong>
+  </button>
+  <button class="btn btn-default side-button" type="button">
+    <span class="glyphicon glyphicon-star"></span>
+    <strong>Am besten bewertet</strong>
+  </button>
+  <button class="btn btn-default side-button" type="button">
+    <span class="glyphicon glyphicon-calendar"></span>
+    <strong>Neueste</strong>
+  </button>
+  <div class="filters">
+    <app-collapsible-panel title="Veranstaltungsarten">
+      <app-checkbox-options [options]="courseTypes"
+                            (selectionChanged)="onCourseTypeSelect($event)">
+      </app-checkbox-options>
+    </app-collapsible-panel>
+    <app-collapsible-panel title="Gruppengröße">
+    </app-collapsible-panel>
+    <app-collapsible-panel title="Zeitaufwand (Minuten)">
+    </app-collapsible-panel>
+    <app-collapsible-panel title="Gruppen-Zusammensetzung">
+    </app-collapsible-panel>
+    <app-collapsible-panel title="Mindestbewertung">
+    </app-collapsible-panel>
+    <app-collapsible-panel title="Aviva-Phase">
+      <div class="phase-selections">
+        <strong>Phase(n)</strong>
+        <div class="selections-body">
+          <app-checkbox-options [options]="phases"
+                                (selectionChanged)="onPhaseSelect($event)">
+          </app-checkbox-options>
+        </div>
+        <strong>Unterphase(n)</strong>
+        <div class="selections-body">
+          <div *ngFor="let subphasesForPhase of subphases">
+            <app-checkbox-options
+              [options]="subphasesForPhase"
+              (selectionChanged)="onSubphaseSelect($event)">
+            </app-checkbox-options>
+          </div>
+        </div>
+      </div>
+    </app-collapsible-panel>
+    <app-collapsible-panel title="Sozialform">
+      <app-checkbox-options [options]="socialForms"
+                            (selectionChanged)="onSocialFormSelect($event)">
+      </app-checkbox-options>
+    </app-collapsible-panel>
+    <app-collapsible-panel title="Materialien">
+    </app-collapsible-panel>
+    <app-collapsible-panel title="Raumanforderungen">
+    </app-collapsible-panel>
   </div>
-  <app-collapsible-panel title="Veranstaltungsarten">
-    <app-checkbox label="Seminar" value="0"
-                  (selected)="onCourseTypeSelect($event)"></app-checkbox>
-    <app-checkbox label="Übung" value="1"
-                  (selected)="onCourseTypeSelect($event)"></app-checkbox>
-    <app-checkbox label="Vorlesung" value="2"
-                  (selected)="onCourseTypeSelect($event)"></app-checkbox>
-
-  </app-collapsible-panel>
-  <app-collapsible-panel title="Gruppengröße">
-  </app-collapsible-panel>
-  <app-collapsible-panel title="Zeitaufwand (Minuten)">
-  </app-collapsible-panel>
-  <app-collapsible-panel title="Gruppen-Zusammensetzung">
-  </app-collapsible-panel>
-  <app-collapsible-panel title="Mindestbewertung">
-  </app-collapsible-panel>
-  <app-collapsible-panel title="Aviva-Phase">
-  </app-collapsible-panel>
-  <app-collapsible-panel title="Sozialform">
-    <app-checkbox label="Plenum interaktiv" value="0"
-                  (selected)="onSocialFormSelect($event)"></app-checkbox>
-    <app-checkbox label="Partner/Gruppenarbeit" value="1"
-                  (selected)="onSocialFormSelect($event)"></app-checkbox>
-    <app-checkbox label="Plenum untereinander" value="2"
-                  (selected)="onSocialFormSelect($event)"></app-checkbox>
-    <app-checkbox label="Einzelarbeit" value="3"
-                  (selected)="onSocialFormSelect($event)"></app-checkbox>
-    <app-checkbox label="Plenum frontal" value="4"
-                  (selected)="onSocialFormSelect($event)"></app-checkbox>
-  </app-collapsible-panel>
-  <app-collapsible-panel title="Materialien">
-  </app-collapsible-panel>
-  <app-collapsible-panel title="Raumanforderungen">
-  </app-collapsible-panel>
-
 </perfect-scrollbar>

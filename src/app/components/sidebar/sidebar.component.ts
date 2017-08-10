@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MethodService} from '../../home/main/method/method.service';
-import {Subscription} from 'rxjs/Subscription';
 import {CheckboxState} from '../checkbox/checkbox-state.model';
+import {courseTypes, phases, socialForms, subPhases} from '../../models/constants';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +9,10 @@ import {CheckboxState} from '../checkbox/checkbox-state.model';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  methodServiceSubscription: Subscription;
+  socialForms: any[] = socialForms;
+  courseTypes: any[] = courseTypes;
+  phases: any[] = phases;
+  subphases: any[] = subPhases;
 
   constructor(private methodService: MethodService) {
   }
@@ -25,18 +28,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   onCourseTypeSelect(checkboxState: CheckboxState) {
-    if (checkboxState.selectionState) {
-      this.methodService.addCourseTypeSelection(checkboxState.value);
-    } else {
-      this.methodService.removeCourseTypeSelection(checkboxState.value);
-    }
+    this.methodService.updateCourseTypeSelection(checkboxState);
   }
 
   onSocialFormSelect(checkBoxState: CheckboxState) {
-    if (checkBoxState.selectionState) {
-      this.methodService.addSocialFormSelection(checkBoxState.value);
-    } else {
-      this.methodService.removeSocialFormSelection(checkBoxState.value);
-    }
+    this.methodService.updateSocialFormSelection(checkBoxState);
+  }
+
+  onPhaseSelect(checkBoxState: CheckboxState) {
+    this.methodService.updatePhaseSelection(checkBoxState);
+  }
+
+  onSubphaseSelect(checkBoxState: CheckboxState) {
+    this.methodService.updateSubphaseSelection(checkBoxState);
   }
 }

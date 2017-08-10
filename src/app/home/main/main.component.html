@@ -7,13 +7,11 @@
   </div>
 </div>
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-7 col-sm-4 col-md-3 visible-sm visible-md visible-lg sliding-sidebar"
-         [collapse]="sideBarCollapsed">
-      <app-sidebar></app-sidebar>
-    </div>
-    <div class="col-sm-8 col-md-9" style="padding: 0;">
-      <app-method [detailPageSelected]="detailPageSelected"></app-method>
-    </div>
+  <div class="col-xs-7 col-sm-4 col-md-3 visible-sm visible-md visible-lg sliding-sidebar"
+       [collapse]="sideBarCollapsed">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-sm-8 col-md-9" style="padding: 0;">
+    <app-method [detailPageSelected]="detailPageSelected"></app-method>
   </div>
 </div>

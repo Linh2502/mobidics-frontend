@@ -1,6 +1,8 @@
-<div>
-  <label>
-    <input type="checkbox" (change)="onSelect()">
-    {{ label }}
-  </label>
+<div class="flex-container" (click)="onSelect()">
+  <span class="glyphicon glyphicon-orange"
+        [ngClass]="{ 'glyphicon-check': isSelected, 'glyphicon-unchecked': !isSelected }">
+  </span>
+  <div class="flex-label">
+    {{label}}
+  </div>
 </div>

@@ -50,6 +50,7 @@ import { CommentListItemComponent } from './components/comments/comment-list/com
 import { DdmmyyyyDatePipe } from './pipes/ddmmyyyy-date.pipe';
 import { CollapsiblePanelComponent } from './components/collapsible-panel/collapsible-panel.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { CheckboxOptionsComponent } from './components/checkbox/checkbox-options/checkbox-options.component';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -93,7 +94,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CommentListItemComponent,
     DdmmyyyyDatePipe,
     CollapsiblePanelComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    CheckboxOptionsComponent
   ],
   imports: [
     BrowserModule,
