@@ -19,7 +19,7 @@ import {MethodSocialformPipe} from './home/main/method/method-pipes/method-socia
 import {MethodPhasePipe} from './home/main/method/method-pipes/method-phase.pipe';
 import {MethodSubphasePipe} from './home/main/method/method-pipes/method-subphase.pipe';
 import {MethodCourseTypePipe} from './home/main/method/method-pipes/method-coursetype.pipe';
-import {RatingModule, CarouselModule, CollapseModule, AccordionModule, AlertModule, ModalModule} from 'ngx-bootstrap';
+import {RatingModule, CarouselModule, CollapseModule, AlertModule, ModalModule} from 'ngx-bootstrap';
 import {TokenStorageService} from './services/auth/token-storage.service';
 import {ExportService} from './services/export/export.service';
 import {HttpService} from './services/http/http.service';
@@ -46,11 +46,12 @@ import {AccountComponent} from './home/account/account.component';
 import {CommentsComponent} from './components/comments/comments.component';
 import {CommentListComponent} from './components/comments/comment-list/comment-list.component';
 import {CommentFormComponent} from './components/comments/comment-form/comment-form.component';
-import { CommentListItemComponent } from './components/comments/comment-list/comment-list-item/comment-list-item.component';
-import { DdmmyyyyDatePipe } from './pipes/ddmmyyyy-date.pipe';
-import { CollapsiblePanelComponent } from './components/collapsible-panel/collapsible-panel.component';
-import { CheckboxComponent } from './components/checkbox/checkbox.component';
-import { CheckboxOptionsComponent } from './components/checkbox/checkbox-options/checkbox-options.component';
+import {CommentListItemComponent} from './components/comments/comment-list/comment-list-item/comment-list-item.component';
+import {DdmmyyyyDatePipe} from './pipes/ddmmyyyy-date.pipe';
+import {CollapsiblePanelComponent} from './components/collapsible-panel/collapsible-panel.component';
+import {CheckboxComponent} from './components/checkbox/checkbox.component';
+import {CheckboxOptionsComponent} from './components/checkbox/checkbox-options/checkbox-options.component';
+import { RangeInputComponent } from './components/range-input/range-input.component';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -95,7 +96,8 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DdmmyyyyDatePipe,
     CollapsiblePanelComponent,
     CheckboxComponent,
-    CheckboxOptionsComponent
+    CheckboxOptionsComponent,
+    RangeInputComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +106,6 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CollapseModule.forRoot(),
     CarouselModule.forRoot(),
     RatingModule.forRoot(),
-    AccordionModule.forRoot(),
     AlertModule.forRoot(),
     ModalModule.forRoot(),
     PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),

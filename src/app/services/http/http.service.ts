@@ -7,6 +7,7 @@ import {Comment} from '../../models/comment.model';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {Router} from '@angular/router';
 import {Rating} from '../../models/rating.model';
+import {MinMaxSummary} from '../../models/minMaxes.model';
 
 @Injectable()
 export class HttpService {
@@ -42,16 +43,18 @@ export class HttpService {
              phases: string[],
              subPhases: string[],
              courseTypes: string[],
-             groupMin: number, groupMax: number,
-             minTime: number, maxTime: number,
+             groupType: number,
+             maxGroupSize: number,
+             maxTime: number,
              minRating: number,
              socialForms: string[]): Observable<Method[]> {
     const headers: Headers = this.generateHeaders();
     return this.http.get(
       this.buildMethodQueryUri(
         searchQuery, phases, subPhases, courseTypes,
-        groupMin, groupMax,
-        minTime, maxTime,
+        groupType,
+        maxGroupSize,
+        maxTime,
         minRating, socialForms), {headers})
       .map(response => response.json())
       .catch(error => this.processError(error));
@@ -141,6 +144,12 @@ export class HttpService {
       .catch(error => this.processError(error));
   }
 
+  getMinMaxes(): Observable<MinMaxSummary> {
+    return this.http.get(this.baseUri + 'methods/mins-maxes')
+      .map(response => response.json())
+      .catch(error => this.processError(error));
+  }
+
   private generateHeaders(): Headers {
     const headers: Headers = new Headers();
     headers.append('X-mobidics-jwt-token', this.tokenStorageService.getJwtToken());
@@ -156,19 +165,19 @@ export class HttpService {
                               phases: string[],
                               subPhases: string[],
                               courseTypes: string[],
-                              groupMin: number, groupMax: number,
-                              minTime: number, maxTime: number,
+                              groupType: number,
+                              maxGroupSize: number,
+                              maxTime: number,
                               minRating: number,
                               socialForms: string[]): string {
     let resultUri = this.baseUri + 'methods';
-    if (searchString || phases || subPhases || courseTypes || groupMin || groupMax || minTime || maxTime || minRating || socialForms) {
+    if (searchString || phases || subPhases || courseTypes || groupType || maxGroupSize || maxTime || minRating || socialForms) {
       resultUri += '?search=' + searchString;
       phases.forEach(phase => resultUri += '&phase=' + phase);
       subPhases.forEach(subPhase => resultUri += '&subphase=' + subPhase);
       courseTypes.forEach(courseType => resultUri += '&coursetype=' + courseType);
-      resultUri += '&groupmin=' + groupMin;
-      resultUri += '&groupmax=' + groupMax;
-      resultUri += '&mintime=' + minTime;
+      resultUri += '&grouptype' + groupType;
+      resultUri += '&groupmax=' + maxGroupSize;
       resultUri += '&maxtime=' + maxTime;
       resultUri += '&minrating=' + minRating;
       socialForms.forEach(socialform => resultUri += '&socialform=' + socialform);

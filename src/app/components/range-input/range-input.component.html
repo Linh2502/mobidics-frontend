@@ -1,0 +1,15 @@
+<div class="input-range">
+  <div class="custom-label selection-label">{{currentSelection}} {{unit}}</div>
+  <div class="optional-labels" *ngIf="minLabel || maxLabel">
+    <div class="custom-label">{{minLabel}}</div>
+    <div class="custom-label">{{maxLabel}}</div>
+  </div>
+  <div class="range-slider">
+    <input type="range" name="timeSelector" id="timeSelector" [min]="min" [max]="max" [step]="step"
+           value="0" [(ngModel)]="currentSelection" title="{{inputTitle}}">
+  </div>
+  <div class="button-section">
+    <button class="btn btn-default reset-button" (click)="onReset()">Zurücksetzen</button>
+    <button class="btn btn-default accept-button" (click)="onSelect()">Auswählen</button>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+@import '../../../variables';
+
+.input-range {
+  padding-top: 5px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input[range]:focus {
+  outline: none;
+}
+
+.optional-labels {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.range-slider {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.custom-label {
+  border: 1px $color-primary solid;
+  background: $color-primary;
+  color: white;
+  min-width: 30px;
+  border-radius: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.button-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.selection-label {
+  align-self: flex-end;
+}

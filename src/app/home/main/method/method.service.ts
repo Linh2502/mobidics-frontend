@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import {Rating} from '../../../models/rating.model';
 import {CheckboxState} from '../../../components/checkbox/checkbox-state.model';
 import {mapSubphaseToPhaseIndex, updateSelectionArray} from '../../../functions';
+import {MinMaxSummary} from '../../../models/minMaxes.model';
 
 @Injectable()
 export class MethodService {
@@ -19,9 +20,8 @@ export class MethodService {
   private selectedSubphases: string[][] = [[], [], [], [], [], []];
   private selectedCourseTypes: string[] = [];
   private selectedSocialForms: string[] = [];
-  private selectedGroupMin = 0;
-  private selectedGroupMax = 0;
-  private selectedMinTime = 0;
+  private selectedGroupType = 0;
+  private selectedMaxGroupSize = 0;
   private selectedMaxTime = 0;
   private selectedMinRating = 0;
 
@@ -37,8 +37,9 @@ export class MethodService {
       this.selectedPhases,
       [].concat(this.selectedSubphases),
       this.selectedCourseTypes,
-      this.selectedGroupMin, this.selectedGroupMax,
-      this.selectedMinTime, this.selectedMaxTime,
+      this.selectedGroupType,
+      this.selectedMaxGroupSize,
+      this.selectedMaxTime,
       this.selectedMinRating,
       this.selectedSocialForms)
       .subscribe(
@@ -133,5 +134,29 @@ export class MethodService {
   updateSubphaseSelection(checkBoxState: CheckboxState) {
     updateSelectionArray(this.selectedSubphases[mapSubphaseToPhaseIndex(checkBoxState.value)], checkBoxState);
     this.refreshMethods();
+  }
+
+  updateGroupTypeSelection(groupType: number) {
+    this.selectedGroupType = groupType;
+    this.refreshMethods();
+  }
+
+  updateMaxGroupSizeSelection(maxGroupSize: number) {
+    this.selectedMaxGroupSize = maxGroupSize;
+    this.refreshMethods();
+  }
+
+  updateMaxTimeSelection(maxTime: number) {
+    this.selectedMaxTime = maxTime;
+    this.refreshMethods();
+  }
+
+  updateMinRatingSelection(minRating: number) {
+    this.selectedMinRating = minRating;
+    this.refreshMethods();
+  }
+
+  getMinMaxes(): Observable<MinMaxSummary> {
+    return this.httpService.getMinMaxes();
   }
 }

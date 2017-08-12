@@ -15,23 +15,49 @@
   <div class="filters">
     <app-collapsible-panel title="Veranstaltungsarten">
       <app-checkbox-options [options]="courseTypes"
-                            (selectionChanged)="onCourseTypeSelect($event)">
+                            (selectionChanged)="onCourseTypeSelected($event)">
       </app-checkbox-options>
     </app-collapsible-panel>
-    <app-collapsible-panel title="Gruppengröße">
+    <app-collapsible-panel title="Maximaler Zeitaufwand">
+      <app-range-input [min]="minMaxes.timeMin" [max]="minMaxes.timeMax" unit="Minuten"
+                       inputTitle="Zeitaufwand auswählen"
+                       (selected)="onMaxTimeSelected($event)">
+      </app-range-input>
     </app-collapsible-panel>
-    <app-collapsible-panel title="Zeitaufwand (Minuten)">
+    <app-collapsible-panel title="Maximale Gruppengröße">
+      <app-range-input [min]="minMaxes.minGroupSize" [max]="minMaxes.maxGroupSize" unit="Teilnehmer"
+                       inputTitle="Maximale Gruppengröße auswhählen"
+                       (selected)="onMaxGroupSizeSelected($event)">
+      </app-range-input>
     </app-collapsible-panel>
     <app-collapsible-panel title="Gruppen-Zusammensetzung">
+      <app-range-input min="0" max="10"
+                       inputTitle="Gruppen-Zusammensetzung auswählen"
+                       step="1"
+                       minLabel="homogen" maxLabel="heterogen"
+                       (selected)="onGroupTypeSelected($event)">
+      </app-range-input>
     </app-collapsible-panel>
     <app-collapsible-panel title="Mindestbewertung">
+      <div class="rating-filter">
+        <div class="rating-option" *ngFor="let rating of [1,2,3,4,5]" (click)="onMinRatingSelected(rating)">
+          <rating [ngModel]="rating"
+                  [max]="5"
+                  [readonly]="true"
+                  style="font-size: 1.2em">
+          </rating>
+          <div class="rating-option-text">
+            ({{rating}} Sterne)
+          </div>
+        </div>
+      </div>
     </app-collapsible-panel>
     <app-collapsible-panel title="Aviva-Phase">
       <div class="phase-selections">
         <strong>Phase(n)</strong>
         <div class="selections-body">
           <app-checkbox-options [options]="phases"
-                                (selectionChanged)="onPhaseSelect($event)">
+                                (selectionChanged)="onPhaseSelected($event)">
           </app-checkbox-options>
         </div>
         <strong>Unterphase(n)</strong>
@@ -39,7 +65,7 @@
           <div *ngFor="let subphasesForPhase of subphases">
             <app-checkbox-options
               [options]="subphasesForPhase"
-              (selectionChanged)="onSubphaseSelect($event)">
+              (selectionChanged)="onSubphaseSelected($event)">
             </app-checkbox-options>
           </div>
         </div>
@@ -47,12 +73,14 @@
     </app-collapsible-panel>
     <app-collapsible-panel title="Sozialform">
       <app-checkbox-options [options]="socialForms"
-                            (selectionChanged)="onSocialFormSelect($event)">
+                            (selectionChanged)="onSocialFormSelected($event)">
       </app-checkbox-options>
     </app-collapsible-panel>
     <app-collapsible-panel title="Materialien">
+      Work in Progress
     </app-collapsible-panel>
     <app-collapsible-panel title="Raumanforderungen">
+      Work in Progress
     </app-collapsible-panel>
   </div>
 </perfect-scrollbar>
