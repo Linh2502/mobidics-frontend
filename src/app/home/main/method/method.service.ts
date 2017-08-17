@@ -14,6 +14,7 @@ export class MethodService {
   public favoritesChanged: EventEmitter<string[]>;
   public checkedMethods: string[] = [];
   public cachedFavorites: string[] = [];
+  public cachedMethods: Method[] = [];
 
   private searchQuery = '';
   private selectedPhases: string[] = [];
@@ -44,12 +45,27 @@ export class MethodService {
       this.selectedSocialForms)
       .subscribe(
         (methods: Method[]) => {
+          this.cachedMethods = methods;
           this.methodListChanged.emit(methods);
         }
       );
   }
+  
+  sortMethodsDate() {
+    this.methodListChanged.emit(this.cachedMethods.sort(
+      (method1: Method, method2: Method) =>
+        -(method1.creationDate - method2.creationDate)
+    ));
+  }
 
-  public setQuery(query: string): void {
+  sortMethodsRating() {
+    this.methodListChanged.emit(this.cachedMethods.sort(
+      (method1: Method, method2: Method) =>
+        -(method1.userRating - method2.userRating)
+    ));
+  }
+
+  setQuery(query: string): void {
     this.searchQuery = query;
     this.refreshMethods();
   }

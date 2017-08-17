@@ -34,6 +34,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
+  sortMethodsDate() {
+    this.methodService.sortMethodsDate();
+  }
+
+  sortMethodsRating() {
+    this.methodService.sortMethodsRating();
+  }
+
   onCourseTypeSelected(checkboxState: CheckboxState) {
     this.methodService.updateCourseTypeSelection(checkboxState);
   }

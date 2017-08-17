@@ -8,6 +8,8 @@ import {TokenStorageService} from '../auth/token-storage.service';
 import {Router} from '@angular/router';
 import {Rating} from '../../models/rating.model';
 import {MinMaxSummary} from '../../models/minMaxes.model';
+import {University} from '../../models/user/university.model';
+import {Faculty} from '../../models/user/faculty.model';
 
 @Injectable()
 export class HttpService {
@@ -146,6 +148,18 @@ export class HttpService {
 
   getMinMaxes(): Observable<MinMaxSummary> {
     return this.http.get(this.baseUri + 'methods/mins-maxes')
+      .map(response => response.json())
+      .catch(error => this.processError(error));
+  }
+
+  getUniversities(): Observable<University[]> {
+    return this.http.get(this.baseUri + 'universities')
+      .map(response => response.json())
+      .catch(error => this.processError(error));
+  }
+
+  getFaculties(): Observable<Faculty[]> {
+    return this.http.get(this.baseUri + 'faculties')
       .map(response => response.json())
       .catch(error => this.processError(error));
   }

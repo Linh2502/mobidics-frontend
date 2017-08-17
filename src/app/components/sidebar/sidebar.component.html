@@ -1,17 +1,19 @@
 <perfect-scrollbar class="side-bar scrollable-content">
-  <h4>Erweiterte Suche:</h4>
-  <button class="btn btn-default side-button" type="button" (click)="onFavoriteButtonClicked()">
+  <div class="sidebar-button" (click)="onFavoriteButtonClicked()">
     <span class="glyphicon glyphicon-heart"></span>
     <strong>Meine Favoriten</strong>
-  </button>
-  <button class="btn btn-default side-button" type="button">
+  </div>
+
+  <div class="sidebar-button" (click)="sortMethodsRating()">
     <span class="glyphicon glyphicon-star"></span>
     <strong>Am besten bewertet</strong>
-  </button>
-  <button class="btn btn-default side-button" type="button">
+  </div>
+
+  <div class="sidebar-button" (click)="sortMethodsDate()">
     <span class="glyphicon glyphicon-calendar"></span>
     <strong>Neueste</strong>
-  </button>
+  </div>
+  
   <div class="filters">
     <app-collapsible-panel title="Veranstaltungsarten">
       <app-checkbox-options [options]="courseTypes"

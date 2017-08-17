@@ -8,12 +8,29 @@
   padding-top: 10px;
 }
 
-.side-button {
+.sidebar-button {
+  display: flex;
   margin-bottom: 10px;
+  justify-content: center;
   border: 1px solid $color-primary;
-  border-radius: 0;
-  padding: 10px 0 10px 0;
+  border-radius: 5px;
+  padding: 10px 0;
   width: 100%;
+  cursor: pointer;
+}
+
+.sidebar-button:hover {
+  background: $color-primary;
+  color: white;
+
+  .glyphicon {
+    color: white;
+  }
+}
+
+.glyphicon {
+  margin-right: 5px;
+  padding-top: 2px;
 }
 
 .scrollable-content {

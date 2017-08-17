@@ -51,7 +51,8 @@ import {DdmmyyyyDatePipe} from './pipes/ddmmyyyy-date.pipe';
 import {CollapsiblePanelComponent} from './components/collapsible-panel/collapsible-panel.component';
 import {CheckboxComponent} from './components/checkbox/checkbox.component';
 import {CheckboxOptionsComponent} from './components/checkbox/checkbox-options/checkbox-options.component';
-import { RangeInputComponent } from './components/range-input/range-input.component';
+import {RangeInputComponent} from './components/range-input/range-input.component';
+import {AdminGuard} from './services/auth/admin.guard';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -119,6 +120,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ExportService,
     HttpService,
     AuthGuard,
+    AdminGuard,
     TokenStorageService,
     DataConverterService
   ],

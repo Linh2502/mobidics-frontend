@@ -32,8 +32,8 @@ export class Method {
               public scope: string,
               public userRating: number = 0,
               public thumbnail: string,
-              public creationDate: Date = new Date(),
-              public lastModifiedDate: Date = new Date(),
+              public creationDate: number,
+              public lastModifiedDate: number,
               public language: string) {
   }
 }
