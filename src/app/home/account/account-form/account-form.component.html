@@ -1,121 +1,136 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <div class="form-horizontal">
-    <div class="row">
-      <div class="col-xs-4 col-sm-4 col-xs-offset-4 col-sm-offset-0">
-        <div class="row">
-          <img class="img-responsive col-xs-12" alt="Profile Image" src="{{ profileImage }}">
-        </div>
-        <div class="row">
-          <label class="btn btn-primary col-xs-8 col-xs-offset-2"
-                 for="profile-image-selector">
-            <input id="profile-image-selector" type="file" style="display:none;">
-            Profilbild hochladen...
-          </label>
-        </div>
+<form #accountForm="ngForm" (ngSubmit)="onSubmit()">
+  {{diagnostics}}
+  <div class="form-group">
+    <div class="image-section">
+      <div class="preview">
+        <img class="img" [src]="(user && user.profileImage) || defaultImage">
+        <button type="button" class="btn btn-danger btn-circle delete"
+                (click)="onRemoveProfileImage()">
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>
       </div>
-      <div class="col-xs-10 col-sm-8 col-xs-offset-1 col-sm-offset-0">
-        <div class="form-group">
-          <label for="firstname" class="control-label col-xs-12 col-sm-4">Vorname</label>
-          <div class="col-xs-12 col-sm-8">
-            <input id="firstname"
-                   class="form-control"
-                   formControlName="firstname">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="lastname" class="control-label col-xs-12 col-sm-4">Nachname</label>
-          <div class="col-xs-12 col-sm-8">
-            <input id="lastname"
-                   class="form-control"
-                   formControlName="lastname">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="username" class="control-label col-xs-12 col-sm-4">Nutzername</label>
-          <div class="col-xs-12 col-sm-8">
-            <input id="username"
-                   class="form-control"
-                   formControlName="username">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="email" class="control-label col-xs-12 col-sm-4">E-Mail Adresse</label>
-          <div class="col-xs-12 col-sm-8">
-            <input id="email"
-                   type="email"
-                   class="form-control"
-                   formControlName="email">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="languages" class="control-label col-xs-12 col-sm-4">Sprachen</label>
-          <div class="col-xs-12 col-sm-8">
-            <input class="form-control"
-                   id="languages"
-                   formControlName="languages">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="gender" class="control-label col-xs-12 col-sm-4">Geschlecht</label>
-          <div class="col-xs-12 col-sm-8">
-            <input class="form-control"
-                   id="gender"
-                   formControlName="gender">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="userStatus" class="control-label col-xs-12 col-sm-4">Nutzerstatus</label>
-          <div class="col-xs-12 col-sm-8">
-            <input class="form-control"
-                   id="userStatus"
-                   formControlName="userStatus">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="userType" class="control-label col-xs-12 col-sm-4">Nutzertyp</label>
-          <div class="col-xs-12 col-sm-8">
-            <input class="form-control"
-
-                   id="userType"
-                   formControlName="userType">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="university" class="control-label col-xs-12 col-sm-4">Universität</label>
-          <div class="col-xs-12 col-sm-8">
-            <input class="form-control"
-                   id="university"
-                   formControlName="university">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="faculty" class="control-label col-xs-12 col-sm-4">Fakultät</label>
-          <div class="col-xs-12 col-sm-8">
-            <input class="form-control"
-                   id="faculty"
-                   formControlName="faculty">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="experience" class="control-label col-xs-12 col-sm-4">Lehrerfahrung</label>
-          <div class="col-xs-12 col-sm-8">
-            <input class="form-control"
-                   id="experience"
-                   formControlName="experience">
-          </div>
-        </div>
-        <div class="form-group pull-right" style="padding-right: 20px">
-          <button class="btn btn-success"
-                  (click)="onSubmit()"
-                  [disabled]="!userForm.valid">
-            Speichern
-          </button>
-          <button (click)="onAbortEdit()" class="btn btn-danger">
-            Abbrechen
-          </button>
-        </div>
+      <label class="btn btn-primary"
+             for="profile-image-selector">
+        <input id="profile-image-selector" type="file" style="display:none;"
+               imageUpload [resizeOptions]="resizeOptions" [allowedExtensions]="allowedImageExtensions"
+               (imageSelected)="onImageSelected($event)"
+               name="profileImage"
+               #imageUploadButton>
+        Hochladen...
+      </label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="username">Nutzername</label>
+    <input id="username" class="form-control"
+           [(ngModel)]="user.username" name="username"
+           required>
+  </div>
+  <div class="form-group">
+    <div class="password-section">
+      <label for="passwordSection">Passwort</label>
+      <button class="btn" type="button" id="passwordSection"
+              [ngClass]="{'btn-default': !changePassword, 'btn-danger': changePassword}"
+              (click)="changePassword=!changePassword;">
+        {{!changePassword? 'Password ändern': 'Abbrechen'}}
+      </button>
+      <div class="password-change-section" *ngIf="changePassword">
+        <label for="password">Neues Passwort eingeben</label>
+        <input id="password" type="password" class="form-control"
+               [(ngModel)]="user.password" name="password"
+               required>
+        <label for="passwordCheck">Passwort wiederholen</label>
+        <input id="passwordCheck" type="password" class="form-control"
+               [(ngModel)]="passwordCheck" name="passwordCheck"
+               required>
       </div>
     </div>
+  </div>
+  <div class="form-group">
+    <label for="firstname">Vorname</label>
+    <input id="firstname" class="form-control"
+           [(ngModel)]="user.firstname" name="firstname"
+           required>
+  </div>
+  <div class="form-group">
+    <label for="lastname">Nachname</label>
+    <input id="lastname" class="form-control"
+           [(ngModel)]="user.lastname" name="lastname"
+           required>
+  </div>
+  <div class="form-group">
+    <label for="email">E-Mail Adresse</label>
+    <input id="email" type="email" class="form-control"
+           [(ngModel)]="user.email" name="email"
+           required>
+  </div>
+  <div class="form-group">
+    <label for="language">Sprache</label>
+    <select class="form-control" id="language"
+            [(ngModel)]="user.language" name="language"
+            required>
+      <option *ngFor="let language of languages" [value]="language.value">{{language.label}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="gender">Geschlecht</label>
+    <select class="form-control" id="gender"
+            [(ngModel)]="user.gender" name="gender"
+            required>
+      <option *ngFor="let gender of genders" [value]="gender.value">{{gender.label}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="userStatus">Nutzerstatus</label>
+    <select class="form-control" id="userStatus"
+            [(ngModel)]="user.userStatus" name="userStatus">
+      <option *ngFor="let userStatus of userStatuses" [value]="userStatus.value">{{userStatus.label}}</option>
+    </select>
+    <input *ngIf="user && user.userStatus == 99" class="form-control" id="userStatusOther" title="Anderes"
+           [(ngModel)]="user.userStatusOther" name="userStatusOther"
+           required>
+  </div>
+  <div class="form-group">
+    <label for="usertype">Nutzertyp</label>
+    <select class="form-control" id="usertype"
+            [(ngModel)]="user.userType" name="usertype">
+      <option *ngFor="let userType of userTypes" [value]="userType.value">{{userType.label}}</option>
+    </select>
+    <input *ngIf="user && user.userType == 99" class="form-control" id="userTypeOther" title="Anderes"
+           [(ngModel)]="user.userTypeOther" name="userTypeOther"
+           required>
+  </div>
+  <div class="form-group">
+    <label for="university">Universität</label>
+    <select class="form-control" id="university"
+            [(ngModel)]="user.university" name="university">
+      <option *ngFor="let university of universities" [ngValue]="university">{{university.name}}
+      </option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="faculty">Fakultät</label>
+    <select class="form-control" id="faculty"
+            [(ngModel)]="user.faculty" name="faculty">
+      <option *ngFor="let faculty of faculties" [ngValue]="faculty">{{faculty.name}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="experience">Lehrerfahrung</label>
+    <div class="flex-split">
+      <input class="form-control flex-input" id="experience"
+             [(ngModel)]="user.experience" name="experience">
+      <div class="flex-fixed-text">Jahre</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success"
+            [disabled]="!accountForm.valid">
+      Speichern
+    </button>
+    <button type="button" (click)="onAbortEdit()" class="btn btn-danger">
+      Abbrechen
+    </button>
   </div>
 </form>
 

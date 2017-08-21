@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../services/auth/auth.service';
 import {Animations} from '../../../animations';
 import {ActivatedRoute, Router} from '@angular/router';
+import {HttpService} from '../../../services/http/http.service';
 
 @Component({
   selector: 'app-account',
@@ -12,19 +13,36 @@ import {ActivatedRoute, Router} from '@angular/router';
   animations: [Animations.fadeInOut]
 })
 export class AccountDetailsComponent implements OnInit {
+  panelTitle = 'Mein Konto';
   user: User;
   profileImage = 'assets/avatar_male.png';
+  editButtonEnabled = true;
 
   constructor(private authService: AuthService,
+              private httpService: HttpService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.user = this.authService.loggedInUser;
+    this.activatedRoute.params.subscribe(
+      params => {
+        if (params.hasOwnProperty('username')) {
+          this.editButtonEnabled = false;
+          this.httpService.getUserByUsername(params['username']).subscribe(
+            (user: User) => {
+              this.user = user;
+              this.panelTitle = user.username + 's Konto';
+            }
+          );
+        } else {
+          this.user = this.authService.loggedInUser;
+        }
+      }
+    );
   }
 
   onEditButtonClicked(): void {
-    this.router.navigate(['edit'], {relativeTo: this.activatedRoute});
+    this.router.navigate(['account', 'me', 'edit']);
   }
 }

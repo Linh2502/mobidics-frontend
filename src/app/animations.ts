@@ -22,9 +22,9 @@ export class Animations {
     })),
     transition('void => in', [
       style({opacity: 0}),
-      animate('500ms')
+      animate('300ms')
     ]),
-    transition('* <=> *', animate('500ms'))
+    transition('* <=> *', animate('300ms'))
   ]);
 
   public static pushInOut = trigger('pushInOut', [

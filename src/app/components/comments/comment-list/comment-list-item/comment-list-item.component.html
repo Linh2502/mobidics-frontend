@@ -1,7 +1,8 @@
 <div class="comment-list-item row"
      [ngClass]="{'response-comment': comment.inResponseTo}">
   <div class="col-xs-12">
-    <a class="pointer-cursor" style="font-size: 1.1em; font-weight:bold">{{comment.username}}</a>, am
+    <a class="pointer-cursor" style="font-size: 1.1em; font-weight:bold" (click)="onUsernameClicked()">{{comment.username}}</a>,
+    am
     {{comment.creationDate | ddmmyyyyDate}}
   </div>
   <div class="col-xs-12 comment-text">
@@ -14,7 +15,7 @@
     </a>
     |
     <a class="pointer-cursor"
-       *ngIf="comment.username == authService.loggedInUser.username || authService.getUserLevel() == 9"
+       *ngIf="comment.username == getLoggedInUsername() || getLoggedInUserlevel() == 9"
        (click)="staticModal.show()">
       Löschen
     </a>
@@ -26,7 +27,7 @@
     <a class="pointer-cursor">Thumbs Down</a>
   </div>
 </div>
-<div class="response-form" *ngIf="respondMode">
+<div class="response-form" *ngIf="respondMode" [@pushInOut]="respondMode">
   <app-comment-form [inResponseTo]="comment.id"
                     [rootCommentId]="comment.rootCommentId?comment.rootCommentId : comment.id"
                     (aborted)="onAbort()">

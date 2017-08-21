@@ -5,7 +5,7 @@ import {AuthService} from '../../services/auth/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm: any = {
@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log('login');
     this.loading = true;
     this.authService.login(
       this.loginForm.username,
@@ -43,5 +44,9 @@ export class LoginComponent implements OnInit {
   private handleError() {
     this.loading = false;
     this.errorMessage = 'Nutzername oder Passwort ist falsch!';
+  }
+
+  onRegisterButtonClicked() {
+    this.router.navigate(['/register']);
   }
 }

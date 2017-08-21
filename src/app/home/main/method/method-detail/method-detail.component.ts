@@ -39,15 +39,6 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
     this.router.navigate(['edit'], {relativeTo: this.activatedRoute});
   }
 
-  onDeleteButtonClicked() {
-    this.methodService.deleteMethod(this.method).subscribe(
-      () => {
-        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
-      },
-      () => console.log('ERROR')
-    );
-  }
-
   ngOnInit() {
     this.subscription = this.activatedRoute.params.subscribe(
       params => {
@@ -92,6 +83,15 @@ export class MethodDetailComponent implements OnInit, OnDestroy {
   updateUserrating() {
     this.methodService.updateUserrating(this.method.id, this.selectedRating).subscribe(
       () => this.fetchMethod(this.method.id)
+    );
+  }
+
+  onAcceptDeletion() {
+    this.methodService.deleteMethod(this.method).subscribe(
+      () => {
+        this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+      },
+      () => console.log('ERROR')
     );
   }
 }

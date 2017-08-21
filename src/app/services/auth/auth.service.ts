@@ -18,7 +18,12 @@ export class AuthService {
     const authCache = JSON.parse(localStorage.getItem('authCache'));
     this.isLoggedIn = !!authCache;
     this.tokenStorage.setJwtToken(authCache && authCache.jwtToken);
-    this.loggedInUser = (authCache && authCache.user);
+    if (authCache && authCache.user) {
+      this.loggedInUser = (authCache && authCache.user);
+      this.httpService.getUserMe().subscribe(
+        (user: User) => this.loggedInUser = user
+      );
+    }
   }
 
   public login(username: string, password: string, persist: boolean): Observable<any> {

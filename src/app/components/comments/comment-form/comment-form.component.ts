@@ -2,11 +2,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Comment} from '../../../models/comment.model';
 import {AuthService} from '../../../services/auth/auth.service';
 import {CommentService} from '../comment.service';
+import {Animations} from '../../../animations';
 
 @Component({
   selector: 'app-comment-form',
   templateUrl: './comment-form.component.html',
-  styleUrls: ['./comment-form.component.scss']
+  styleUrls: ['./comment-form.component.scss'],
 })
 export class CommentFormComponent implements OnInit {
   @Input() inResponseTo: string = null;

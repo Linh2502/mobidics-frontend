@@ -50,7 +50,7 @@ export class MethodService {
         }
       );
   }
-  
+
   sortMethodsDate() {
     this.methodListChanged.emit(this.cachedMethods.sort(
       (method1: Method, method2: Method) =>

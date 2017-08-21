@@ -65,6 +65,5 @@ export class MethodListComponent implements OnInit, OnDestroy {
 
   onNewMethodButtonClicked() {
     this.methodService.notifyDetailPagedSelected(true);
-    this.router.navigate(['new'], {relativeTo: this.activatedRoute});
   }
 }

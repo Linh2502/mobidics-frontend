@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {User} from '../../../models/user/user.model';
 import {AuthService} from '../../../services/auth/auth.service';
-import {AccountGenderPipe} from '../account-pipes/account-gender.pipe';
-import {AccountLanguagePipe} from '../account-pipes/account-language.pipe';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, UrlSegment} from '@angular/router';
+import {ImageResult, ResizeOptions} from 'ng2-imageupload';
+import {userStatuses, userTypes, genders, languages} from '../../../models/constants';
+import {University} from '../../../models/user/university.model';
+import {Faculty} from '../../../models/user/faculty.model';
+import {HttpService} from '../../../services/http/http.service';
 
 @Component({
   selector: 'app-account-form',
@@ -13,51 +15,85 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class AccountFormComponent implements OnInit {
 
-  userForm: FormGroup;
-  profileImage = 'assets/avatar_male.png';
+  userStatuses = userStatuses;
+  userTypes = userTypes;
+  genders = genders;
+  languages = languages;
+  universities: University[];
+  faculties: Faculty[];
 
-  constructor(private router: Router,
-              private activatedRoute: ActivatedRoute) {
+  resizeOptions: ResizeOptions = {
+    resizeMaxHeight: 1024,
+    resizeMaxWidth: 1024
+  };
+  allowedImageExtensions = ['jpg', 'png', 'gif', 'jpeg'];
+  imageUploadErrorMessage = '';
+
+  @ViewChild('imageUploadButton') imageUploadButton: ElementRef;
+
+
+  user: User = new User();
+  defaultImage = 'assets/avatar_male.png';
+  newAccount = false;
+  changePassword = false;
+
+  constructor(private httpService: HttpService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
-    this.userForm = new FormGroup({
-      'firstname': new FormControl('', Validators.required),
-      'lastname': new FormControl('', Validators.required),
-      'username': new FormControl('', Validators.required),
-      'email': new FormControl('',
-        [Validators.required,
-          Validators.email]),
-      'languages': new FormControl('', Validators.required),
-      'gender': new FormControl('', Validators.required),
-      'userStatus': new FormControl('', Validators.required),
-      'userType': new FormControl('', Validators.required),
-      'university': new FormControl('', Validators.required),
-      'faculty': new FormControl('', Validators.required),
-      'experience': new FormControl('',
-        [Validators.required,
-          Validators.pattern('\\d+'),
-          Validators.maxLength(2)])
-    });
-    // const user: User = this.authService.loggedInUser;
-    // this.profileImage = user.profileImage ? user.profileImage : this.profileImage;
-    // this.userForm.get('firstname').setValue(user.firstname);
-    // this.userForm.get('lastname').setValue(user.lastname);
-    // this.userForm.get('username').setValue(user.username);
-    // this.userForm.get('email').setValue(user.email);
-    // this.userForm.get('languages').setValue(this.languagePipe.transform(user.language));
-    // this.userForm.get('gender').setValue(this.genderPipe.transform(user.gender));
-    // this.userForm.get('userStatus').setValue(user.userStatus);
-    // this.userForm.get('userType').setValue(user.userType);
-    // this.userForm.get('university').setValue(user.university.name);
-    // this.userForm.get('faculty').setValue(user.faculty.name);
-    // this.userForm.get('experience').setValue(user.experience);
+    this.newAccount = this.router.url.includes('register');
+    if (!this.newAccount) {
+      this.user = this.authService.loggedInUser;
+    }
+    this.httpService.getUniversities().subscribe(universities => this.universities = universities.sort((university1, university2) => {
+        if (university1.name.toLowerCase() < university2.name.toLowerCase()) {
+          return -1;
+        }
+        if (university1.name.toLowerCase() > university2.name.toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      }
+    ));
+    this.httpService.getFaculties().subscribe(faculties => this.faculties = faculties.sort((faculty1, faculty2) => {
+      if (faculty1.name.toLowerCase() < faculty2.name.toLowerCase()) {
+        return -1;
+      }
+      if (faculty1.name.toLowerCase() > faculty2.name.toLowerCase()) {
+        return 1;
+      }
+      return 0;
+    }));
   }
 
   onSubmit() {
   }
 
   onAbortEdit() {
-    this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+    this.router.navigate(['account', 'me']);
+  }
+
+  get diagnostics() {
+    return JSON.stringify({...this.user, newForm: this.newAccount});
+  }
+
+
+  onImageSelected(imageResult: ImageResult) {
+    if (imageResult.error) {
+      this.imageUploadErrorMessage = 'Ungültige Datei!';
+    } else {
+      this.imageUploadErrorMessage = null;
+      this.user.profileImage = imageResult.resized
+        && imageResult.resized.dataURL
+        || imageResult.dataURL;
+    }
+    this.imageUploadButton.nativeElement.value = '';
+  }
+
+  onRemoveProfileImage() {
+    this.user.profileImage = this.defaultImage;
   }
 }

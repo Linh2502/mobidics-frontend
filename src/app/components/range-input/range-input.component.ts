@@ -15,7 +15,7 @@ export class RangeInputComponent implements OnInit {
   @Input() maxLabel;
   @Output() selected: EventEmitter<number> = new EventEmitter();
 
-  private currentSelection = 0;
+  currentSelection = 0;
 
   constructor() {
   }

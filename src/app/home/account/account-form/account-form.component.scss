@@ -1,0 +1,77 @@
+.ng-valid[required], .ng-valid.required {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442; /* red */
+}
+
+.image-section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.preview {
+  position: relative;
+  display: inline-block;
+  border: none;
+  box-shadow: 2px 2px 4px #bbb;
+  vertical-align: bottom;
+  margin: 10px 5px;
+}
+
+.preview:hover {
+  img {
+    display: block;
+    background: black;
+  }
+}
+
+.delete {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 90%;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 3px 2px 2px 1px;
+  font-size: 13px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+
+  .glyphicon {
+    color: white;
+  }
+}
+
+.flex-split {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-input {
+  flex: 1;
+}
+
+.flex-fixed-text {
+  margin-left: 10px;
+  margin-top: 6px;
+  flex: 1;
+}
+
+.password-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.password-change-section {
+  margin-left: 20px;
+}
+
+#passwordSection.btn-danger {
+  margin-bottom: 5px;
+}

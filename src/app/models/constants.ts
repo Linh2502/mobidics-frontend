@@ -51,3 +51,32 @@ export const subPhases: any[][] = [
     {label: 'Feedback einholen', value: '18'}
   ]
 ];
+
+export const userTypes = [
+  {label: '--', value: -1},
+  {label: 'Fest angestellt', value: 0},
+  {label: 'Befristet angestellt', value: 1},
+  {label: 'Beamter', value: 2},
+  {label: 'Freiberuflich', value: 3},
+  {label: 'Anderes', value: 99}
+];
+
+export const userStatuses = [
+  {label: '--', value: -1},
+  {label: 'Prof.', value: 0},
+  {label: 'Dr..', value: 1},
+  {label: 'Dipl.', value: 2},
+  {label: 'Anderes', value: 99}
+];
+
+export const genders = [
+  {label: 'Männlich', value: 0},
+  {label: 'Weiblich', value: 0}
+];
+
+export const languages = [
+  {label: 'Deutsch', value: 'de'},
+  {label: 'Englisch', value: 'en'},
+  {label: 'Französisch', value: 'fr'},
+  {label: 'Spanisch', value: 'sp'}
+];

@@ -8,7 +8,7 @@
     Bearbeiten
   </button>
   <button *ngIf="authService.getUserLevel() == 9" type="button" class="btn btn-danger"
-          (click)="onDeleteButtonClicked()">
+          (click)="staticModal.show();">
     <span class="glyphicon glyphicon-trash"></span>
     Löschen
   </button>
@@ -79,7 +79,9 @@
         <td>{{ method.courseType | courseType }}</td>
       </tr>
       <tr *ngIf="method.groupType">
-        <th>Gruppenzusammensetzung</th>
+        <th>Gruppenzu-
+          sammensetzung
+        </th>
         <td>
           <div class="flex-group-type">
             <div class="flex-text-left">homogen</div>
@@ -115,7 +117,9 @@
         <td>{{ method.material }}</td>
       </tr>
       <tr *ngIf="method.methodMaterial">
-        <th>Methodenspezifisches Material</th>
+        <th>Methodenspezifisches
+          Material
+        </th>
         <td>{{ method.methodMaterial }}</td>
       </tr>
       <tr *ngIf="method.timeMin || method.timeMax">
@@ -169,3 +173,19 @@
     </app-comments>
   </div>
 </perfect-scrollbar>
+
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Methode wirklich löschen?</h4>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-success" (click)="onAcceptDeletion()">Ja</button>
+        <button type="button" class="btn btn-danger" (click)="staticModal.hide()">Nein</button>
+      </div>
+    </div>
+  </div>
+</div>

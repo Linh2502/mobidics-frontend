@@ -13,7 +13,7 @@
   </div>
 </div>
 <ul class="list-group">
-  <li (click)="onNewMethodButtonClicked()" class="list-group-item add-item" routerLinkActive="active"
+  <li [routerLink]="['new']" (click)="onNewMethodButtonClicked()" class="list-group-item add-item" routerLinkActive="active"
       style="cursor: pointer">
     <div class="media">
       <div class="media-left media-middle">
