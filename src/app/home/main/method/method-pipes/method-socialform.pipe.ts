@@ -5,17 +5,17 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class MethodSocialformPipe implements PipeTransform {
 
-  static mapSocialForm(value: string): string {
+  static mapSocialForm(value: number): string {
     switch (value) {
-      case '0':
+      case 0:
         return 'Plenum interaktiv';
-      case '1':
+      case 1:
         return 'Partner/Gruppenarbeit';
-      case '2':
+      case 2:
         return 'Plenum untereinander';
-      case '3':
+      case 3:
         return 'Einzelarbeit';
-      case '4':
+      case 4:
         return 'Plenum frontal';
     }
     return 'Unbekannt';
@@ -24,10 +24,9 @@ export class MethodSocialformPipe implements PipeTransform {
   transform(value: any, args?: any): any {
     let result: string = null;
     if (value) {
-      const splitString: string[] = value.split(':');
-      result = MethodSocialformPipe.mapSocialForm(splitString[0]);
-      for (let i = 1; i < splitString.length; i++) {
-        result += ', ' + MethodSocialformPipe.mapSocialForm(splitString[i]);
+      result = MethodSocialformPipe.mapSocialForm(value[0]);
+      for (let i = 1; i < value.length; i++) {
+        result += ', ' + MethodSocialformPipe.mapSocialForm(value[i]);
       }
     }
     return result;

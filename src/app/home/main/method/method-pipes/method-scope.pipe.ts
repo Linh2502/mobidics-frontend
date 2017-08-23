@@ -17,15 +17,7 @@ export class MethodScopePipe implements PipeTransform {
   }
 
   transform(value: any, args?: any): any {
-    let result: string = null;
-    if (value) {
-      const splitString: string[] = value.split(':');
-      result = MethodScopePipe.mapScopes(splitString[0]);
-      for (let i = 1; i < splitString.length; i++) {
-        result += ', ' + MethodScopePipe.mapScopes(splitString[i]);
-      }
-    }
-    return result;
+    return MethodScopePipe.mapScopes(value);
   }
 
 }

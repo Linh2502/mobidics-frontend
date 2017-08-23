@@ -8,7 +8,7 @@ import {CheckboxState} from './checkbox-state.model';
 })
 export class CheckboxComponent implements OnInit {
   @Input() label: string;
-  @Input() value: string;
+  @Input() value: number;
   @Input() isSelected = false;
 
   @Output() selected: EventEmitter<CheckboxState> = new EventEmitter();

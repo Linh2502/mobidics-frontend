@@ -9,7 +9,7 @@ import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 import {ResizeOptions, ImageResult} from 'ng2-imageupload';
 import {courseTypes, phases, socialForms, subPhases} from '../../../../models/constants';
 import {CheckboxState} from '../../../../components/checkbox/checkbox-state.model';
-import {mapSubphaseToPhaseIndex, singleColonDataToArray, updateSelectionArray} from '../../../../functions';
+import {mapSubphaseToPhaseIndex, updateSelectionArray} from '../../../../functions';
 
 @Component({
   selector: 'app-method-add-edit',
@@ -50,10 +50,10 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
   subphases: any[][] = subPhases;
   courseTypes: any[] = courseTypes;
 
-  selectedSocialForms: string[] = [];
-  selectedPhases: string[] = [];
-  selectedSubphases: string[][] = [[], [], [], [], [], []];
-  selectedCourseTypes: string[] = [];
+  selectedSocialForms: number[] = [];
+  selectedPhases: number[] = [];
+  selectedSubphases: number[][] = [[], [], [], [], [], []];
+  selectedCourseTypes: number[] = [];
 
   constructor(private methodService: MethodService,
               private router: Router,
@@ -120,10 +120,10 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
               this.methodForm.get('scope').setValue(method.scope);
               this.uploadedImages = method.images;
               this.thumbnailSrc = method.thumbnail;
-              this.selectedSocialForms = singleColonDataToArray(method.socialForm);
-              this.selectedPhases = singleColonDataToArray(method.phase);
-              this.preselectSubphases(singleColonDataToArray(method.subPhase));
-              this.selectedCourseTypes = singleColonDataToArray(method.courseType);
+              this.selectedSocialForms = method.socialForm;
+              this.selectedPhases = method.phase;
+              this.preselectSubphases(method.subPhase);
+              this.selectedCourseTypes = method.courseType;
             }
           );
         } else {
@@ -133,7 +133,7 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
     );
   }
 
-  preselectSubphases(subphases: string[]) {
+  preselectSubphases(subphases: number[]) {
     subphases.forEach(subphase => {
       this.selectedSubphases[mapSubphaseToPhaseIndex(subphase)].push(subphase);
     });
