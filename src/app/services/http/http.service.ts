@@ -161,8 +161,14 @@ export class HttpService {
 
   deleteCommentById(methodId: string, commentId: string): Observable<any> {
     const headers: Headers = this.generateHeaders();
-    return this.http.delete(this.baseUri + 'methods/' + methodId + '/comments/' + commentId, {headers})
+    return this.http.delete(this.baseUri + 'comments/' + commentId, {headers})
       .map(response => response.json())
+      .catch(error => this.processError(error));
+  }
+
+  postCommentVote(commentId: string, value: number): Observable<any> {
+    const headers: Headers = this.generateHeaders();
+    return this.http.post(this.baseUri + 'comments/' + commentId + '/votes', {value: value}, {headers})
       .catch(error => this.processError(error));
   }
 

@@ -8,22 +8,26 @@
     {{comment.text}}
   </div>
   <div class="col-xs-12">
-    <a class="pointer-cursor"
-       (click)="onRespondButtonClicked()">
+    <a (click)="onRespondButtonClicked()">
       Antworten
     </a>
     |
-    <a class="pointer-cursor"
-       *ngIf="comment.username == authService.loggedInUser.username || authService.loggedInUser.userLevel == 9"
+    <a *ngIf="comment.username == authService.loggedInUser.username || authService.loggedInUser.userLevel == 9"
        (click)="staticModal.show()">
       Löschen
     </a>
     |
-    <a class="pointer-cursor">
-      Thumbs Up
-    </a>
+    <button type="button" class="btn btn-default" (click)="onThumbsUpButtonClicked()"
+            [disabled]="comment.username == authService.loggedInUser.username">
+      <span class="glyphicon glyphicon-thumbs-up"></span>
+    </button>
+    ({{comment.thumbsUp}})
     |
-    <a class="pointer-cursor">Thumbs Down</a>
+    <button type="button" class="btn btn-default" (click)="onThumbsDownButtonClicked()"
+            [disabled]="comment.username == authService.loggedInUser.username">
+      <span class="glyphicon glyphicon-thumbs-down"></span>
+    </button>
+    ({{comment.thumbsDown}})
   </div>
 </div>
 <div class="response-form" *ngIf="respondMode" [@pushInOut]="respondMode">

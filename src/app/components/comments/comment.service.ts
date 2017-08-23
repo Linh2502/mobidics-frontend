@@ -33,4 +33,10 @@ export class CommentService {
         this.getComments();
       });
   }
+
+  addCommentVote(commentId: string, value: number) {
+    this.httpService.postCommentVote(commentId, value).subscribe(
+      () => this.getComments()
+    );
+  }
 }

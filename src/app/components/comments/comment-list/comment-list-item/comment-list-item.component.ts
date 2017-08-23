@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Comment} from '../../../../models/comment.model';
 import {CommentService} from '../../comment.service';
 import {AuthService} from '../../../../services/auth/auth.service';
 import {Router} from '@angular/router';
 import {Animations} from '../../../../animations';
+import {HttpService} from '../../../../services/http/http.service';
 
 @Component({
   selector: 'app-comment-list-item',
@@ -40,11 +41,12 @@ export class CommentListItemComponent implements OnInit {
   }
 
   onThumbsUpButtonClicked() {
-    // TODO: add comment vote
+    this.commentService.addCommentVote(this.comment.id, 1);
+
   }
 
   onThumbsDownButtonClicked() {
-    // TODO: remove comment vote
+    this.commentService.addCommentVote(this.comment.id, -1);
   }
 
 }
