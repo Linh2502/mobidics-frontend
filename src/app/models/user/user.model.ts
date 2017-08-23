@@ -20,6 +20,7 @@ export class User {
               public lastActionDate?: number,
               public department?: string,
               public experience?: number,
-              public profileImage?: string) {
+              public profileImage?: string,
+              public privateFields: string[] = []) {
   }
 }

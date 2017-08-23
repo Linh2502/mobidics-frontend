@@ -20,9 +20,7 @@ export class AuthService {
     this.tokenStorage.setJwtToken(authCache && authCache.jwtToken);
     if (authCache && authCache.user) {
       this.loggedInUser = (authCache && authCache.user);
-      this.httpService.getUserMe().subscribe(
-        (user: User) => this.loggedInUser = user
-      );
+      this.refreshUser();
     }
   }
 
@@ -55,5 +53,11 @@ export class AuthService {
 
   public getUserLevel(): number {
     return this.loggedInUser.userLevel;
+  }
+
+  public refreshUser() {
+    this.httpService.getUserMe().subscribe(
+      (user: User) => this.loggedInUser = user
+    );
   }
 }

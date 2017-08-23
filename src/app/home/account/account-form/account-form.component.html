@@ -3,9 +3,11 @@
   <div class="form-group" *ngIf="!newAccount">
     <div class="image-section">
       <div class="preview">
-        <img class="img" [src]="(user && user.profileImage) || defaultImage">
+        <img class="img"
+             [src]="(user.profileImage) || (user.gender == 0? 'assets/avatar_male.png': 'assets/avatar_female.png')">
         <button type="button" class="btn btn-danger btn-circle delete"
-                (click)="onRemoveProfileImage()">
+                (click)="onRemoveProfileImage()"
+                *ngIf="user.profileImage">
           <i class="glyphicon glyphicon-remove"></i>
         </button>
       </div>
@@ -20,7 +22,7 @@
       </label>
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" *ngIf="newAccount">
     <label for="username">Nutzername</label>
     <input id="username" class="form-control"
            [(ngModel)]="user.username" name="username"

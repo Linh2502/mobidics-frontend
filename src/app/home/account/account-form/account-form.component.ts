@@ -31,11 +31,10 @@ export class AccountFormComponent implements OnInit {
 
   @ViewChild('imageUploadButton') imageUploadButton: ElementRef;
   @Input() newAccount = false;
+  @Input() user: User = new User();
   @Output() aborted: EventEmitter<any> = new EventEmitter();
   @Output() submitted: EventEmitter<User> = new EventEmitter();
 
-  user: User = new User();
-  defaultImage = 'assets/avatar_male.png';
   changePassword = false;
   passwordCheck = '';
 
@@ -91,6 +90,6 @@ export class AccountFormComponent implements OnInit {
   }
 
   onRemoveProfileImage() {
-    this.user.profileImage = this.defaultImage;
+    this.user.profileImage = null;
   }
 }

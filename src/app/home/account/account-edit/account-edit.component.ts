@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {User} from '../../../models/user/user.model';
 import {HttpService} from '../../../services/http/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-account-edit',
@@ -10,15 +11,19 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class AccountEditComponent implements OnInit {
 
-  constructor(private httpService: HttpService,
+  user: User;
+
+  constructor(private authService: AuthService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.user = this.authService.loggedInUser;
   }
 
   onSubmit(user: User) {
+    this.authService.refreshUser();
     console.log(user);
   }
 
