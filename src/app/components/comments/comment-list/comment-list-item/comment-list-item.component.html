@@ -1,8 +1,13 @@
 <div class="comment-list-item row"
      [ngClass]="{'response-comment': comment.inResponseTo}">
   <div class="col-xs-12">
-    <a class="pointer-cursor" style="font-size: 1.1em; font-weight:bold" (click)="onUsernameClicked()">{{comment.username}}</a>,
+    <a style="font-size: 1.1em; font-weight:bold" (click)="onUsernameClicked()">{{comment.username}}</a>,
     vor {{(comment.creationDate / 1000) | timeSince}}
+    <div class="delete-button pull-right"
+         *ngIf="comment.username == authService.loggedInUser.username || authService.loggedInUser.userLevel == 9"
+         (click)="staticModal.show()">
+      <span class="glyphicon glyphicon-remove"></span>
+    </div>
   </div>
   <div class="col-xs-12 comment-text">
     {{comment.text}}
@@ -10,11 +15,6 @@
   <div class="col-xs-12">
     <a (click)="onRespondButtonClicked()">
       Antworten
-    </a>
-    |
-    <a *ngIf="comment.username == authService.loggedInUser.username || authService.loggedInUser.userLevel == 9"
-       (click)="staticModal.show()">
-      Löschen
     </a>
     |
     <button type="button" class="btn btn-default" (click)="onThumbsUpButtonClicked()"
