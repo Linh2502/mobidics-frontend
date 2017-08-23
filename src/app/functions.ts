@@ -36,3 +36,11 @@ export const mapSubphaseToPhaseIndex = (subphase: string): number => {
       return 5;
   }
 };
+
+export const singleColonDataToArray = (data: string): string[] => {
+  const result: string[] = [];
+  data.split(':').forEach(
+    (element: string) => result.push(element)
+  );
+  return result;
+};

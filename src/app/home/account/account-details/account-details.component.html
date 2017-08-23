@@ -19,8 +19,8 @@
       <app-label-value label="E-Mail Addresse:" value="{{user.email}}"></app-label-value>
       <app-label-value label="Sprachen:" value="{{user.language | accountLanguage}}"></app-label-value>
       <app-label-value label="Geschlecht:" value="{{user.gender | accountGender}}"></app-label-value>
-      <app-label-value label="Nutzerstatus:" value="{{user.userStatus}}"></app-label-value>
-      <app-label-value label="Nutzertyp:" value="{{user.userType}}"></app-label-value>
+      <app-label-value label="Titel:" value="{{user.userStatus | accountUserstatus}}"></app-label-value>
+      <app-label-value label="Anstellung:" value="{{user.userType | accountUsertype}}"></app-label-value>
       <app-label-value label="Universität:" value="{{user.university.name}}"></app-label-value>
       <app-label-value label="Fakultät:" value="{{user.faculty.name}}"></app-label-value>
       <app-label-value label="Lehrerfahrung:" value="{{user.experience}} Jahre"></app-label-value>

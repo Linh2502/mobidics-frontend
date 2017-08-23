@@ -17,7 +17,7 @@ export class User {
               public university?: University,
               public faculty?: Faculty,
               public userLevel?: number,
-              public lastActionDate?: Date,
+              public lastActionDate?: number,
               public department?: string,
               public experience?: number,
               public profileImage?: string) {

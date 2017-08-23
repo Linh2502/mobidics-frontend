@@ -1,5 +1,3 @@
-.test-container {
-  position: fixed;
-  height: 200px;
-  background-color: black;
+a {
+  cursor: pointer;
 }

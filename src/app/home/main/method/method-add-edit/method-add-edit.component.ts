@@ -7,10 +7,9 @@ import {MethodService} from '../method.service';
 import {Animations} from '../../../../animations';
 import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 import {ResizeOptions, ImageResult} from 'ng2-imageupload';
-import {DataConverterService} from '../../../../services/data-converter/data-converter.service';
 import {courseTypes, phases, socialForms, subPhases} from '../../../../models/constants';
 import {CheckboxState} from '../../../../components/checkbox/checkbox-state.model';
-import {mapSubphaseToPhaseIndex, updateSelectionArray} from '../../../../functions';
+import {mapSubphaseToPhaseIndex, singleColonDataToArray, updateSelectionArray} from '../../../../functions';
 
 @Component({
   selector: 'app-method-add-edit',
@@ -57,7 +56,7 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
   selectedCourseTypes: string[] = [];
 
   constructor(private methodService: MethodService,
-              private router: Router, private dataConverter: DataConverterService,
+              private router: Router,
               private activatedRoute: ActivatedRoute) {
   }
 
@@ -121,10 +120,10 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
               this.methodForm.get('scope').setValue(method.scope);
               this.uploadedImages = method.images;
               this.thumbnailSrc = method.thumbnail;
-              this.selectedSocialForms = this.dataConverter.singleColonDataToArray(method.socialForm);
-              this.selectedPhases = this.dataConverter.singleColonDataToArray(method.phase);
-              this.preselectSubphases(this.dataConverter.singleColonDataToArray(method.subPhase));
-              this.selectedCourseTypes = this.dataConverter.singleColonDataToArray(method.courseType);
+              this.selectedSocialForms = singleColonDataToArray(method.socialForm);
+              this.selectedPhases = singleColonDataToArray(method.phase);
+              this.preselectSubphases(singleColonDataToArray(method.subPhase));
+              this.selectedCourseTypes = singleColonDataToArray(method.courseType);
             }
           );
         } else {

@@ -1,6 +1,6 @@
 <form #accountForm="ngForm" (ngSubmit)="onSubmit()">
   {{diagnostics}}
-  <div class="form-group">
+  <div class="form-group" *ngIf="!newAccount">
     <div class="image-section">
       <div class="preview">
         <img class="img" [src]="(user && user.profileImage) || defaultImage">
@@ -24,19 +24,20 @@
     <label for="username">Nutzername</label>
     <input id="username" class="form-control"
            [(ngModel)]="user.username" name="username"
-           required>
+           required
+           minlength="2">
   </div>
   <div class="form-group">
-    <div class="password-section">
+    <div class="password-section" *ngIf="!newAccount">
       <label for="passwordSection">Passwort</label>
       <button class="btn" type="button" id="passwordSection"
               [ngClass]="{'btn-default': !changePassword, 'btn-danger': changePassword}"
               (click)="changePassword=!changePassword;">
         {{!changePassword? 'Password ändern': 'Abbrechen'}}
       </button>
-      <div class="password-change-section" *ngIf="changePassword">
-        <label for="password">Neues Passwort eingeben</label>
-        <input id="password" type="password" class="form-control"
+      <div class="password-change-section" *ngIf="changePassword || newAccount">
+        <label for="passwordEdit">Neues Passwort eingeben</label>
+        <input id="passwordEdit" type="password" class="form-control"
                [(ngModel)]="user.password" name="password"
                required>
         <label for="passwordCheck">Passwort wiederholen</label>
@@ -44,6 +45,13 @@
                [(ngModel)]="passwordCheck" name="passwordCheck"
                required>
       </div>
+    </div>
+    <div *ngIf="newAccount">
+      <label for="passwordNew">Passwort</label>
+      <input id="passwordNew" type="password" class="form-control"
+             [(ngModel)]="user.password" name="password"
+             required
+             minlength="4">
     </div>
   </div>
   <div class="form-group">
@@ -62,7 +70,8 @@
     <label for="email">E-Mail Adresse</label>
     <input id="email" type="email" class="form-control"
            [(ngModel)]="user.email" name="email"
-           required>
+           required
+           email>
   </div>
   <div class="form-group">
     <label for="language">Sprache</label>
@@ -81,7 +90,7 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="userStatus">Nutzerstatus</label>
+    <label for="userStatus">Titel</label>
     <select class="form-control" id="userStatus"
             [(ngModel)]="user.userStatus" name="userStatus">
       <option *ngFor="let userStatus of userStatuses" [value]="userStatus.value">{{userStatus.label}}</option>
@@ -91,7 +100,7 @@
            required>
   </div>
   <div class="form-group">
-    <label for="usertype">Nutzertyp</label>
+    <label for="usertype">Anstellung</label>
     <select class="form-control" id="usertype"
             [(ngModel)]="user.userType" name="usertype">
       <option *ngFor="let userType of userTypes" [value]="userType.value">{{userType.label}}</option>
@@ -103,19 +112,20 @@
   <div class="form-group">
     <label for="university">Universität</label>
     <select class="form-control" id="university"
-            [(ngModel)]="user.university" name="university">
+            [(ngModel)]="user.university" name="university"
+            required>
       <option *ngFor="let university of universities" [ngValue]="university">{{university.name}}
       </option>
     </select>
   </div>
-  <div class="form-group">
+  <div class="form-group" *ngIf="!newAccount">
     <label for="faculty">Fakultät</label>
     <select class="form-control" id="faculty"
             [(ngModel)]="user.faculty" name="faculty">
       <option *ngFor="let faculty of faculties" [ngValue]="faculty">{{faculty.name}}</option>
     </select>
   </div>
-  <div class="form-group">
+  <div class="form-group" *ngIf="!newAccount">
     <label for="experience">Lehrerfahrung</label>
     <div class="flex-split">
       <input class="form-control flex-input" id="experience"
@@ -126,7 +136,7 @@
   <div class="form-group">
     <button class="btn btn-success"
             [disabled]="!accountForm.valid">
-      Speichern
+      {{newAccount? 'Registrieren': 'Speichern'}}
     </button>
     <button type="button" (click)="onAbortEdit()" class="btn btn-danger">
       Abbrechen

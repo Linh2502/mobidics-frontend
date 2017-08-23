@@ -27,6 +27,26 @@ export class HttpService {
       .catch(error => this.processError(error));
   }
 
+  register(user: User) {
+    return this.http.post(this.baseUri + 'users', user);
+  }
+
+  deleteUser(user: User) {
+    const headers: Headers = this.generateHeaders();
+    return this.http.delete(this.baseUri + 'users/' + user.username, {headers})
+      .catch(error => this.processError(error));
+  }
+
+  approveUser(user: User) {
+    const headers: Headers = this.generateHeaders();
+    return this.http.put(this.baseUri + 'users/' + user.username + '/approve', null, {headers});
+  }
+
+  disapproveUser(user: User) {
+    const headers: Headers = this.generateHeaders();
+    return this.http.put(this.baseUri + 'users/' + user.username + '/disapprove', null, {headers});
+  }
+
   getUserByUsername(username: string): Observable<User> {
     const headers: Headers = this.generateHeaders();
     return this.http.get(this.baseUri + 'users/' + username, {headers})

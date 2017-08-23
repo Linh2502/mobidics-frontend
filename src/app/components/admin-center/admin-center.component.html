@@ -33,9 +33,10 @@
           <td>
             {{user.approved? 'Freigegeben': 'Nicht Freigegeben'}}
           </td>
-          <td>
-            <a>Löschen</a>
-            <a>Sperren</a>
+          <td *ngIf="user.username !== authService.loggedInUser.username">
+            <a (click)="onDelete(user)">Löschen</a>
+            <a (click)="onDisapprove(user)" *ngIf="user.approved">Sperren</a>
+            <a (click)="onApprove(user)" *ngIf="!user.approved">Freigeben</a>
           </td>
         </tr>
         </tbody>
@@ -45,7 +46,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      Heading 1
+      Nutzerrechte verwalten
     </div>
     <div class="panel-body">
       Body 1
@@ -65,7 +66,7 @@
 
         </tbody>
       </table>
-      <button>Gesperrte Benutzer löschen</button>
+      <button type="button" class="btn btn-danger">Gesperrte Benutzer löschen</button>
     </div>
   </div>
 

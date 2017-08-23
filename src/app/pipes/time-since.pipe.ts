@@ -10,26 +10,26 @@ export class TimeSincePipe implements PipeTransform {
 
     let interval = Math.floor(seconds / 31536000);
 
-    if (interval > 1) {
-      return interval + ' years';
+    if (interval >= 1) {
+      return interval + (interval > 1 ? ' Jahren' : ' Jahr');
     }
     interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
-      return interval + ' months';
+    if (interval >= 1) {
+      return interval + (interval > 1 ? ' Monaten' : ' Monat');
     }
     interval = Math.floor(seconds / 86400);
     if (interval > 1) {
-      return interval + ' days';
+      return interval + (interval > 1 ? ' Tagen' : ' Tag');
     }
     interval = Math.floor(seconds / 3600);
     if (interval > 1) {
-      return interval + ' hours';
+      return interval + (interval > 1 ? ' Stunden' : ' Stunde');
     }
     interval = Math.floor(seconds / 60);
     if (interval > 1) {
-      return interval + ' minutes';
+      return interval + (interval > 1 ? ' Minuten' : ' Minute');
     }
-    return Math.floor(seconds) + ' seconds';
+    return Math.floor(seconds) + (seconds > 1 ? ' Sekunden' : ' Sekunde');
   }
 
 }

@@ -32,7 +32,6 @@ import {ArrayAsStringPipe} from './pipes/array-as-string.pipe';
 import {StringAsArrayPipe} from './pipes/string-as-array.pipe';
 import {PerfectScrollbarConfigInterface, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {ImageUploadModule} from 'ng2-imageupload';
-import {DataConverterService} from './services/data-converter/data-converter.service';
 import {MethodScopePipe} from './home/main/method/method-pipes/method-scope.pipe';
 import {AccountDetailsComponent} from './home/account/account-details/account-details.component';
 import {AccountCreateComponent} from './home/account/account-create/account-create.component';
@@ -47,12 +46,13 @@ import {CommentsComponent} from './components/comments/comments.component';
 import {CommentListComponent} from './components/comments/comment-list/comment-list.component';
 import {CommentFormComponent} from './components/comments/comment-form/comment-form.component';
 import {CommentListItemComponent} from './components/comments/comment-list/comment-list-item/comment-list-item.component';
-import {DdmmyyyyDatePipe} from './pipes/ddmmyyyy-date.pipe';
 import {CollapsiblePanelComponent} from './components/collapsible-panel/collapsible-panel.component';
 import {CheckboxComponent} from './components/checkbox/checkbox.component';
 import {CheckboxOptionsComponent} from './components/checkbox/checkbox-options/checkbox-options.component';
 import {RangeInputComponent} from './components/range-input/range-input.component';
 import {AdminGuard} from './services/auth/admin.guard';
+import { AccountUserstatusPipe } from './home/account/account-pipes/account-userstatus.pipe';
+import { AccountUsertypePipe } from './home/account/account-pipes/account-usertype.pipe';
 
 const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -94,11 +94,12 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CommentListComponent,
     CommentFormComponent,
     CommentListItemComponent,
-    DdmmyyyyDatePipe,
     CollapsiblePanelComponent,
     CheckboxComponent,
     CheckboxOptionsComponent,
-    RangeInputComponent
+    RangeInputComponent,
+    AccountUserstatusPipe,
+    AccountUsertypePipe
   ],
   imports: [
     BrowserModule,
@@ -121,8 +122,7 @@ const PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpService,
     AuthGuard,
     AdminGuard,
-    TokenStorageService,
-    DataConverterService
+    TokenStorageService
   ],
   bootstrap: [AppComponent]
 })

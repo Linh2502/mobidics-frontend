@@ -1,7 +1,7 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {User} from '../../../models/user/user.model';
 import {AuthService} from '../../../services/auth/auth.service';
-import {ActivatedRoute, Router, UrlSegment} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ImageResult, ResizeOptions} from 'ng2-imageupload';
 import {userStatuses, userTypes, genders, languages} from '../../../models/constants';
 import {University} from '../../../models/user/university.model';
@@ -30,24 +30,20 @@ export class AccountFormComponent implements OnInit {
   imageUploadErrorMessage = '';
 
   @ViewChild('imageUploadButton') imageUploadButton: ElementRef;
-
+  @Input() newAccount = false;
+  @Output() aborted: EventEmitter<any> = new EventEmitter();
+  @Output() submitted: EventEmitter<User> = new EventEmitter();
 
   user: User = new User();
   defaultImage = 'assets/avatar_male.png';
-  newAccount = false;
   changePassword = false;
+  passwordCheck = '';
 
   constructor(private httpService: HttpService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private authService: AuthService) {
+              private router: Router) {
   }
 
   ngOnInit() {
-    this.newAccount = this.router.url.includes('register');
-    if (!this.newAccount) {
-      this.user = this.authService.loggedInUser;
-    }
     this.httpService.getUniversities().subscribe(universities => this.universities = universities.sort((university1, university2) => {
         if (university1.name.toLowerCase() < university2.name.toLowerCase()) {
           return -1;
@@ -70,10 +66,11 @@ export class AccountFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted.emit(this.user);
   }
 
   onAbortEdit() {
-    this.router.navigate(['account', 'me']);
+    this.aborted.emit();
   }
 
   get diagnostics() {

@@ -7,7 +7,9 @@
         </h4>
       </div>
       <div class="panel-body">
-        <app-account-form></app-account-form>
+        <app-account-form [newAccount]="true"
+                          (submitted)="onSubmit($event)"
+                          (aborted)="onAbort()"></app-account-form>
       </div>
     </div>
   </div>

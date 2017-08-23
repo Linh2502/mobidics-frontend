@@ -2,8 +2,7 @@
      [ngClass]="{'response-comment': comment.inResponseTo}">
   <div class="col-xs-12">
     <a class="pointer-cursor" style="font-size: 1.1em; font-weight:bold" (click)="onUsernameClicked()">{{comment.username}}</a>,
-    am
-    {{comment.creationDate | ddmmyyyyDate}}
+    vor {{(comment.creationDate / 1000) | timeSince}}
   </div>
   <div class="col-xs-12 comment-text">
     {{comment.text}}
@@ -15,7 +14,7 @@
     </a>
     |
     <a class="pointer-cursor"
-       *ngIf="comment.username == getLoggedInUsername() || getLoggedInUserlevel() == 9"
+       *ngIf="comment.username == authService.loggedInUser.username || authService.loggedInUser.userLevel == 9"
        (click)="staticModal.show()">
       Löschen
     </a>

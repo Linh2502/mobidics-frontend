@@ -71,7 +71,7 @@ export const userStatuses = [
 
 export const genders = [
   {label: 'Männlich', value: 0},
-  {label: 'Weiblich', value: 0}
+  {label: 'Weiblich', value: 1}
 ];
 
 export const languages = [

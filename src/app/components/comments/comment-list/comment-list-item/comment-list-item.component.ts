@@ -15,17 +15,9 @@ export class CommentListItemComponent implements OnInit {
   @Input('comment') comment: Comment;
   respondMode = false;
 
-  constructor(private authService: AuthService,
+  constructor(public authService: AuthService,
               private commentService: CommentService,
               private router: Router) {
-  }
-
-  getLoggedInUsername() {
-    return this.authService.loggedInUser.username;
-  }
-
-  getLoggedInUserlevel() {
-    return this.authService.loggedInUser.userLevel;
   }
 
   ngOnInit() {
