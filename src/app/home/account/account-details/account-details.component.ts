@@ -15,7 +15,7 @@ import {HttpService} from '../../../services/http/http.service';
 export class AccountDetailsComponent implements OnInit {
   panelTitle = 'Mein Konto';
   user: User;
-  profileImage = 'assets/avatar_male.png';
+  profileImage = 'assets/avatar_male.jpg';
   editButtonEnabled = true;
 
   constructor(private authService: AuthService,

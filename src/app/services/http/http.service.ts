@@ -13,7 +13,7 @@ import {Faculty} from '../../models/user/faculty.model';
 
 @Injectable()
 export class HttpService {
-  private baseUri = 'http://lb-staging.dynv6.net:8080/mobidics/api/';
+  private baseUri = 'http://lbstaging.dynv6.net:8080/mobidics/api/';
 
   constructor(private http: Http,
               private tokenStorageService: TokenStorageService,

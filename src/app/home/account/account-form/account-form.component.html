@@ -3,8 +3,8 @@
   <div class="form-group" *ngIf="!newAccount">
     <div class="image-section">
       <div class="preview">
-        <img class="img"
-             [src]="(user.profileImage) || (user.gender == 0? 'assets/avatar_male.png': 'assets/avatar_female.png')">
+        <img class="img"  width="196" height="196"
+             [src]="(user.profileImage) || (user.gender == 0? 'assets/avatar_male.jpg': 'assets/avatar_female.jpg')">
         <button type="button" class="btn btn-danger btn-circle delete"
                 (click)="onRemoveProfileImage()"
                 *ngIf="user.profileImage">

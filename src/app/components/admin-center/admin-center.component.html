@@ -5,42 +5,44 @@
       Inhalt der Benutzertabelle
     </div>
     <div class="panel-body">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Benutzername</th>
-          <th>Grad</th>
-          <th>E-Mail</th>
-          <th>Zuletzt aktiv</th>
-          <th>Freigabe</th>
-          <th>Aktionen</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let user of users; let i = index">
-          <td>
-            {{user.username}}
-          </td>
-          <td>
-            {{user.userLevel}}
-          </td>
-          <td>
-            {{user.email}}
-          </td>
-          <td>
-            {{user.lastActionDate | timeSince}}
-          </td>
-          <td>
-            {{user.approved? 'Freigegeben': 'Nicht Freigegeben'}}
-          </td>
-          <td *ngIf="user.username !== authService.loggedInUser.username">
-            <a (click)="onDelete(user)">Löschen</a>
-            <a (click)="onDisapprove(user)" *ngIf="user.approved">Sperren</a>
-            <a (click)="onApprove(user)" *ngIf="!user.approved">Freigeben</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Benutzername</th>
+            <th>Grad</th>
+            <th>E-Mail</th>
+            <th>Zuletzt aktiv</th>
+            <th>Freigabe</th>
+            <th>Aktionen</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let user of users; let i = index">
+            <td>
+              {{user.username}}
+            </td>
+            <td>
+              {{user.userLevel}}
+            </td>
+            <td>
+              {{user.email}}
+            </td>
+            <td>
+              {{user.lastActionDate | timeSince}}
+            </td>
+            <td>
+              {{user.approved? 'Freigegeben': 'Nicht Freigegeben'}}
+            </td>
+            <td *ngIf="user.username !== authService.loggedInUser.username">
+              <a (click)="onDelete(user)">Löschen</a>
+              <a (click)="onDisapprove(user)" *ngIf="user.approved">Sperren</a>
+              <a (click)="onApprove(user)" *ngIf="!user.approved">Freigeben</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 

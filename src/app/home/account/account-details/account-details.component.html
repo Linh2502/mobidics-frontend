@@ -12,7 +12,8 @@
     </button>
   </div>
   <div class="panel-body" *ngIf="user">
-    <img class="img-responsive center-block" src="{{user.profileImage || profileImage}}"/>
+    <img class="img center-block" width="196" height="196"
+         src="{{user.profileImage || (user.gender == 0? 'assets/avatar_male.jpg': 'assets/avatar_female.jpg')}}"/>
     <h4 class="flex-child text-center">{{user.firstname}} {{user.lastname}}</h4>
     <div class="col-xs-10 col-xs-offset-1">
       <app-label-value label="Nutzername:" value="{{user.username}}"></app-label-value>
