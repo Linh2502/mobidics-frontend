@@ -20,12 +20,12 @@ export class MethodPhasePipe implements PipeTransform {
       case 5:
         return 'Auswerten';
     }
-    return 'Unbekannt';
+    return null;
   }
 
   transform(value: any, args?: any): any {
     let result: string = null;
-    if (value) {
+    if (value && value.length !== 0) {
       result = MethodPhasePipe.mapPhases(value[0]);
       for (let i = 1; i < value.length; i++) {
         result += ', ' + MethodPhasePipe.mapPhases(value[i]);

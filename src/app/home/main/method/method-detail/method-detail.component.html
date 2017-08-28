@@ -3,12 +3,15 @@
     <span class="glyphicon glyphicon-chevron-left"></span>
     Zurück
   </button>
-  <button type="button" class="btn btn-primary" (click)="onEditButtonClicked()">
+  <button type="button" class="btn btn-primary"
+          (click)="onEditButtonClicked()"
+          *ngIf="authService.getUserLevel() == 9 || method.author === authService.loggedInUser.username">
     <span class="glyphicon glyphicon-edit"></span>
     Bearbeiten
   </button>
-  <button *ngIf="authService.getUserLevel() == 9" type="button" class="btn btn-danger"
-          (click)="staticModal.show();">
+  <button type="button" class="btn btn-danger"
+          (click)="staticModal.show();"
+          *ngIf="authService.getUserLevel() == 9 || method.author === authService.loggedInUser.username">
     <span class="glyphicon glyphicon-trash"></span>
     Löschen
   </button>
@@ -58,15 +61,15 @@
         <th>Alternativnamen</th>
         <td>{{ method.alternativeTitles | splitArray }}</td>
       </tr>
-      <tr *ngIf="method.socialForm">
+      <tr *ngIf="method.socialForm && method.socialForm.length !== 0">
         <th>Sozialform</th>
         <td>{{ method.socialForm | socialform }}</td>
       </tr>
-      <tr *ngIf="method.phase">
+      <tr *ngIf="method.phase && method.subPhase.length !== 0">
         <th>Phase</th>
         <td>{{ method.phase | phase }}</td>
       </tr>
-      <tr *ngIf="method.subPhase">
+      <tr *ngIf="method.subPhase && method.subPhase.length !== 0">
         <th>Unterphase</th>
         <td>{{ method.subPhase | subphase }}</td>
       </tr>
@@ -74,7 +77,7 @@
         <th>Ergebnis</th>
         <td>{{ method.result }}</td>
       </tr>
-      <tr *ngIf="method.courseType">
+      <tr *ngIf="method.courseType && method.courseType.length !== 0">
         <th>Art der Veranstaltung</th>
         <td>{{ method.courseType | courseType }}</td>
       </tr>

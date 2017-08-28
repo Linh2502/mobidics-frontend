@@ -9,7 +9,7 @@ import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 import {ResizeOptions, ImageResult} from 'ng2-imageupload';
 import {courseTypes, phases, socialForms, subPhases} from '../../../../models/constants';
 import {CheckboxState} from '../../../../components/checkbox/checkbox-state.model';
-import {mapSubphaseToPhaseIndex, updateSelectionArray} from '../../../../functions';
+import {flatten, mapSubphaseToPhaseIndex, updateSelectionArray} from '../../../../functions';
 
 @Component({
   selector: 'app-method-add-edit',
@@ -33,7 +33,7 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
   @ViewChild('thumbnailUploadButton') thumbnailUploadButton: ElementRef;
   @ViewChild('imageUploadButton') imageUploadButton: ElementRef;
 
-  methodId: number;
+  methodId: string;
   routerSubscription: Subscription;
   isNew = true;
   method: Method;
@@ -168,12 +168,17 @@ export class MethodAddEditComponent implements OnInit, OnDestroy {
     newMethod.language = 'de';
     newMethod.thumbnail = this.thumbnailSrc;
     newMethod.images = this.uploadedImages;
+    newMethod.phase = this.selectedPhases;
+    newMethod.subPhase = flatten(this.selectedSubphases);
+    newMethod.socialForm = this.selectedSocialForms;
+    newMethod.courseType = this.selectedCourseTypes;
 
-    // TODO include checkbox values
+    console.log(newMethod);
     if (this.isNew) {
-      this.methodService.addMethod(newMethod).subscribe();
+      this.methodService.addMethod(newMethod);
     } else {
-      this.methodService.editMethod(newMethod).subscribe();
+      newMethod.id = this.methodId;
+      this.methodService.editMethod(newMethod);
     }
     this.navigateBack();
   }

@@ -35,3 +35,5 @@ export const mapSubphaseToPhaseIndex = (subphase: number): number => {
       return 5;
   }
 };
+
+export const flatten = (arr) => arr.reduce((flat, next) => flat.concat(next), []);

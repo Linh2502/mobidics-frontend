@@ -52,7 +52,7 @@ export const subPhases: any[][] = [
   ]
 ];
 
-export const userTypes = [
+export const userTypes: any[] = [
   {label: '--', value: -1},
   {label: 'Fest angestellt', value: 0},
   {label: 'Befristet angestellt', value: 1},
@@ -61,7 +61,7 @@ export const userTypes = [
   {label: 'Anderes', value: 99}
 ];
 
-export const userStatuses = [
+export const userStatuses: any[] = [
   {label: '--', value: -1},
   {label: 'Prof.', value: 0},
   {label: 'Dr..', value: 1},

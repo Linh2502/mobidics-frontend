@@ -1,9 +1,8 @@
 <form #accountForm="ngForm" (ngSubmit)="onSubmit()">
-  {{diagnostics}}
   <div class="form-group" *ngIf="!newAccount">
     <div class="image-section">
       <div class="preview">
-        <img class="img"  width="196" height="196"
+        <img class="img" width="196" height="196"
              [src]="(user.profileImage) || (user.gender == 0? 'assets/avatar_male.jpg': 'assets/avatar_female.jpg')">
         <button type="button" class="btn btn-danger btn-circle delete"
                 (click)="onRemoveProfileImage()"
@@ -88,14 +87,14 @@
     <select class="form-control" id="gender"
             [(ngModel)]="user.gender" name="gender"
             required>
-      <option *ngFor="let gender of genders" [value]="gender.value">{{gender.label}}</option>
+      <option *ngFor="let gender of genders" [ngValue]="gender.value">{{gender.label}}</option>
     </select>
   </div>
   <div class="form-group">
     <label for="userStatus">Titel</label>
     <select class="form-control" id="userStatus"
             [(ngModel)]="user.userStatus" name="userStatus">
-      <option *ngFor="let userStatus of userStatuses" [value]="userStatus.value">{{userStatus.label}}</option>
+      <option *ngFor="let userStatus of userStatuses" [ngValue]="userStatus.value">{{userStatus.label}}</option>
     </select>
     <input *ngIf="user && user.userStatus == 99" class="form-control" id="userStatusOther" title="Anderes"
            [(ngModel)]="user.userStatusOther" name="userStatusOther"
@@ -105,7 +104,7 @@
     <label for="usertype">Anstellung</label>
     <select class="form-control" id="usertype"
             [(ngModel)]="user.userType" name="usertype">
-      <option *ngFor="let userType of userTypes" [value]="userType.value">{{userType.label}}</option>
+      <option *ngFor="let userType of userTypes" [ngValue]="userType.value">{{userType.label}}</option>
     </select>
     <input *ngIf="user && user.userType == 99" class="form-control" id="userTypeOther" title="Anderes"
            [(ngModel)]="user.userTypeOther" name="userTypeOther"
@@ -116,15 +115,18 @@
     <select class="form-control" id="university"
             [(ngModel)]="user.university" name="university"
             required>
-      <option *ngFor="let university of universities" [ngValue]="university">{{university.name}}
+      <option *ngFor="let university of universities"
+              [ngValue]="university">{{university.name}}
       </option>
     </select>
   </div>
   <div class="form-group" *ngIf="!newAccount">
-    <label for="faculty">Fakultät</label>
+    <label for="faculty">Fachbereich</label>
     <select class="form-control" id="faculty"
             [(ngModel)]="user.faculty" name="faculty">
-      <option *ngFor="let faculty of faculties" [ngValue]="faculty">{{faculty.name}}</option>
+      <option *ngFor="let faculty of faculties"
+              [ngValue]="faculty">{{faculty.name}}
+      </option>
     </select>
   </div>
   <div class="form-group" *ngIf="!newAccount">

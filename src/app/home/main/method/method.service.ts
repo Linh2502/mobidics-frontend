@@ -4,7 +4,7 @@ import {HttpService} from '../../../services/http/http.service';
 import {Observable} from 'rxjs/Observable';
 import {Rating} from '../../../models/rating.model';
 import {CheckboxState} from '../../../components/checkbox/checkbox-state.model';
-import {mapSubphaseToPhaseIndex, updateSelectionArray} from '../../../functions';
+import {flatten, mapSubphaseToPhaseIndex, updateSelectionArray} from '../../../functions';
 import {MinMaxSummary} from '../../../models/minMaxes.model';
 
 @Injectable()
@@ -36,7 +36,7 @@ export class MethodService {
     this.httpService.getMethods(
       this.searchQuery,
       this.selectedPhases,
-      [].concat(this.selectedSubphases),
+      flatten(this.selectedSubphases),
       this.selectedCourseTypes,
       this.selectedGroupType,
       this.selectedMaxGroupSize,
@@ -82,13 +82,16 @@ export class MethodService {
     );
   }
 
-  addMethod(method: Method): Observable<any> {
-    return this.httpService.addMethod(method)
-      .do(() => this.refreshMethods());
+  addMethod(method: Method): void {
+    this.httpService.addMethod(method).subscribe(
+      () => this.refreshMethods()
+    );
   }
 
-  editMethod(method: Method): Observable<any> {
-    return Observable.create();
+  editMethod(method: Method): void {
+    this.httpService.editMethod(method).subscribe(
+      () => this.refreshMethods()
+    );
   }
 
   deleteMethod(method: Method): Observable<any> {

@@ -21,7 +21,11 @@ export class AccountCreateComponent implements OnInit {
 
   onSubmit(user: User) {
     this.httpService.register(user).subscribe(
-      () => console.log('Registration successful!'),
+      () => {
+        // TODO redirect to successful registration page
+        this.router.navigate(['login']);
+        console.log('Registration successful!');
+      },
       () => console.log('Registration failed!'),
     );
   }

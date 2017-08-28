@@ -34,6 +34,7 @@ export class Method {
               public thumbnail: string,
               public creationDate: number,
               public lastModifiedDate: number,
-              public language: string) {
+              public language: string,
+              public author: string) {
   }
 }

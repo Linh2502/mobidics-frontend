@@ -42,12 +42,12 @@ export class MethodSubphasePipe implements PipeTransform {
       case 19:
         return 'Auflockerung';
     }
-    return 'Unbekannt';
+    return null;
   }
 
   transform(value: any, args?: any): any {
     let result: string = null;
-    if (value) {
+    if (value && value.length !== 0) {
       result = MethodSubphasePipe.mapSubphases(value[0]);
       for (let i = 1; i < value.length; i++) {
         result += ', ' + MethodSubphasePipe.mapSubphases(value[i]);

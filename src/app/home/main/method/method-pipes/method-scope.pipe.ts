@@ -13,7 +13,7 @@ export class MethodScopePipe implements PipeTransform {
       case '2':
         return 'Jeder kann sich diese Methode anschauen';
     }
-    return 'Unbekannt';
+    return null;
   }
 
   transform(value: any, args?: any): any {

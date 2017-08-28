@@ -15,7 +15,7 @@ export class AccountEditComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private httpService: HttpService) {
   }
 
   ngOnInit() {
@@ -23,11 +23,15 @@ export class AccountEditComponent implements OnInit {
   }
 
   onSubmit(user: User) {
-    this.authService.refreshUser();
-    console.log(user);
+    this.httpService.updateUser(this.user).subscribe(
+      () => {
+        this.authService.refreshUser();
+        this.router.navigate(['account', 'me']);
+      }
+    );
   }
 
   onAbort() {
-    this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+    this.router.navigate(['account', 'me']);
   }
 }

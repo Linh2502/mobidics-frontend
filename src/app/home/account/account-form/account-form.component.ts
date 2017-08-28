@@ -72,11 +72,6 @@ export class AccountFormComponent implements OnInit {
     this.aborted.emit();
   }
 
-  get diagnostics() {
-    return JSON.stringify({...this.user, newForm: this.newAccount});
-  }
-
-
   onImageSelected(imageResult: ImageResult) {
     if (imageResult.error) {
       this.imageUploadErrorMessage = 'Ungültige Datei!';

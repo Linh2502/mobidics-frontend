@@ -18,12 +18,12 @@ export class MethodSocialformPipe implements PipeTransform {
       case 4:
         return 'Plenum frontal';
     }
-    return 'Unbekannt';
+    return null;
   }
 
   transform(value: any, args?: any): any {
     let result: string = null;
-    if (value) {
+    if (value && value.length !== 0) {
       result = MethodSocialformPipe.mapSocialForm(value[0]);
       for (let i = 1; i < value.length; i++) {
         result += ', ' + MethodSocialformPipe.mapSocialForm(value[i]);

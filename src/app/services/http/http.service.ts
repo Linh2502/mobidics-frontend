@@ -31,6 +31,11 @@ export class HttpService {
     return this.http.post(this.baseUri + 'users', user);
   }
 
+  updateUser(user: User) {
+    const headers: Headers = this.generateHeaders();
+    return this.http.put(this.baseUri + 'users/' + user.username, user, {headers});
+  }
+
   deleteUser(user: User) {
     const headers: Headers = this.generateHeaders();
     return this.http.delete(this.baseUri + 'users/' + user.username, {headers})
@@ -92,6 +97,12 @@ export class HttpService {
   addMethod(method: Method): Observable<any> {
     const headers: Headers = this.generateHeaders();
     return this.http.post(this.baseUri + 'methods/', method, {headers})
+      .catch(error => this.processError(error));
+  }
+
+  editMethod(method: Method): Observable<any> {
+    const headers: Headers = this.generateHeaders();
+    return this.http.put(this.baseUri + 'methods/' + method.id, method, {headers})
       .catch(error => this.processError(error));
   }
 
