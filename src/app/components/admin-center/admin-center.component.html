@@ -51,25 +51,26 @@
       Nutzerrechte verwalten
     </div>
     <div class="panel-body">
-      Body 1
+      <div class="col-xs-4">
+        <select [(ngModel)]="selectedUser" class="form-control" title="Nutzer auswählen">
+          <option *ngFor="let user of users" [ngValue]="user">
+            {{user.username}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-1">
+        <select [ngModel]="selectedUser.userLevel" (change)="onUserlevelSelectionChanged($event.currentTarget.value)"
+                class="form-control"
+                title="Nutzerlevel auswählen"
+                *ngIf="selectedUser">
+          <option *ngFor="let level of [1,2,9]" [value]="level">
+            {{level}}
+          </option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-warning" (click)="onChangeButtonClicked()">
+        Ändern
+      </button>
     </div>
   </div>
-
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      Inhalt der Tabelle der gesperrten Benutzer
-    </div>
-    <div class="panel-body">
-      <table class="table">
-        <thead>
-
-        </thead>
-        <tbody>
-
-        </tbody>
-      </table>
-      <button type="button" class="btn btn-danger">Gesperrte Benutzer löschen</button>
-    </div>
-  </div>
-
 </div>

@@ -12,6 +12,7 @@ export class AdminCenterComponent implements OnInit {
 
   users: User[];
   selectedUser: User;
+  selectedUserLevel: number;
 
   constructor(public authService: AuthService,
               private httpService: HttpService) {
@@ -26,6 +27,7 @@ export class AdminCenterComponent implements OnInit {
       users => {
         this.users = users;
         this.selectedUser = users[0];
+        this.selectedUserLevel = this.selectedUser.userLevel;
       }
     );
   }
@@ -48,4 +50,19 @@ export class AdminCenterComponent implements OnInit {
     );
   }
 
+  onUserlevelSelectionChanged(value) {
+    this.selectedUserLevel = value;
+  }
+
+  onChangeButtonClicked() {
+    this.httpService.changeRights(this.selectedUser.username, this.selectedUserLevel).subscribe(
+      () => this.httpService.getAllUsers().subscribe(
+        users => {
+          this.users = users;
+          this.selectedUser = users[0];
+          this.selectedUserLevel = this.selectedUser.userLevel;
+        }
+      )
+    );
+  }
 }

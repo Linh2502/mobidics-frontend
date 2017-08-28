@@ -201,6 +201,12 @@ export class HttpService {
       .catch(error => this.processError(error));
   }
 
+  changeRights(username: string, userlevel: number): Observable<any> {
+    const headers: Headers = this.generateHeaders();
+    return this.http.put(this.baseUri + 'users/' + username + '/level/' + userlevel, null, {headers})
+      .catch(error => this.processError(error));
+  }
+
   private generateHeaders(): Headers {
     const headers: Headers = new Headers();
     headers.append('X-mobidics-jwt-token', this.tokenStorageService.getJwtToken());
