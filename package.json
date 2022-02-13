@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/platform-server": "^4.2.4",
     "@angular/router": "^4.2.4",
-    "ajv": "^5.2.2",
+    "ajv": "^6.12.3",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "ng2-imageupload": "^1.4.2",
